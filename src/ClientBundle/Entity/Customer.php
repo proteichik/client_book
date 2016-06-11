@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package ClientBundle\Entity
  *
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="customer")
  */
 class Customer
@@ -162,15 +163,11 @@ class Customer
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Customer
+     * @ORM\PrePersist
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt()
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = new \DateTime();
 
         return $this;
     }

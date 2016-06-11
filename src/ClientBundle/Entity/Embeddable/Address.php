@@ -40,4 +40,75 @@ class Address
      * @Assert\Range(min=100000000, max=999999999)
      */
     protected $unp;
+
+    /**
+     * Set city
+     *
+     * @param $city
+     * @return $this
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set street
+     *
+     * @param $street
+     * @return $this
+     */
+    public function setStreet($street)
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    /**
+     * Get street
+     *
+     * @return string
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * Set UNP
+     *
+     * @param $unp
+     * @return $this
+     */
+    public function setUnp($unp)
+    {
+        $this->unp = $unp;
+
+        return $this;
+    }
+
+    /**
+     * Get UNP
+     *
+     * @return int
+     */
+    public function getUnp()
+    {
+        return $this->unp;
+    }
+
+
 }
