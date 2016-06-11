@@ -76,15 +76,23 @@ class Customer
     protected $meetings;
 
     /**
-     * @var ClientBundle\Entity\Manager
+     * @var ClientBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="Manager", inversedBy="customers")
-     * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="customers")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
-     * @Assert\Type(type="ClientBundle\Entity\Manager")
+     * @Assert\Type(type="ClientBundle\Entity\User")
      * @Assert\Valid()
      */
-    protected $manager;
+    protected $user;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="date")
+     *
+     */
+    protected $createdAt;
 
     /**
      * Customer constructor.
@@ -93,5 +101,227 @@ class Customer
     {
         $this->calls = new ArrayCollection();
         $this->meetings = new ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set company
+     *
+     * @param string $company
+     *
+     * @return Customer
+     */
+    public function setCompany($company)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return string
+     */
+    public function getCompany()
+    {
+        return $this->company;
+    }
+
+    /**
+     * Set info
+     *
+     * @param string $info
+     *
+     * @return Customer
+     */
+    public function setInfo($info)
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * Get info
+     *
+     * @return string
+     */
+    public function getInfo()
+    {
+        return $this->info;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Customer
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set address
+     *
+     * @param \ClientBundle\Entity\Embeddable\Address $address
+     *
+     * @return Customer
+     */
+    public function setAddress(\ClientBundle\Entity\Embeddable\Address $address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \ClientBundle\Entity\Embeddable\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set contacts
+     *
+     * @param \ClientBundle\Entity\Embeddable\Contacts $contacts
+     *
+     * @return Customer
+     */
+    public function setContacts(\ClientBundle\Entity\Embeddable\Contacts $contacts)
+    {
+        $this->contacts = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \ClientBundle\Entity\Embeddable\Contacts
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
+    }
+
+    /**
+     * Add call
+     *
+     * @param \ClientBundle\Entity\Call $call
+     *
+     * @return Customer
+     */
+    public function addCall(\ClientBundle\Entity\Call $call)
+    {
+        $this->calls[] = $call;
+
+        return $this;
+    }
+
+    /**
+     * Remove call
+     *
+     * @param \ClientBundle\Entity\Call $call
+     */
+    public function removeCall(\ClientBundle\Entity\Call $call)
+    {
+        $this->calls->removeElement($call);
+    }
+
+    /**
+     * Get calls
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCalls()
+    {
+        return $this->calls;
+    }
+
+    /**
+     * Add meeting
+     *
+     * @param \ClientBundle\Entity\Meeting $meeting
+     *
+     * @return Customer
+     */
+    public function addMeeting(\ClientBundle\Entity\Meeting $meeting)
+    {
+        $this->meetings[] = $meeting;
+
+        return $this;
+    }
+
+    /**
+     * Remove meeting
+     *
+     * @param \ClientBundle\Entity\Meeting $meeting
+     */
+    public function removeMeeting(\ClientBundle\Entity\Meeting $meeting)
+    {
+        $this->meetings->removeElement($meeting);
+    }
+
+    /**
+     * Get meetings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeetings()
+    {
+        return $this->meetings;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ClientBundle\Entity\User $user
+     *
+     * @return Customer
+     */
+    public function setUser(\ClientBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ClientBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }
