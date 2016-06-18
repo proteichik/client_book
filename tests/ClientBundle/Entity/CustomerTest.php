@@ -32,6 +32,9 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->customer->getCalls() instanceof ArrayCollection);
         $this->assertEquals(0, $this->customer->getCalls()->count());
+
+        $this->assertTrue($this->customer->getMeetings() instanceof ArrayCollection);
+        $this->assertEquals(0, $this->customer->getMeetings()->count());
     }
 
     public function testObjectWithData()
@@ -69,6 +72,7 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $this->customer->setInfo('test info');
         $this->assertEquals('test info', $this->customer->getInfo());
 
+        //Call
         $call1 = new Call();
         $call2 = new Call();
         $this->customer->addCall($call1);
@@ -78,5 +82,21 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $this->customer->removeCall($call1);
         $this->assertEquals(1, $this->customer->getCalls()->count());
 
+        $fake_call = new Call();
+        $this->customer->removeCall($fake_call);
+        $this->assertEquals(1, $this->customer->getCalls()->count());
+
+        //Meeting
+        $meeting = new Meeting();
+        $this->customer->addMeeting($meeting);
+        $this->assertEquals(1, $this->customer->getMeetings()->count());
+
+        $this->customer->removeMeeting($meeting);
+        $this->assertEquals(0, $this->customer->getMeetings()->count());
+
+        $fake_meeting = new Meeting();
+        $this->customer->addMeeting($meeting);
+        $this->customer->removeMeeting($fake_meeting);
+        $this->assertEquals(1, $this->customer->getMeetings()->count());
     }
 }
