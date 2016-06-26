@@ -73,12 +73,21 @@ class BaseService implements ServiceInterface
      */
     public function findBy($options = array())
     {
+
         if (!isset($options['criteria'])) {
             throw new \InvalidArgumentException('Search criteria not defined!');
         }
 
+        if (!is_array($options['criteria'])) {
+            throw new \InvalidArgumentException('Search criteria must be array!');
+        }
+
         $criteria = $options['criteria'];
         $order = (isset($options['order'])) ? $options['order'] : array();
+
+        if (!is_array($order)) {
+            throw new \InvalidArgumentException('Search order must be array!');
+        }
 
         return $this->em->getRepository($this->entityClass)->findBy($criteria, $order);
     }
