@@ -108,4 +108,54 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
         $result = $this->service->findBy($option);
 
     }
+
+    public function testFindAll()
+    {
+        $this->em->expects($this->once())
+            ->method('getRepository')
+            ->with($this->identicalTo($this->entityClass))
+            ->will($this->returnValue($this->mockRepository))
+            ;
+
+        $this->mockRepository->expects($this->once())
+            ->method('findAll')
+            ;
+        $result = $this->service->findAll();
+    }
+
+    public function testSave()
+    {
+        $saveObject = new Call();
+        $this->em->expects($this->once())
+            ->method('persist')
+            ->with($this->identicalTo($saveObject))
+        ;
+        $this->em->expects($this->once())
+            ->method('flush')
+        ;
+
+        $this->service->save($saveObject);
+
+    }
+
+    public function testRemove()
+    {
+        $removeObject = new Call();
+        $this->em->expects($this->once())->method('remove')->with($this->identicalTo($removeObject));
+        $this->em->expects($this->once())->method('flush');
+
+        $this->service->remove($removeObject);
+    }
+
+    public function testPersist()
+    {
+        $this->em->expects($this->once())->method('persist');
+        $this->service->persist(new Call());
+    }
+
+    public function testFlush()
+    {
+        $this->em->expects($this->once())->method('flush');
+        $this->service->flush();
+    }
 }

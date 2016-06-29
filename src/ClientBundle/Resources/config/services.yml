@@ -1,4 +1,8 @@
 services:
-#    client.example:
-#        class: ClientBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+#Form types
+    form.type.entity_hidden:
+        class: ClientBundle\Form\Type\EntityHiddenType
+        tags:
+            - {name: form.type, alias: entity_hidden}
+
+
