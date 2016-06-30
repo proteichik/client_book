@@ -1,31 +1,27 @@
 <?php
 
-namespace ClientBundle\Form;
+namespace ClientBundle\Form\Embeddable;
 
-use ClientBundle\Form\Type\CustomerType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class CallForm
- * @package ClientBundle\Form
+ * Class AddressForm
+ * @package ClientBundle\Form\Embeddable
  */
-class CallForm extends AbstractType
+class AddressForm extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
-            ->add('date')
-            ->add('status')
-            ->add('info')
-            ->add('customer', CustomerType::class)
-            ->add('save', SubmitType::class)
+            ->add('city')
+            ->add('street')
+            ->add('unp')
         ;
     }
 
@@ -35,7 +31,7 @@ class CallForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ClientBundle\Entity\Call',
+            'data_class' => 'ClientBundle\Entity\Embeddable\Address',
         ));
     }
 
@@ -44,6 +40,6 @@ class CallForm extends AbstractType
      */
     public function getName()
     {
-        return 'call';
+        return 'address';
     }
 }
