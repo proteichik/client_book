@@ -1,7 +1,6 @@
 <?php
-namespace Juglon\AdminBundle\Controller;
+namespace ClientBundle\Controller;
 
-use Juglon\AdminBundle\Model\AbstractEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -59,7 +58,7 @@ class BaseController extends AbstractController
      */
     public function updateAction(Request $request, $id, $routeTo)
     {
-        $object = $this->getService()->findById($id);
+        $object = $this->getService()->findBy($id);
 
         if (!$object) {
             throw new \InvalidArgumentException('Object not find');

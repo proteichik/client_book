@@ -2,6 +2,7 @@
 
 namespace ClientBundle\Entity;
 
+use ClientBundle\Model\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="customer")
  */
-class Customer
+class Customer implements EntityInterface
 {
     /**
      * @var int

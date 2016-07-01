@@ -2,6 +2,7 @@
 
 namespace ClientBundle\Entity;
 
+use ClientBundle\Model\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -9,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class AbstractEvent
  * @package ClientBundle\Entity
  */
-abstract class AbstractEvent
+abstract class AbstractEvent implements EntityInterface
 {
     const PLANNED_TYPE = 0;
     const DONE_TYPE = 1;

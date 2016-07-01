@@ -1,15 +1,15 @@
 <?php
 
-namespace Juglon\AdminBundle\Controller;
+namespace ClientBundle\Controller;
 
-use Juglon\AdminBundle\Model\AbstractEntity;
-use Juglon\AdminBundle\Service\BaseService;
+use ClientBundle\Model\EntityInterface;
+use ClientBundle\Service\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 abstract class AbstractController extends Controller
 {
     /**
-     * @var BaseService
+     * @var ServiceInterface
      */
     protected $service;
 
@@ -19,17 +19,17 @@ abstract class AbstractController extends Controller
     protected $form;
 
     /**
-     * @var AbstractEntity
+     * @var EntityInterface
      */
     protected $prototype;
 
 
     /**
-     * @param BaseService $service
+     * @param ServiceInterface $service
      * @param string $form
-     * @param AbstractEntity $prototype
+     * @param EntityInterface $prototype
      */
-    public function __construct(BaseService $service, $form, AbstractEntity $prototype)
+    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype)
     {
         $this->service = $service;
         $this->form = $form;
@@ -37,10 +37,10 @@ abstract class AbstractController extends Controller
     }
 
     /**
-     * @param BaseService $service
+     * @param ServiceInterface $service
      * @return $this
      */
-    public function setService(BaseService $service)
+    public function setService(ServiceInterface $service)
     {
         $this->service = $service;
 
@@ -48,7 +48,7 @@ abstract class AbstractController extends Controller
     }
 
     /**
-     * @return BaseService
+     * @return ServiceInterface
      */
     public function getService()
     {
@@ -75,10 +75,10 @@ abstract class AbstractController extends Controller
     }
 
     /**
-     * @param AbstractEntity  $prototype
+     * @param EntityInterface  $prototype
      * @return $this
      */
-    public function setPrototype(AbstractEntity $prototype)
+    public function setPrototype(EntityInterface $prototype)
     {
         $this->prototype = $prototype;
 
@@ -86,7 +86,7 @@ abstract class AbstractController extends Controller
     }
 
     /**
-     * @return AbstractEntity
+     * @return EntityInterface
      */
     public function getPrototype()
     {
