@@ -58,7 +58,7 @@ class BaseController extends AbstractController
      */
     public function updateAction(Request $request, $id, $routeTo)
     {
-        $object = $this->getService()->findBy($id);
+        $object = $this->getService()->find($id);
 
         if (!$object) {
             throw new \InvalidArgumentException('Object not find');
@@ -89,7 +89,7 @@ class BaseController extends AbstractController
      */
     public function deleteAction(Request $request, $id, $routeTo)
     {
-        $object = $this->getService()->findById($id);
+        $object = $this->getService()->find($id);
 
         if (!$object) {
             throw new \InvalidArgumentException('Object not find');
