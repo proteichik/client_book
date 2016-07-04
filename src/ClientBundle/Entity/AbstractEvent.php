@@ -138,7 +138,7 @@ abstract class AbstractEvent implements EntityInterface
     /**
      * is valid status
      *
-     * @Assert\IsTrue(message="Вы не можете запланировать встречу в прошлом")
+     * @Assert\IsTrue(message="Вы не можете запланировать cобытие в прошлом")
      *
      * @return bool
      */
