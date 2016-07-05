@@ -6,4 +6,21 @@ services:
         tags:
             - {name: form.type, alias: entity_hidden}
 
+#Entities:
+    client.entity.customer:
+        class: ClientBundle\Entity\Customer
+
+#Services:
+    client.service.customer:
+        class: ClientBundle\Service\BaseService
+        arguments: ["@doctrine.orm.entity_manager", "%client.repository.customer.name%"]
+
+#Controllers:
+    client.controller.customer:
+        class: ClientBundle\Controller\CustomerController
+        arguments: ["@client.service.customer", "%client.form.customer.class%", "@client.entity.customer"]
+        calls:
+            - [setContainer, ['@service_container']]
+
+
 

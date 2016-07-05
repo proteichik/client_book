@@ -18,18 +18,18 @@ class BaseService implements ServiceInterface
     /**
      * @var string
      */
-    protected $entityClass;
+    protected $repositoryName;
 
     /**
      * Constructor
      *
      * @param EntityManagerInterface $em
-     * @param $entityClass
+     * @param $repositoryName
      */
-    public function __construct(EntityManagerInterface $em, $entityClass)
+    public function __construct(EntityManagerInterface $em, $repositoryName)
     {
         $this->em = $em;
-        $this->setEntityClass($entityClass);
+        $this->setRepositoryName($repositoryName);
     }
 
     /**
@@ -44,16 +44,16 @@ class BaseService implements ServiceInterface
     }
 
     /**
-     * @param $entityClass
+     * @param $repositoryName
      * @return $this
      */
-    public function setEntityClass($entityClass)
+    public function setRepositoryName($repositoryName)
     {
-        if (!is_string($entityClass)) {
+        if (!is_string($repositoryName)) {
             throw new \InvalidArgumentException('Entity Class must be a string!');
         }
 
-        $this->entityClass = $entityClass;
+        $this->repositoryName = $repositoryName;
 
         return $this;
     }
@@ -64,7 +64,7 @@ class BaseService implements ServiceInterface
      */
     public function find($id)
     {
-        return $this->em->getRepository($this->entityClass)->find($id);
+        return $this->em->getRepository($this->repositoryName)->find($id);
     }
 
     /**
@@ -89,7 +89,7 @@ class BaseService implements ServiceInterface
             throw new \InvalidArgumentException('Search order must be array!');
         }
 
-        return $this->em->getRepository($this->entityClass)->findBy($criteria, $order);
+        return $this->em->getRepository($this->repositoryName)->findBy($criteria, $order);
     }
 
     /**
@@ -97,7 +97,7 @@ class BaseService implements ServiceInterface
      */
     public function findAll()
     {
-        return $this->em->getRepository($this->entityClass)->findAll();
+        return $this->em->getRepository($this->repositoryName)->findAll();
     }
 
     /**

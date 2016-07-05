@@ -26,7 +26,7 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
     {
         try {
             $fake_entity_class = new Call();
-            $this->service->setEntityClass($fake_entity_class);
+            $this->service->setRepositoryName($fake_entity_class);
             $this->fail('Must throw exception');
         } catch(\Exception $ex)
         {

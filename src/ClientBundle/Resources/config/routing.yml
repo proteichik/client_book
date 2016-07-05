@@ -1,3 +1,7 @@
 client_homepage:
     path:     /
     defaults: { _controller: ClientBundle:Default:index }
+
+client_customers:
+    path: /customers
+    defaults: {_controller: 'client.controller.customer:listAction'}
