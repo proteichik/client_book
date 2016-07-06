@@ -1,8 +1,12 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+root_page:
+    path: /
+    defaults: {_controller: ClientBundle:Default:index}
+
 client:
     resource: "@ClientBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /book
 
 

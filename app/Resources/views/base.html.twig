@@ -55,7 +55,15 @@
                                 <h3>General</h3>
                                 <ul class="nav side-menu">
                                     <li>
-                                        <a><i class="fa fa-home"></i> Клиенты</a>
+                                        <a><i class="fa fa-home"></i> Клиенты <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="{{ path('client_customers') }}">Мои клиенты</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ path('client_customer.add') }}">Добавить клиента</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li><a><i class="fa fa-edit"></i> События <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
@@ -118,7 +126,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="images/img.jpg" alt="">John Doe
+                                        <img src="{{ asset('bundles/client/images/img.jpg') }}" alt="">John Doe
                                         <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">

@@ -5,3 +5,7 @@ client_homepage:
 client_customers:
     path: /customers
     defaults: {_controller: 'client.controller.customer:listAction'}
+
+client_customer.add:
+    path: /customer/add
+    defaults: {_controller: 'client.controller.customer:createAction'}

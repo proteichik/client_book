@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Компания</th>
+            <th>Адрес</th>
+            <th>Добавлена</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in objects %}
+            <tr>
+                <th class="row">{{ object.id }}</th>
+                <td>{{ object.company }}</td>
+                <td>{{ object.address.city }}, {{ object.address.street }}</td>
+                <td>{{ object.createdAt | date('m/d/Y') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
