@@ -6,6 +6,7 @@ use ClientBundle\Model\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use ClientBundle\Annotation\UserAware;
 
 /**
  * Class Customer
@@ -14,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="customer")
+ *
+ * @UserAware(userFieldName="user_id")
  */
 class Customer implements EntityInterface
 {

@@ -11,17 +11,11 @@ class CustomerController extends AbstractController
      */
     public function listAction()
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $objects = $this->getService()->findAll();
-        } else {
-            $options = array(
-                'criteria' => array(
-                    'user' => $this->getUser(),
-                ),
-            );
-            $objects = $this->getService()->findBy($options);
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
         }
 
+        $objects = $this->getService()->findAll();
 
         return $this->render($this->getTemplateName($this, __METHOD__), array('objects' => $objects));
     }
@@ -41,8 +35,6 @@ class CustomerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $customer = $form->getData();
-            $customer->setUser($this->getUser());
 
             $this->getService()->save($form->getData());
             return $this->redirectToRoute('client_customers');

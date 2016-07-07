@@ -5,6 +5,18 @@ services:
         arguments: ['@doctrine.orm.entity_manager']
         tags:
             - {name: form.type, alias: entity_hidden}
+    clien.form.type.user_hidden:
+        class: ClientBundle\Form\Type\UserHiddenType
+        arguments: ['@security.token_storage']
+        tags:
+            - {name: form.type, alias: user_hidden}
+
+#Form
+    client.form.customer:
+        class: ClientBundle\Form\CustomerForm
+        arguments: ['@security.token_storage']
+        tags:
+            - {name: form.type, alias: customer_form}
 
 #Entities:
     client.entity.customer:
@@ -21,6 +33,13 @@ services:
         arguments: ["@client.service.customer", "%client.form.customer.class%", "@client.entity.customer"]
         calls:
             - [setContainer, ['@service_container']]
+
+#Doctrine filter configurator
+    client.doctrine.filter.configurator:
+        class: ClientBundle\Filter\Configurator
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@annotation_reader"]
+        tags:
+            - {name: kernel.event_listener, event: kernel.request}
 
 
 
