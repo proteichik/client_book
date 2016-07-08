@@ -12,7 +12,7 @@ use ClientBundle\Annotation\UserAware;
  * Class Customer
  * @package ClientBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ClientBundle\Repository\CustomerRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="customer")
  *

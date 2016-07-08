@@ -1,24 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Компания</th>
-            <th>Адрес</th>
-            <th>Добавлена</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for object in objects %}
+    <div class="col-md-9 col-xs-12">
+        <table class="table">
+            <thead>
             <tr>
-                <th class="row">{{ object.id }}</th>
-                <td>{{ object.company }}</td>
-                <td>{{ object.address.city }}, {{ object.address.street }}</td>
-                <td>{{ object.createdAt | date('m/d/Y') }}</td>
+                <th>#</th>
+                <th>Компания</th>
+                <th>Адрес</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>Сотрудник</th>
+                {% endif %}
+                <th>Добавлена</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for object in objects %}
+                <tr>
+                    <th class="row">{{ object.id }}</th>
+                    <td>{{ object.company }}</td>
+                    <td>{{ object.address.city }}, {{ object.address.street }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>{{ object.user.username }}</td>
+                    {% endif %}
+                    <td>{{ object.createdAt | date('m/d/Y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
