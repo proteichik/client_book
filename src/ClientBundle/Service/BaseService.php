@@ -64,7 +64,7 @@ class BaseService implements ServiceInterface
      */
     public function find($id)
     {
-        return $this->em->getRepository($this->repositoryName)->find($id);
+        return $this->getRepository($this->repositoryName)->find($id);
     }
 
     /**
@@ -89,7 +89,7 @@ class BaseService implements ServiceInterface
             throw new \InvalidArgumentException('Search order must be array!');
         }
 
-        return $this->em->getRepository($this->repositoryName)->findBy($criteria, $order);
+        return $this->getRepository($this->repositoryName)->findBy($criteria, $order);
     }
 
     /**
@@ -97,7 +97,7 @@ class BaseService implements ServiceInterface
      */
     public function findAll()
     {
-        return $this->em->getRepository($this->repositoryName)->findAll();
+        return $this->getRepository($this->repositoryName)->findAll();
     }
 
     /**
@@ -134,5 +134,10 @@ class BaseService implements ServiceInterface
     public function flush()
     {
         $this->em->flush();
+    }
+
+    protected function getRepository()
+    {
+        return $this->em->getRepository($this->repositoryName);
     }
 }

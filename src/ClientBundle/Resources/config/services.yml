@@ -24,19 +24,26 @@ services:
 
 #Services:
     client.service.customer:
-        class: ClientBundle\Service\BaseService
-        arguments: ["@doctrine.orm.entity_manager", "%client.repository.customer.name%"]
+        class: ClientBundle\Service\FilterService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.customer.name%"
+            - "@lexik_form_filter.query_builder_updater"
 
 #Controllers:
     client.controller.customer:
         class: ClientBundle\Controller\CustomerController
-        arguments: ["@client.service.customer", "%client.form.customer.class%", "@client.entity.customer"]
+        arguments:
+            - "@client.service.customer"
+            - "%client.form.customer.class%"
+            - "@client.entity.customer"
+            - "%client.filter.form.customer.class%"
         calls:
             - [setContainer, ['@service_container']]
 
 #Doctrine filter configurator
     client.doctrine.filter.configurator:
-        class: ClientBundle\Filter\Configurator
+        class: ClientBundle\Filter\SQLFilter\Configurator
         arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@annotation_reader"]
         tags:
             - {name: kernel.event_listener, event: kernel.request}

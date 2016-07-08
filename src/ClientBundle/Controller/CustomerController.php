@@ -4,21 +4,8 @@ namespace ClientBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerController extends AbstractController
+class CustomerController extends BaseController
 {
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function listAction()
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        }
-
-        $objects = $this->getService()->findAll();
-
-        return $this->render($this->getTemplateName($this, __METHOD__), array('objects' => $objects));
-    }
 
     /**
      * @param Request $request

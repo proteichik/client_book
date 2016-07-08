@@ -7,105 +7,28 @@ use Symfony\Component\HttpFoundation\Request;
 class BaseController extends AbstractController
 {
     /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $objects = $this->getService()->findAll();
-
-        return $this->render($this->getTemplateName($this, __METHOD__), array('objects' => $objects));
-    }
-
-    /**
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function detailAction($id)
-    {
-        $object = $this->getService()->getObjectDetail($id);
-
-        return $this->render($this->getTemplateName($this, __METHOD__), array('object' => $object));
-    }
-
-    /**
-     * @param Request $request
-     * @param $routeTo
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function createAction(Request $request, $routeTo)
-    {
-        $form = $this->createForm($this->getForm(), $this->getPrototype());
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getService()->save($form->getData());
-
-            if ($routeTo) {
-                return $this->redirectToRoute($routeTo['route']);
-            }
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
         }
 
-        return $this->render($this->getTemplateName($this, __METHOD__), array('form' => $form->createView()));
-    }
+        $filterForm = $this->createForm($this->filterFormClass);
 
-    /**
-     * @param Request $request
-     * @param $id
-     * @param $routeTo
-     * @throws \InvalidArgumentException
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function updateAction(Request $request, $id, $routeTo)
-    {
-        $object = $this->getService()->find($id);
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->submit($request->query->get($filterForm->getName()));
+            $objects = $this->getService()->getFilteredList($filterForm);
 
-        if (!$object) {
-            throw new \InvalidArgumentException('Object not find');
+        } else {
+            $objects = $this->getService()->findAll();
         }
 
-        $form = $this->createForm($this->getForm(), $object);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getService()->save($object);
-
-            if ($routeTo) {
-                return $this->redirectToRoute($routeTo['route']);
-            }
-        }
-
-        return $this->render($this->getTemplateName($this, __METHOD__), array('form' => $form->createView(),
-            'object' => $object));
-
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @param $routeTo
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function deleteAction(Request $request, $id, $routeTo)
-    {
-        $object = $this->getService()->find($id);
-
-        if (!$object) {
-            throw new \InvalidArgumentException('Object not find');
-        }
-
-        if ($request->getMethod() === "POST"){
-            if ($request->get("delete_confirmation", "no") === "yes") {
-                $this->getService()->delete($object);
-            }
-
-            if ($routeTo) {
-                return $this->redirectToRoute($routeTo['route']);
-            }
-        }
-
-        return $this->render($this->getTemplateName($this, __METHOD__), array('object' => $object));
+        return $this->render($this->getTemplateName($this, __METHOD__), array(
+            'objects' => $objects,
+            'filterForm' => $filterForm->createView()));
     }
 
 

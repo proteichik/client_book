@@ -41,6 +41,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'bootstrap_3_layout.html.twig'
+        - LexikFormFilterBundle:Form:form_div_layout.html.twig
 
 # Doctrine Configuration
 doctrine:
@@ -65,7 +66,7 @@ doctrine:
         auto_mapping: true
         filters:
             user_filter:
-                class: ClientBundle\Filter\UserFilter
+                class: ClientBundle\Filter\SQLFilter\UserFilter
                 enabled: true
 
 # Swiftmailer Configuration
@@ -80,4 +81,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: ClientBundle\Entity\User
+
+lexik_form_filter:
+    listeners:
+        doctrine_orm: true
+        doctrine_dbal: false
+        doctrine_mongodb: false
+    where_method: ~  # null | and | or
 

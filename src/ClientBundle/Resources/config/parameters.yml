@@ -3,3 +3,5 @@ parameters:
     client.repository.customer.name: ClientBundle:Customer
 #Forms
     client.form.customer.class: ClientBundle\Form\CustomerForm
+#Filter forms
+    client.filter.form.customer.class: ClientBundle\Filter\FormFilter\CustomerFilter

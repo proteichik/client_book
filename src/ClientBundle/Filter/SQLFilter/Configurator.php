@@ -1,6 +1,6 @@
 <?php
 
-namespace ClientBundle\Filter;
+namespace ClientBundle\Filter\SQLFilter;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Common\Persistence\ObjectManager;

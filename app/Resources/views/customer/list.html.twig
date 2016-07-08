@@ -29,4 +29,11 @@
             </tbody>
         </table>
     </div>
+    <div class="col-md-3 col-xs-12">
+        <form method="get" action="{{ path('client_customers') }}">
+            {{ form_rest(filterForm) }}
+            <input type="submit" name="submit-filter" value="filter" />
+        </form>
+
+    </div>
 {% endblock %}

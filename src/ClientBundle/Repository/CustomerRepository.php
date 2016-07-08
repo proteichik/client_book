@@ -2,9 +2,7 @@
 
 namespace ClientBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-class CustomerRepository extends EntityRepository
+class CustomerRepository extends AbstractRepository
 {
     public function findAll()
     {
@@ -13,5 +11,12 @@ class CustomerRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    public function getFilteredBuilder()
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.user', 'u');
+    }
+
 
 }
