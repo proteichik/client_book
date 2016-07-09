@@ -19,9 +19,9 @@ class BaseController extends AbstractController
         $filterForm = $this->createForm($this->filterFormClass);
 
         if ($request->query->has($filterForm->getName())) {
+
             $filterForm->submit($request->query->get($filterForm->getName()));
             $objects = $this->getService()->getFilteredList($filterForm);
-
         } else {
             $objects = $this->getService()->findAll();
         }

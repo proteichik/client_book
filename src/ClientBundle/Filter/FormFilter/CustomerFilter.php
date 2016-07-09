@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CustomerFilter extends AbstractType
 {
@@ -15,17 +16,18 @@ class CustomerFilter extends AbstractType
         $builder->add('company', Filters\TextFilterType::class, array(
             'condition_pattern' => FilterOperands::STRING_CONTAINS,
         ));
+        $builder->add('address', AddressFilterType::class);
     }
 
     public function getBlockPrefix()
     {
         return 'customer_filter';
     }
-
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
+//
+//    public function getName()
+//    {
+//        return $this->getBlockPrefix();
+//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {

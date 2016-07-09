@@ -53,7 +53,12 @@ class FilterService extends BaseService
         /* @var \Doctrine\ORM\QueryBuilder */
         $filterBuilder = $repository->getFilteredBuilder();
 
-        $this->filterBuilderUpdater->addFilterConditions($filterForm, $filterBuilder);
+        try {
+            $this->filterBuilderUpdater->addFilterConditions($filterForm, $filterBuilder);
+        } catch (\Exception $ex)
+        {
+
+        }
 
         return $filterBuilder->getQuery()->getResult();
     }
