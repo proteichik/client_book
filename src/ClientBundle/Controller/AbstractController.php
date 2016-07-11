@@ -2,9 +2,12 @@
 
 namespace ClientBundle\Controller;
 
+use ClientBundle\Exception\InvalidFormException;
 use ClientBundle\Model\EntityInterface;
 use ClientBundle\Service\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormTypeInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractController extends Controller
 {
@@ -173,7 +176,19 @@ abstract class AbstractController extends Controller
         return $className . '/' . $actionName . '.'. $content . '.' .$templating;
     }
 
+    /**
+     * @param Request $request
+     * @param EntityInterface $object
+     * @return \Symfony\Component\Form\Form
+     */
+    protected function prepareForm(Request $request, EntityInterface $object)
+    {
+        $form = $this->createForm($this->getForm(), $object);
 
+        $form->handleRequest($request);
+
+        return $form;
+    }
 
 
 }

@@ -18,6 +18,13 @@ services:
         tags:
             - {name: form.type, alias: customer_form}
 
+#Form filter
+    client.filter.form.customer:
+        class: ClientBundle\Filter\FormFilter\CustomerFilter
+        arguments: ['@security.token_storage']
+        tags:
+            - {name: form.type, alias: customer_filter}
+
 #Entities:
     client.entity.customer:
         class: ClientBundle\Entity\Customer

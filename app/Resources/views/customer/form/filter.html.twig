@@ -7,6 +7,12 @@
     <label>УНП:</label>
     {{ form_widget(filter.address.unp) }}
 </div>
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="form-group form-group-sm">
+        <label>Сотрудник:</label>
+        {{ form_widget(filter.user) }}
+    </div>
+{% endif %}
 <p>
     <input type="submit" class="btn btn-primary btn-sm btn-block" value="Поиск" />
 </p>
