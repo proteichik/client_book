@@ -2,12 +2,15 @@
 
 namespace ClientBundle\Filter\FormFilter;
 
+use Lexik\Bundle\FormFilterBundle\Filter\Condition\ConditionBuilderInterface;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use ClientBundle\Entity\Customer;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderExecuterInterface;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 class CustomerFilter extends AbstractType
 {
@@ -21,19 +24,15 @@ class CustomerFilter extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'customer_filter';
+        return 'user_filter';
     }
-//
-//    public function getName()
-//    {
-//        return $this->getBlockPrefix();
-//    }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'csrf_protection'   => false,
-            'validation_groups' => array('filtering') // avoid NotBlank() constraint-related message
+            'validation_groups' => array('filtering'), // avoid NotBlank() constraint-related message
         ));
     }
 }
