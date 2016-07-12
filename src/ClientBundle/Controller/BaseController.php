@@ -5,6 +5,7 @@ use ClientBundle\Exception\InvalidFormException;
 use ClientBundle\Model\EntityInterface;
 use ClientBundle\Model\Route;
 use ClientBundle\Service\ServiceInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class BaseController extends AbstractController
@@ -33,9 +34,7 @@ abstract class BaseController extends AbstractController
      */
     public function listAction(Request $request)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        }
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $filterForm = $this->createForm($this->filterFormClass);
 
@@ -58,9 +57,7 @@ abstract class BaseController extends AbstractController
      */
     public function createAction(Request $request)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        }
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $form = $this->prepareForm($request, $this->getPrototype());
 
@@ -74,6 +71,29 @@ abstract class BaseController extends AbstractController
         return $this->render($this->getTemplateName($this, __METHOD__), array('form' => $form->createView()));
 
     }
+
+    public function updateAction(Request $request, $id)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $object = $this->getService()->find($id);
+
+        if (!$object) {
+            throw new \InvalidArgumentException('Object not found');
+        }
+
+        $form = $this->prepareForm($request, $object);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getService()->save($form->getData());
+            $routeTo = $this->getRoute(__FUNCTION__);
+
+            return $this->redirectToRoute($routeTo->getRoute(), $routeTo->getParams(), $routeTo->getCode());
+        }
+
+        return $this->render($this->getTemplateName($this, __METHOD__), array('form' => $form->createView()));
+    }
+    
 
     /**
      * @param $name

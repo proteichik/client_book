@@ -181,7 +181,7 @@ abstract class AbstractController extends Controller
      * @param EntityInterface $object
      * @return \Symfony\Component\Form\Form
      */
-    protected function prepareForm(Request $request, EntityInterface $object)
+    protected function prepareForm(Request $request, EntityInterface $object = null)
     {
         $form = $this->createForm($this->getForm(), $object);
 
