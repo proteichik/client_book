@@ -15,7 +15,7 @@ class CallController extends BaseController
         $object->setCustomer($customer);
 
         $form = $this->createForm($this->getForm(), $object, array(
-            'action' => $this->generateUrl('client_customer.add', array(
+            'action' => $this->generateUrl('client_call.add', array(
                 'id_customer' => $customer->getId(),
             ))
         ));
