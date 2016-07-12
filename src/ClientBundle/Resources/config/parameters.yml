@@ -1,7 +1,10 @@
 parameters:
 #Repositories
     client.repository.customer.name: ClientBundle:Customer
+    client.repository.call.name: ClientBundle:Call
 #Forms
     client.form.customer.class: ClientBundle\Form\CustomerForm
+    client.form.call.class: ClientBundle\Form\CallForm
 #Filter forms
     client.filter.form.customer.class: ClientBundle\Filter\FormFilter\CustomerFilter
+    client.filter.form.call.class: ClientBundle\Filter\FormFilter\CallFilter

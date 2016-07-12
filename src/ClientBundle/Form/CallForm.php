@@ -2,7 +2,7 @@
 
 namespace ClientBundle\Form;
 
-use ClientBundle\Form\Type\CustomerType;
+use ClientBundle\Form\Type\EntityHiddenType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +24,9 @@ class CallForm extends AbstractType
             ->add('date')
             ->add('status')
             ->add('info')
-            ->add('customer', CustomerType::class)
+            ->add('customer', EntityHiddenType::class, array(
+                'class' => 'ClientBundle\Entity\Customer',
+            ))
             ->add('save', SubmitType::class)
         ;
     }

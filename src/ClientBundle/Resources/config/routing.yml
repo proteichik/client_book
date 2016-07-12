@@ -9,3 +9,15 @@ client_customers:
 client_customer.add:
     path: /customer/add
     defaults: {_controller: 'client.controller.customer:createAction'}
+
+client_customer.edit:
+    path: /customer/{id}
+    defaults: {_controller: 'client.controller.customer:updateAction'}
+    requirements:
+        id: \d+
+
+client_call.add:
+    path: /customer/{id_customer}/call/add
+    defaults: {_controller: 'client.controller.call:createAction'}
+    requirements:
+        id_customer: \d+

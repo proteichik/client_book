@@ -6,6 +6,7 @@ use ClientBundle\Exception\InvalidFormException;
 use ClientBundle\Model\EntityInterface;
 use ClientBundle\Service\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -178,17 +179,31 @@ abstract class AbstractController extends Controller
 
     /**
      * @param Request $request
-     * @param EntityInterface $object
+     * @param EntityInterface|null $object
+     * @param array $options
      * @return \Symfony\Component\Form\Form
      */
-    protected function prepareForm(Request $request, EntityInterface $object = null)
+    protected function prepareForm(Request $request, EntityInterface $object = null, $options = array())
     {
-        $form = $this->createForm($this->getForm(), $object);
+        $form = $this->createForm($this->getForm(), $object, $options);
 
         $form->handleRequest($request);
 
         return $form;
     }
 
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
+    protected function runSave(FormInterface $form)
+    {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getService()->save($form->getData());
 
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

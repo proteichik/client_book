@@ -29,12 +29,22 @@ services:
     client.entity.customer:
         class: ClientBundle\Entity\Customer
 
+    client.entity.call:
+        class: ClientBundle\Entity\Call
+
 #Services:
     client.service.customer:
         class: ClientBundle\Service\FilterService
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%client.repository.customer.name%"
+            - "@lexik_form_filter.query_builder_updater"
+
+    client.service.call:
+        class: ClientBundle\Service\FilterService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.call.name%"
             - "@lexik_form_filter.query_builder_updater"
 
 #Controllers:
@@ -44,6 +54,16 @@ services:
             - "@client.service.customer"
             - "%client.form.customer.class%"
             - "@client.entity.customer"
+            - "%client.filter.form.customer.class%"
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client.controller.call:
+        class: ClientBundle\Controller\CallController
+        arguments:
+            - "@client.service.call"
+            - "%client.form.call.class%"
+            - "@client.entity.call"
             - "%client.filter.form.customer.class%"
         calls:
             - [setContainer, ['@service_container']]
