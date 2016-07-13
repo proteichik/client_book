@@ -21,7 +21,9 @@ class CallForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date')
+            ->add('date', null, array(
+                'date_widget' => 'single_text'
+            ))
             ->add('status')
             ->add('info')
             ->add('customer', EntityHiddenType::class, array(
