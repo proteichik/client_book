@@ -2,10 +2,10 @@
 
 namespace ClientBundle\Controller;
 
-use ClientBundle\Exception\InvalidFormException;
+use ClientBundle\Controller\Base\FilteredBaseController;
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerController extends BaseController
+class CustomerController extends FilteredBaseController
 {
     /**
      * @param Request $request

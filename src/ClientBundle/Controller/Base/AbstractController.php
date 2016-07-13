@@ -1,6 +1,6 @@
 <?php
 
-namespace ClientBundle\Controller;
+namespace ClientBundle\Controller\Base;
 
 use ClientBundle\Exception\InvalidFormException;
 use ClientBundle\Model\EntityInterface;
@@ -28,47 +28,16 @@ abstract class AbstractController extends Controller
     protected $prototype;
 
     /**
-     * @var string
-     */
-    protected $filterFormClass;
-
-    /**
-     * @return string
-     */
-    public function getFilterFormClass()
-    {
-        return $this->filterFormClass;
-    }
-
-    /**
-     * @param $filterFormClass
-     * @return $this
-     * @throws \InvalidArgumentException
-     */
-    public function setFilterFormClass($filterFormClass)
-    {
-        if (!is_string($filterFormClass)) {
-            throw new \InvalidArgumentException('Form filter must be a string');
-        }
-
-        $this->filterFormClass = $filterFormClass;
-
-        return $this;
-    }
-
-
-    /**
+     * AbstractController constructor.
      * @param ServiceInterface $service
-     * @param string $form
+     * @param $form
      * @param EntityInterface $prototype
-     * @param string $filterFormClass
      */
-    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype, $filterFormClass)
+    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype)
     {
         $this->service = $service;
         $this->form = $form;
         $this->prototype = $prototype;
-        $this->setFilterFormClass($filterFormClass);
     }
 
     /**

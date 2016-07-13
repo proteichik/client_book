@@ -2,10 +2,11 @@
 
 namespace ClientBundle\Controller;
 
+use ClientBundle\Controller\Base\FilteredBaseController;
 use ClientBundle\Entity\Customer;
 use Symfony\Component\HttpFoundation\Request;
 
-class CallController extends BaseController
+class CallController extends FilteredBaseController
 {
     public function showFormAction(Request $request, Customer $customer)
     {
@@ -23,13 +24,15 @@ class CallController extends BaseController
         return $this->render('call/form/form.html.twig', array('form' => $form->createView()));
     }
 
-    public function createAction(Request $request)
+    public function createAction(Request $request, $id_customer)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $form = $this->prepareForm($request, $this->getPrototype());
 
-        $this->runSave($form);
+        if ($this->runSave($form)) {
+            return $this->redirectToRoute('client_customer.edit', array('id' => $id_customer));
+        }
 
         return $this->render('call/form/form.html.twig', array('form' => $form->createView()));
     }
