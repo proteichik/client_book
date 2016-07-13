@@ -2,12 +2,10 @@
 
 namespace ClientBundle\Controller\Base;
 
-use ClientBundle\Exception\InvalidFormException;
 use ClientBundle\Model\EntityInterface;
 use ClientBundle\Service\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractController extends Controller

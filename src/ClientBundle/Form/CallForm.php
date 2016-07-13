@@ -4,6 +4,8 @@ namespace ClientBundle\Form;
 
 use ClientBundle\Form\Type\EntityHiddenType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,11 +23,13 @@ class CallForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', null, array(
-                'date_widget' => 'single_text'
+            ->add('date', DateTimeType::class)
+            ->add('status', CheckboxType::class, array(
+                'required' => false,
             ))
-            ->add('status')
-            ->add('info')
+            ->add('info', null, array(
+                'required' => false,
+            ))
             ->add('customer', EntityHiddenType::class, array(
                 'class' => 'ClientBundle\Entity\Customer',
             ))

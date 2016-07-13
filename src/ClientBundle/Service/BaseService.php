@@ -84,12 +84,17 @@ class BaseService implements ServiceInterface
 
         $criteria = $options['criteria'];
         $order = (isset($options['order'])) ? $options['order'] : array();
+        $limit = (isset($options['limit'])) ? $options['limit'] : null;
 
         if (!is_array($order)) {
             throw new \InvalidArgumentException('Search order must be array!');
         }
 
-        return $this->getRepository($this->repositoryName)->findBy($criteria, $order);
+        if (null !== $limit && !is_int($limit)) {
+            throw new \InvalidArgumentException('Limit must be integer');
+        }
+
+        return $this->getRepository($this->repositoryName)->findBy($criteria, $order, $limit);
     }
 
     /**

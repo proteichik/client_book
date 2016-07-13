@@ -5,6 +5,7 @@ namespace ClientBundle\Entity;
 use ClientBundle\Model\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ClientBundle\Validator\Constraints as ClientAssert;
 
 /**
  * Class AbstractEvent
@@ -12,16 +13,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractEvent implements EntityInterface
 {
-    const PLANNED_TYPE = 0;
-    const DONE_TYPE = 1;
+    const PLANNED_TYPE = 1;
+    const DONE_TYPE = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      *
      * @Assert\NotBlank()
      * @Assert\DateTime()
+     * @ClientAssert\ConstraintNearEvent()
      */
     protected $date;
 
@@ -30,21 +32,20 @@ abstract class AbstractEvent implements EntityInterface
      *
      * @ORM\Column(type="smallint")
      *
-     * @Assert\NotBlank()
      */
     protected $status;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $info;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="date")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
 
@@ -146,10 +147,6 @@ abstract class AbstractEvent implements EntityInterface
     {
         $now = new \DateTime();
 
-        return ($this->date < $now && $this->status = self::PLANNED_TYPE) ? false : true;
+        return ($this->date < $now && $this->status == self::PLANNED_TYPE) ? false : true;
     }
-
-
-
-
 }

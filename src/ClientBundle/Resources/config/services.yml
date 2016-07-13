@@ -1,38 +1,4 @@
 services:
-#Form types
-    client.form.type.entity_hidden:
-        class: ClientBundle\Form\Type\EntityHiddenType
-        arguments: ['@doctrine.orm.entity_manager']
-        tags:
-            - {name: form.type, alias: entity_hidden}
-    clien.form.type.user_hidden:
-        class: ClientBundle\Form\Type\UserHiddenType
-        arguments: ['@security.token_storage']
-        tags:
-            - {name: form.type, alias: user_hidden}
-
-#Form
-    client.form.customer:
-        class: ClientBundle\Form\CustomerForm
-        arguments: ['@security.token_storage']
-        tags:
-            - {name: form.type, alias: customer_form}
-
-#Form filter
-    client.filter.form.customer:
-        class: ClientBundle\Filter\FormFilter\CustomerFilter
-        arguments: ['@security.token_storage']
-        tags:
-            - {name: form.type, alias: customer_filter}
-
-#Entities:
-    client.entity.customer:
-        class: ClientBundle\Entity\Customer
-
-    client.entity.call:
-        class: ClientBundle\Entity\Call
-
-#Services:
     client.service.customer:
         class: ClientBundle\Service\FilterService
         arguments:
@@ -46,34 +12,6 @@ services:
             - "@doctrine.orm.entity_manager"
             - "%client.repository.call.name%"
             - "@lexik_form_filter.query_builder_updater"
-
-#Controllers:
-    client.controller.customer:
-        class: ClientBundle\Controller\CustomerController
-        arguments:
-            - "@client.service.customer"
-            - "%client.form.customer.class%"
-            - "@client.entity.customer"
-            - "%client.filter.form.customer.class%"
-        calls:
-            - [setContainer, ['@service_container']]
-
-    client.controller.call:
-        class: ClientBundle\Controller\CallController
-        arguments:
-            - "@client.service.call"
-            - "%client.form.call.class%"
-            - "@client.entity.call"
-            - "%client.filter.form.customer.class%"
-        calls:
-            - [setContainer, ['@service_container']]
-
-#Doctrine filter configurator
-    client.doctrine.filter.configurator:
-        class: ClientBundle\Filter\SQLFilter\Configurator
-        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@annotation_reader"]
-        tags:
-            - {name: kernel.event_listener, event: kernel.request}
 
 
 

@@ -1,0 +1,7 @@
+services:
+    validator.near_event:
+        class: ClientBundle\Validator\Constraints\ConstraintNearEventValidator
+        arguments:
+            - "%count.days%"
+        tags:
+            - {name: validator.constraint_validator, alias: near_event}

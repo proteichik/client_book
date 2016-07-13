@@ -1,0 +1,19 @@
+services:
+#Form types
+    client.form.type.entity_hidden:
+        class: ClientBundle\Form\Type\EntityHiddenType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - {name: form.type, alias: entity_hidden}
+    clien.form.type.user_hidden:
+        class: ClientBundle\Form\Type\UserHiddenType
+        arguments: ['@security.token_storage']
+        tags:
+            - {name: form.type, alias: user_hidden}
+
+#Form
+    client.form.customer:
+        class: ClientBundle\Form\CustomerForm
+        arguments: ['@security.token_storage']
+        tags:
+            - {name: form.type, alias: customer_form}

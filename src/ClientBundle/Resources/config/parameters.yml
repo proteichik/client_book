@@ -1,4 +1,6 @@
 parameters:
+    max.recent: 5
+    count.days: 3
 #Repositories
     client.repository.customer.name: ClientBundle:Customer
     client.repository.call.name: ClientBundle:Call

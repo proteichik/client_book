@@ -1,0 +1,21 @@
+services:
+#Controllers:
+    client.controller.customer:
+        class: ClientBundle\Controller\CustomerController
+        arguments:
+            - "@client.service.customer"
+            - "%client.form.customer.class%"
+            - "@client.entity.customer"
+            - "%client.filter.form.customer.class%"
+        calls:
+            - [setContainer, ['@service_container']]
+
+    client.controller.call:
+        class: ClientBundle\Controller\CallController
+        arguments:
+            - "@client.service.call"
+            - "%client.form.call.class%"
+            - "@client.entity.call"
+            - "%client.filter.form.customer.class%"
+        calls:
+            - [setContainer, ['@service_container']]

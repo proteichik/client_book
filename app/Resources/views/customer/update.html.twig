@@ -18,15 +18,20 @@
             <div class="col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Добавить звонок</h2>
+                        <h2>Последние звонки</h2>
+                        <a href="#" class="btn btn-default btn-sm pull-right">
+                            <i class="fa fa-list" aria-hidden="true"></i>
+                        </a>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         {{ render(controller(
-                        'client.controller.call:showFormAction',
-                        {'customer': object}
-                        )) }}
+                        'client.controller.call:getRecentAction',
+                        {customer: object})) }}
+                        <a href="{{ path('client_call.add', {id_customer: object.id}) }}" type="button" class="btn btn-success btn-block">Добавить</a>
                     </div>
+
+
                 </div>
             </div>
 

@@ -1,0 +1,6 @@
+services:
+    client.entity.customer:
+        class: ClientBundle\Entity\Customer
+
+    client.entity.call:
+        class: ClientBundle\Entity\Call

@@ -92,6 +92,10 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
             ->method('findBy')
             ->with($this->identicalTo(array('id' => 1)), $this->identicalTo(array('name' => 'ASC')))
         ;
+        $this->mockRepository->expects($this->at(2))
+            ->method('findBy')
+            ->with($this->identicalTo(array('id' => 1)), $this->identicalTo(array('name' => 'ASC')),
+                $this->identicalTo(2));
 
         $result = $this->service->findBy($option);
 
@@ -107,6 +111,18 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->service->findBy($option);
 
+        $option['limit'] = 'test';
+
+        try{
+            $this->service->findBy($option);
+            $this->fail('Must throw exception');
+        } catch (\Exception $ex)
+        {
+
+        }
+        $option['limit'] = 2;
+
+        $result = $this->service->findBy($option);
     }
 
     public function testFindAll()
