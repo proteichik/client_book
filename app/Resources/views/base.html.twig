@@ -21,6 +21,11 @@
         <!-- Custom Theme Style -->
         <link href="{{ asset('bundles/client/css/custom.css') }}" rel="stylesheet">
     {% endblock %}
+
+    {% block js_head %}
+        <!-- jQuery -->
+        <script src="{{ asset('bundles/client/vendors/jquery/dist/jquery.min.js') }}"></script>
+    {% endblock %}
 </head>
 <body class="nav-md">
 {% block body %}
@@ -168,15 +173,17 @@
     </div>
 {% endblock %}
 {% block javascripts %}
-    <!-- jQuery -->
-    <script src="{{ asset('bundles/client/vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
     <script src="{{ asset('bundles/client/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!--Moment JS-->
+    <script src="{{ asset('bundles/client/vendors/moment/moment.js') }}"></script>
+    <script src="{{ asset('bundles/client/vendors/moment/locale/ru.js') }}"></script>
     <!-- bootstrap-progressbar -->
     <script src="{{ asset('bundles/client/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="{{ asset('bundles/client/js/moment/moment.min.js') }}"></script>
-    <script src="{{ asset('bundles/client/js/datepicker/daterangepicker.js') }}"></script>
+    <!--Bootstrap datetimepicker-->
+    <script src="{{ asset('bundles/client/vendors/bootstrap/js/transition.js') }}"></script>
+    <script src="{{ asset('bundles/client/vendors/bootstrap/js/collapse.js') }}"></script>
+    <script src="{{ asset('bundles/client/vendors/bootstrap/js/bootstrap-datetimepicker.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('bundles/client/js/custom.js') }}"></script>

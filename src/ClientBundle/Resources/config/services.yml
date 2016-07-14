@@ -13,5 +13,11 @@ services:
             - "%client.repository.call.name%"
             - "@lexik_form_filter.query_builder_updater"
 
+    client.service.meeting:
+        class: ClientBundle\Service\FilterService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.meeting.name%"
+            - "@lexik_form_filter.query_builder_updater"
 
 

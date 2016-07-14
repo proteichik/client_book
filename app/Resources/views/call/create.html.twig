@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    {{ include('call/form/form.html.twig', {'form': form}) }}
+    <div class="row">
+        <div class="col-md-3 col-xs-12"></div>
+        <div class="col-md-6 col-xs-12">
+            {{ include('call/form/form.html.twig', {'form': form}) }}
+        </div>
+    </div>
+
+
 {% endblock %}

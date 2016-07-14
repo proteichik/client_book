@@ -4,3 +4,6 @@ services:
 
     client.entity.call:
         class: ClientBundle\Entity\Call
+
+    client.entity.meeting:
+        class: ClientBundle\Entity\Meeting

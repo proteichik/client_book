@@ -19,3 +19,13 @@ services:
             - "%client.filter.form.customer.class%"
         calls:
             - [setContainer, ['@service_container']]
+
+    client.controller.meeting:
+        class: ClientBundle\Controller\MeetingController
+        arguments:
+            - "@client.service.meeting"
+            - "%client.form.meeting.class%"
+            - "@client.entity.meeting"
+            - "%client.filter.form.customer.class%"
+        calls:
+            - [setContainer, ['@service_container']]

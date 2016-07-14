@@ -1,0 +1,20 @@
+{% if objects|length > 0  %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Дата встречи</th>
+            <th>Создана</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in objects %}
+            <tr>
+                <th class="row">{{ object.date | date('Y-m-d H:i:s') }}</th>
+                <td>{{ object.createdAt | date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Пока нет встреч...</p>
+{% endif %}

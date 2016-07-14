@@ -2,6 +2,7 @@
 
 namespace ClientBundle\Controller\Base;
 
+use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Entity\Customer;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,13 +17,15 @@ class BaseEventController extends FilteredBaseController
      * @param Customer $customer
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getRecentAction(Request $request, Customer $customer)
+    public function getRecentDoneAction(Request $request, Customer $customer)
     {
         $max = ($this->container->hasParameter('max.recent')) ? $this->getParameter('max.recent') : 5;
 
         $objects = $this->getService()->findBy(
             array(
-                'criteria' => array('customer' => $customer),
+                'criteria' => array(
+                    'customer' => $customer,
+                    'status' => AbstractEvent::DONE_TYPE),
                 'order' => array('date' => 'desc'),
                 'limit' => $max,
             )
@@ -59,6 +62,7 @@ class BaseEventController extends FilteredBaseController
         }
 
         return $this->render($this->getTemplateName($this, __METHOD__), array(
-            'form' => $form->createView()));
+            'form' => $form->createView(),
+            'customer' => $customer));
     }
 }

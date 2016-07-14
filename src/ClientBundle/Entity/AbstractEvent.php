@@ -146,7 +146,21 @@ abstract class AbstractEvent implements EntityInterface
     public function isValidStatus()
     {
         $now = new \DateTime();
+        $now->modify("+ 5 minutes");
 
-        return ($this->date < $now && $this->status == self::PLANNED_TYPE) ? false : true;
+        return ($this->date < $now && $this->status === self::PLANNED_TYPE) ? false : true;
+    }
+
+    /**
+     * Совершенное событие не может быть в будующем
+     *
+     * @Assert\IsFalse(message="Неправильная дата!")
+     * @return bool
+     */
+    public function isNoFutureDoneEvent()
+    {
+        $now = new \DateTime();
+
+        return ($this->status == self::DONE_TYPE && $this->date > $now);
     }
 }

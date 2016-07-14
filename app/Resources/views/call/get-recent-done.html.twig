@@ -3,7 +3,6 @@
     <thead>
     <tr>
         <th>Дата звонка</th>
-        <th>Статус</th>
         <th>Создан</th>
     </tr>
     </thead>
@@ -11,7 +10,6 @@
     {% for object in objects %}
         <tr>
             <th class="row">{{ object.date | date('Y-m-d H:i:s') }}</th>
-            <td>{{ object.status }}</td>
             <td>{{ object.createdAt | date('Y-m-d H:i:s') }}</td>
         </tr>
     {% endfor %}
