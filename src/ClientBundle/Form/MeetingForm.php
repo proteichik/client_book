@@ -3,6 +3,8 @@
 namespace ClientBundle\Form;
 
 use ClientBundle\Form\Type\EntityHiddenType;
+use ClientBundle\Form\Type\MyDateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,10 +23,16 @@ class MeetingForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options = array())
     {
         $builder
-            ->add('date')
-            ->add('status')
-            ->add('info')
-            ->add('customer', EntityHiddenType::class)
+            ->add('date', MyDateTimeType::class)
+            ->add('status', CheckboxType::class, array(
+                'required' => false,
+            ))
+            ->add('info', null, array(
+                'required' => false,
+            ))
+            ->add('customer', EntityHiddenType::class, array(
+                'class' => 'ClientBundle\Entity\Customer',
+            ))
             ->add('save', SubmitType::class)
         ;
     }

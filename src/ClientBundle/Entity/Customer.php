@@ -14,7 +14,7 @@ use ClientBundle\Annotation\UserAware;
  *
  * @ORM\Entity(repositoryClass="ClientBundle\Repository\CustomerRepository")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Table(name="customer")
+ * @ORM\Table(name="customer", indexes={@ORM\Index(name="company_idx", columns={"company"})})
  *
  * @UserAware(userFieldName="user_id")
  */
@@ -32,7 +32,7 @@ class Customer implements EntityInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, unique=true)
      *
      * @Assert\NotBlank()
      */

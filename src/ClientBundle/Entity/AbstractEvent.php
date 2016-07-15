@@ -50,6 +50,18 @@ abstract class AbstractEvent implements EntityInterface
     protected $createdAt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $alias;
+
+    /**
+     * @var \ClientBundle\Entity\Customer
+     */
+    protected $customer;
+
+    /**
      * Set date
      *
      * @param \DateTime $date
@@ -134,6 +146,22 @@ abstract class AbstractEvent implements EntityInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setAlias()
+    {
+        $this->alias = $this->customer->getId() . '-' . $this->date->getTimestamp();
     }
 
     /**

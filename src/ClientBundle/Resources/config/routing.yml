@@ -21,3 +21,9 @@ client_call.add:
     defaults: {_controller: 'client.controller.call:createAction'}
     requirements:
         id_customer: \d+
+
+client_meeting.add:
+    path: /customer/{id_customer}/meeting/add
+    defaults: {_controller: 'client.controller.meeting:createAction'}
+    requirements:
+        id_customer: \d+

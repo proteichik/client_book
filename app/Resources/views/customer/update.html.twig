@@ -48,6 +48,7 @@
                         {{ render(controller(
                         'client.controller.meeting:getRecentDoneAction',
                         {customer: object})) }}
+                        <a href="{{ path('client_meeting.add', {id_customer: object.id}) }}" type="button" class="btn btn-success btn-block">Добавить</a>
                     </div>
                 </div>
             </div>

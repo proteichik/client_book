@@ -34,7 +34,7 @@ class Address
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", unique=true)
      *
      * @Assert\NotBlank()
      * @Assert\Range(min=100000000, max=999999999)

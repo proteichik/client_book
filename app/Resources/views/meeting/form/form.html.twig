@@ -1,8 +1,8 @@
-{{ form_start(form, {'action': path('client_call.add', {id_customer: customer.id}),
+{{ form_start(form, {'action': path('client_meeting.add', {id_customer: customer.id}),
     'attr': {'class': 'form-horizontal form-label-left'}}) }}
 <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date">
-        Дата звонка:
+        Дата встречи:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
         <div class='input-group date' id='date_event'>
@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">
-        Запланировать звонок:
+        Запланировать встречу:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
         {{ form_widget(form.status) }}
