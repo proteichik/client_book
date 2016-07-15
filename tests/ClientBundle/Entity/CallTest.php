@@ -22,11 +22,15 @@ class CallTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->call->getStatus());
         $this->assertNull($this->call->getInfo());
         $this->assertNull($this->call->getCreatedAt());
+        $this->assertNull($this->call->getAlias());
     }
 
     public function testFillObject()
     {
-        $customer = new Customer();
+        $customer = $this->getMockBuilder('ClientBundle\Entity\Customer')->getMock();
+        $customer->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue(2));
 
         $this->call->setCustomer($customer);
         $this->assertEquals($customer, $this->call->getCustomer());
@@ -43,6 +47,9 @@ class CallTest extends \PHPUnit_Framework_TestCase
 
         $this->call->setCreatedAt();
         $this->assertTrue($this->call->getCreatedAt() instanceof \DateTime);
+
+        $this->call->setAlias();
+        $this->assertEquals('2-'.$this->call->getDate()->getTimestamp(), $this->call->getAlias());
 
     }
 

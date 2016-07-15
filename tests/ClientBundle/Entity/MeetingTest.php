@@ -23,6 +23,7 @@ class MeetingTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->meeting->getStatus());
         $this->assertNull($this->meeting->getInfo());
         $this->assertNull($this->meeting->getCreatedAt());
+        $this->assertNull($this->meeting->getAlias());
     }
 
     public function testCustomer()
@@ -75,5 +76,20 @@ class MeetingTest extends \PHPUnit_Framework_TestCase
     {
         $this->meeting->setCreatedAt();
         $this->assertTrue($this->meeting->getCreatedAt() instanceof \DateTime);
+    }
+
+    public function testAlias()
+    {
+        $customer = $this->getMockBuilder('ClientBundle\Entity\Customer')->getMock();
+        $customer->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue(2));
+
+        $this->meeting->setCustomer($customer);
+        $this->meeting->setDate(new \DateTime());
+
+        $this->meeting->setAlias();
+        $this->assertEquals('2-'.$this->meeting->getDate()->getTimestamp(), $this->meeting->getAlias());
+
     }
 }
