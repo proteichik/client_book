@@ -4,6 +4,7 @@ namespace ClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ClientBundle\Annotation\CustomerSelect;
 
 /**
  * Class Meeting
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="meetings")
+ * @CustomerSelect(idField="customer_id")
  */
 class Meeting extends AbstractEvent
 {

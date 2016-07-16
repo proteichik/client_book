@@ -28,6 +28,12 @@ client_call.add:
     requirements:
         id_customer: \d+
 
+client_meetings:
+    path: /customer/{id_customer}/meetings
+    defaults: {_controller: 'client.controller.meeting:listAction'}
+    requirements:
+        id_customer: \d+
+
 client_meeting.add:
     path: /customer/{id_customer}/meeting/add
     defaults: {_controller: 'client.controller.meeting:createAction'}
