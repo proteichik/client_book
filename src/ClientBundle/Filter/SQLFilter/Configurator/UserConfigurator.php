@@ -1,6 +1,6 @@
 <?php
 
-namespace ClientBundle\Filter\SQLFilter;
+namespace ClientBundle\Filter\SQLFilter\Configurator;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -11,7 +11,7 @@ use ClientBundle\Utils\UserUtils;
  * Class Configurator
  * @package ClientBundle\Filter
  */
-class Configurator
+class UserConfigurator
 {
     /**
      * @var ObjectManager
@@ -57,6 +57,7 @@ class Configurator
             $filter = $this->em->getFilters()->enable('user_filter');
             $filter->setParameter('id', $user->getId());
             $filter->setAnnotationReader($this->reader);
+            $filter->setAnnotation('ClientBundle\\Annotation\\UserAware');
         }
     }
 

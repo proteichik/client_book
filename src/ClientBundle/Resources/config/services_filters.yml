@@ -6,8 +6,14 @@ services:
             - {name: form.type, alias: customer_filter}
 
 #Doctrine filter configurator
-    client.doctrine.filter.configurator:
-        class: ClientBundle\Filter\SQLFilter\Configurator
+    client.doctrine.filter.user_configurator:
+        class: ClientBundle\Filter\SQLFilter\Configurator\UserConfigurator
         arguments: ["@doctrine.orm.entity_manager", "@security.token_storage", "@annotation_reader"]
         tags:
             - {name: kernel.event_listener, event: kernel.request}
+
+    client.doctrine.filter.customer_configurator:
+        class: ClientBundle\Filter\SQLFilter\Configurator\CustomerConfigurator
+        arguments: ["@doctrine.orm.entity_manager", "@annotation_reader"]
+        tags:
+            - {name: kernel.event_listener, event: kernel.controller}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Дата</th>
+            <th>Статус</th>
+            <th>Информация</th>
+            <th>Создан</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in objects %}
+            <tr>
+                <th class="row">{{ object.id }}</th>
+                <td>{{ object.date | date('Y-m-d H:i:s') }}</td>
+                <td>{{ object.status }}</td>
+                <td>{{ object.info }}</td>
+                <td>{{ object.createdAt | date('Y-m-d H:i:s') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

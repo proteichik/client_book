@@ -16,6 +16,12 @@ client_customer.edit:
     requirements:
         id: \d+
 
+client_calls:
+    path: /customer/{id_customer}/calls
+    defaults: {_controller: 'client.controller.call:listAction'}
+    requirements:
+        id_customer: \d+
+
 client_call.add:
     path: /customer/{id_customer}/call/add
     defaults: {_controller: 'client.controller.call:createAction'}

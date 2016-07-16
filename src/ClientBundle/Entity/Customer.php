@@ -16,7 +16,7 @@ use ClientBundle\Annotation\UserAware;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="customer", indexes={@ORM\Index(name="company_idx", columns={"company"})})
  *
- * @UserAware(userFieldName="user_id")
+ * @UserAware(idField="user_id")
  */
 class Customer implements EntityInterface
 {

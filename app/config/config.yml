@@ -71,7 +71,11 @@ doctrine:
         auto_mapping: true
         filters:
             user_filter:
-                class: ClientBundle\Filter\SQLFilter\UserFilter
+                class: ClientBundle\Filter\SQLFilter\ByIdOwnerFilter
+                enabled: true
+
+            customer_filter:
+                class: ClientBundle\Filter\SQLFilter\ByIdOwnerFilter
                 enabled: true
 
 # Swiftmailer Configuration

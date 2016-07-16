@@ -5,13 +5,13 @@ namespace ClientBundle\Annotation;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
- * Class UserAware
+ * Class ClientSelect
  * @package ClientBundle\Annotation
  *
  * @Annotation
  * @Target("CLASS")
  */
-final class UserAware extends AbstractOwner
+final class CustomerSelect extends AbstractOwner
 {
 
 }
