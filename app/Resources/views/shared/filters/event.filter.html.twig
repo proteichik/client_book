@@ -1,0 +1,14 @@
+{{ form_start(filter, {'method': 'GET'}) }}
+<div class="form-group form-group-sm">
+    <label>Дата:</label>
+    {{ form_widget(filter.date) }}
+</div>
+<div class="form-group form-group-sm">
+    <label>Статус:</label>
+    {{ form_widget(filter.status) }}
+</div>
+<p>
+    <input type="submit" class="btn btn-primary btn-sm btn-block" value="Поиск" />
+</p>
+
+{{ form_end(filter) }}

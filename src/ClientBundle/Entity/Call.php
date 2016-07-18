@@ -10,7 +10,7 @@ use ClientBundle\Annotation\CustomerSelect;
  * Class Call
  * @package ClientBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ClientBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="calls")
  * @CustomerSelect(idField="customer_id")

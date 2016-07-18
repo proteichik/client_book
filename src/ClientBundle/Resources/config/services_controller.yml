@@ -16,7 +16,7 @@ services:
             - "@client.service.call"
             - "%client.form.call.class%"
             - "@client.entity.call"
-            - "%client.filter.form.customer.class%"
+            - "%client.filter.form.call.class%"
         calls:
             - [setContainer, ['@service_container']]
 
@@ -26,6 +26,6 @@ services:
             - "@client.service.meeting"
             - "%client.form.meeting.class%"
             - "@client.entity.meeting"
-            - "%client.filter.form.customer.class%"
+            - "%client.filter.form.meeting.class%"
         calls:
             - [setContainer, ['@service_container']]
