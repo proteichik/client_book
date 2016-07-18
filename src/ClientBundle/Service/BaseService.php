@@ -64,7 +64,7 @@ class BaseService implements ServiceInterface
      */
     public function find($id)
     {
-        return $this->getRepository($this->repositoryName)->find($id);
+        return $this->getRepository()->find($id);
     }
 
     /**
@@ -94,7 +94,7 @@ class BaseService implements ServiceInterface
             throw new \InvalidArgumentException('Limit must be integer');
         }
 
-        return $this->getRepository($this->repositoryName)->findBy($criteria, $order, $limit);
+        return $this->getRepository()->findBy($criteria, $order, $limit);
     }
 
     /**
@@ -102,7 +102,7 @@ class BaseService implements ServiceInterface
      */
     public function findAll()
     {
-        return $this->getRepository($this->repositoryName)->findAll();
+        return $this->getRepository()->findAll();
     }
 
     /**
