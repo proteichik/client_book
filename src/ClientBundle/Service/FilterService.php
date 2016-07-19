@@ -43,6 +43,10 @@ class FilterService extends BaseService
         $this->filterBuilderUpdater = $filterBuilderUpdater;
     }
 
+    /**
+     * @param FormInterface $filterForm
+     * @return mixed
+     */
     public function getFilteredList(FormInterface $filterForm)
     {
         $repository = $this->getRepository();

@@ -17,7 +17,7 @@ abstract class AbstractFormTestCase extends TypeTestCase
             ->addExtensions($this->getExtensions())
             ->getFormFactory();
 
-        $this->dispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $this->dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcherInterface')->getMock();
         $this->builder = new FormBuilder(null, null, $this->dispatcher, $this->factory);
     }
 }
