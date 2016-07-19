@@ -4,6 +4,7 @@ namespace ClientBundle\Controller\Base;
 
 use ClientBundle\Model\EntityInterface;
 use ClientBundle\Service\ServiceInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class FilteredBaseController extends AbstractController
@@ -13,9 +14,17 @@ class FilteredBaseController extends AbstractController
      */
     protected $filterFormClass;
 
-    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype, $filterFormClass)
+    /**
+     * @param ServiceInterface $service
+     * @param $form
+     * @param EntityInterface $prototype
+     * @param PaginatorInterface $paginator
+     * @param $filterFormClass
+     */
+    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype,
+                                PaginatorInterface $paginator, $filterFormClass)
     {
-        parent::__construct($service, $form, $prototype);
+        parent::__construct($service, $form, $prototype, $paginator);
 
         $this->setFilterFormClass($filterFormClass);
     }
@@ -64,11 +73,9 @@ class FilteredBaseController extends AbstractController
             $query = $this->getService()->findAll();
         }
 
-        $paginator  = $this->get('knp_paginator');
-        $objects = $paginator->paginate(
+        $objects = $this->paginate(
             $query, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
-            10/*limit per page*/
+            $request->query->getInt('page', 1)/*page number*/
         );
         
 

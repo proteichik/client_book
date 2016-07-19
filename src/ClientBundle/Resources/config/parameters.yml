@@ -1,6 +1,7 @@
 parameters:
     max.recent: 5
     count.days: 3
+    item_per_page: 5
 #Repositories
     client.repository.customer.name: ClientBundle:Customer
     client.repository.call.name: ClientBundle:Call

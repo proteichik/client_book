@@ -6,6 +6,7 @@ services:
             - "@client.service.customer"
             - "%client.form.customer.class%"
             - "@client.entity.customer"
+            - "@knp_paginator"
             - "%client.filter.form.customer.class%"
         calls:
             - [setContainer, ['@service_container']]
@@ -16,6 +17,7 @@ services:
             - "@client.service.call"
             - "%client.form.call.class%"
             - "@client.entity.call"
+            - "@knp_paginator"
             - "%client.filter.form.call.class%"
         calls:
             - [setContainer, ['@service_container']]
@@ -26,6 +28,7 @@ services:
             - "@client.service.meeting"
             - "%client.form.meeting.class%"
             - "@client.entity.meeting"
+            - "@knp_paginator"
             - "%client.filter.form.meeting.class%"
         calls:
             - [setContainer, ['@service_container']]

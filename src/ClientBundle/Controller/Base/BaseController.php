@@ -11,7 +11,12 @@ abstract class BaseController extends AbstractController
      */
     public function listAction(Request $request)
     {
-        $objects = $this->getService()->findAll()->getResult();
+        $query = $this->getService()->findAll();
+
+        $objects = $this->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/
+        );
 
         return $this->render($this->getTemplateName($this, __METHOD__), array(
             'objects' => $objects,

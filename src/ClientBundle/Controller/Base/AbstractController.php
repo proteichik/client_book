@@ -7,6 +7,7 @@ use ClientBundle\Service\ServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 abstract class AbstractController extends Controller
 {
@@ -26,16 +27,22 @@ abstract class AbstractController extends Controller
     protected $prototype;
 
     /**
-     * AbstractController constructor.
+     * @var PaginatorInterface
+     */
+    protected $paginator;
+
+    /**
      * @param ServiceInterface $service
      * @param $form
      * @param EntityInterface $prototype
+     * @param PaginatorInterface $paginator
      */
-    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype)
+    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype, PaginatorInterface $paginator)
     {
         $this->service = $service;
         $this->form = $form;
         $this->prototype = $prototype;
+        $this->paginator = $paginator;
     }
 
     /**
@@ -172,5 +179,18 @@ abstract class AbstractController extends Controller
         } else {
             return false;
         }
+    }
+
+    protected function paginate($query, $page, $itemPerPage = 0)
+    {
+        if (0 === $itemPerPage) {
+            $itemPerPage = ($this->container->hasParameter('item_per_page')) ? $this->getParameter('item_per_page') : 10;
+        }
+
+        return $this->paginator->paginate(
+            $query,
+            $page,
+            $itemPerPage
+        );
     }
 }
