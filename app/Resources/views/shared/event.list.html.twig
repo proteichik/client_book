@@ -1,0 +1,26 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ knp_pagination_sortable(objects, '#', 'q.id') }}</th>
+        <th>{{ knp_pagination_sortable(objects, 'Дата', 'q.date') }}</th>
+        <th>{{ knp_pagination_sortable(objects, 'Статус', 'q.status') }}</th>
+        <th>Информация</th>
+        <th>{{ knp_pagination_sortable(objects, 'Создан', 'q.createdAt') }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in objects %}
+        <tr>
+            <th class="row">{{ object.id }}</th>
+            <td>{{ object.date | date('Y-m-d H:i:s') }}</td>
+            <td>{{ object.status }}</td>
+            <td>{{ object.info }}</td>
+            <td>{{ object.createdAt | date('Y-m-d H:i:s') }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="navigation">
+    {{ knp_pagination_render(objects) }}
+</div>
+

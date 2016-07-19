@@ -12,3 +12,18 @@
 </p>
 
 {{ form_end(filter) }}
+
+<script type="text/javascript">
+    $(function () {
+        $('#left_date').datetimepicker();
+        $('#right_date').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#left_date").on("dp.change", function (e) {
+            $('#right_date').data("DateTimePicker").minDate(e.date);
+        });
+        $("#right_date").on("dp.change", function (e) {
+            $('#left_date').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>

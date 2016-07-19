@@ -24,9 +24,13 @@ class EventFilter extends AbstractType
         $builder->add('date', DateRangeFilterType::class, array(
            'left_date_options' => array(
                'widget' => 'single_text',
+               'html5' => false,
+               'data' => new \DateTime()
            ),
             'right_date_options' => array(
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'html5' => false,
+                'data' => new \DateTime()
             ),
         ));
 

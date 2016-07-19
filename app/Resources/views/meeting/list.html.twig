@@ -2,28 +2,15 @@
 
 {% block content %}
     <div class="col-md-9 col-xs-12">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Дата</th>
-                <th>Статус</th>
-                <th>Информация</th>
-                <th>Создан</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for object in objects %}
-                <tr>
-                    <th class="row">{{ object.id }}</th>
-                    <td>{{ object.date | date('Y-m-d H:i:s') }}</td>
-                    <td>{{ object.status }}</td>
-                    <td>{{ object.info }}</td>
-                    <td>{{ object.createdAt | date('Y-m-d H:i:s') }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Список встречь с клиентом</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                {{ include ('shared/event.list.html.twig', {'objects': objects}) }}
+            </div>
+        </div>
     </div>
     <div class="col-md-3 col-xs-12">
         <div class="x_panel">
@@ -37,3 +24,4 @@
         </div>
     </div>
 {% endblock %}
+
