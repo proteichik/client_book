@@ -58,9 +58,6 @@ class FilterServiceTest extends \PHPUnit_Framework_TestCase
             ->method('getQuery')
             ->will($this->returnValue($query));
 
-        $query->expects($this->once())
-            ->method('getResult');
-
         try {
             $this->service->getFilteredList($form);
             $this->fail('Must throw Exception');

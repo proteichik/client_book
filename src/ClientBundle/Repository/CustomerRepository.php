@@ -4,19 +4,9 @@ namespace ClientBundle\Repository;
 
 class CustomerRepository extends AbstractRepository
 {
-    public function findAll()
+    public function getQueryAllBuilder()
     {
-        $query = $this->getEntityManager()
-            ->createQuery('SELECT c, u FROM ClientBundle:Customer c JOIN c.user u');
-
-        return $query->getResult();
+        return $this->createQueryBuilder('q')
+            ->join('q.user', 'u');
     }
-
-    public function getFilteredBuilder()
-    {
-        return $this->createQueryBuilder('c')
-            ->join('c.user', 'u');
-    }
-
-
 }

@@ -19,7 +19,7 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
         $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->disableOriginalConstructor()->getMock();
         $this->entityClass = 'ClientBundle:Call';
         $this->service = new BaseService($this->em, $this->entityClass);
-        $this->mockRepository = $this->getMockBuilder('Doctrine\ORM\EntityRepository')->disableOriginalConstructor()->getMock();;
+        $this->mockRepository = $this->getMockBuilder('ClientBundle\Repository\EventRepository')->disableOriginalConstructor()->getMock();;
     }
 
     public function testConstructWithInvalidArgument()
@@ -134,7 +134,7 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
             ;
 
         $this->mockRepository->expects($this->once())
-            ->method('findAll')
+            ->method('getQueryAllBuilder')
             ;
         $result = $this->service->findAll();
     }

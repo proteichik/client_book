@@ -5,7 +5,7 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
+                <th>{{ knp_pagination_sortable(objects, 'Id', 'q.id') }}</th>
                 <th>Компания</th>
                 <th>Адрес</th>
                 {% if is_granted('ROLE_ADMIN') %}

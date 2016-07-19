@@ -60,6 +60,6 @@ class FilterService extends BaseService
         $this->filterBuilderUpdater->addFilterConditions($filterForm, $filterBuilder);
 
 
-        return $filterBuilder->getQuery()->getResult();
+        return $filterBuilder->getQuery();
     }
 }

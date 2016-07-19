@@ -11,7 +11,7 @@ abstract class BaseController extends AbstractController
      */
     public function listAction(Request $request)
     {
-        $objects = $this->getService()->findAll();
+        $objects = $this->getService()->findAll()->getResult();
 
         return $this->render($this->getTemplateName($this, __METHOD__), array(
             'objects' => $objects,

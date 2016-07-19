@@ -58,10 +58,19 @@ class FilteredBaseController extends AbstractController
         if ($request->query->has($filterForm->getName())) {
 
             $filterForm->submit($request->query->get($filterForm->getName()));
-            $objects = $this->getService()->getFilteredList($filterForm);
+            $query = $this->getService()->getFilteredList($filterForm);
+            
         } else {
-            $objects = $this->getService()->findAll();
+            $query = $this->getService()->findAll();
         }
+
+        $paginator  = $this->get('knp_paginator');
+        $objects = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+        
 
         return $this->render($this->getTemplateName($this, __METHOD__), array(
             'objects' => $objects,

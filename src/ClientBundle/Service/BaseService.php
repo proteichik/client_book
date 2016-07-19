@@ -2,6 +2,7 @@
 
 namespace ClientBundle\Service;
 
+use ClientBundle\Repository\InternalRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -102,7 +103,7 @@ class BaseService implements ServiceInterface
      */
     public function findAll()
     {
-        return $this->getRepository()->findAll();
+        return $this->getRepository()->getQueryAllBuilder();
     }
 
     /**
@@ -143,6 +144,12 @@ class BaseService implements ServiceInterface
 
     protected function getRepository()
     {
-        return $this->em->getRepository($this->repositoryName);
+        $repository = $this->em->getRepository($this->repositoryName);
+        
+        if (!$repository instanceof InternalRepositoryInterface) {
+            throw new \InvalidArgumentException('Repository must implements InternalRepositoryInterface ');
+        }
+
+        return $repository;
     }
 }
