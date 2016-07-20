@@ -1,9 +1,11 @@
 {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
+{{ form_errors(form) }}
 <div class="form-group">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="company">
         Компания:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.company) }}
         {{ form_widget(form.company) }}
     </div>
 </div>
@@ -13,6 +15,7 @@
         Город:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.address.city) }}
         {{ form_widget(form.address.city) }}
     </div>
 </div>
@@ -22,6 +25,7 @@
         Улица:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.address.street) }}
         {{ form_widget(form.address.street) }}
     </div>
 </div>
@@ -31,6 +35,7 @@
         УНП:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.address.unp) }}
         {{ form_widget(form.address.unp) }}
     </div>
 </div>
@@ -40,6 +45,7 @@
         Городской тел.:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.contacts.work) }}
         {{ form_widget(form.contacts.work) }}
     </div>
 </div>
@@ -49,6 +55,7 @@
         Мобильный тел.:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.contacts.mobile) }}
         {{ form_widget(form.contacts.mobile) }}
     </div>
 </div>
@@ -58,6 +65,7 @@
         Факс:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.contacts.fax) }}
         {{ form_widget(form.contacts.fax) }}
     </div>
 </div>
@@ -67,6 +75,7 @@
         Email:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.contacts.email) }}
         {{ form_widget(form.contacts.email) }}
     </div>
 </div>
@@ -76,6 +85,7 @@
         Информация:
     </label>
     <div class="col-md-9 col-sm-9 col-xs-12">
+        {{ form_errors(form.info) }}
         {{ form_widget(form.info) }}
     </div>
 </div>
@@ -85,10 +95,12 @@
             Сотрудник:
         </label>
         <div class="col-md-9 col-sm-9 col-xs-12">
+            {{ form_errors(form.user) }}
             {{ form_widget(form.user) }}
         </div>
     </div>
 {% else %}
+    {{ form_errors(form.user) }}
     {{ form_widget(form.user) }}
 {% endif %}
 
