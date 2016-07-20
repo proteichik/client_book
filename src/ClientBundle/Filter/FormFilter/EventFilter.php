@@ -25,12 +25,12 @@ class EventFilter extends AbstractType
            'left_date_options' => array(
                'widget' => 'single_text',
                'html5' => false,
-               'data' => new \DateTime()
+               //'data' => new \DateTime()
            ),
             'right_date_options' => array(
                 'widget' => 'single_text',
                 'html5' => false,
-                'data' => new \DateTime()
+                //'data' => new \DateTime()
             ),
         ));
 
