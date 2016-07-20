@@ -14,16 +14,12 @@
 {{ form_end(filter) }}
 
 <script type="text/javascript">
-    $(function () {
-        $('#cal_left_date').datetimepicker();
-        $('#cal_right_date').datetimepicker({
-            useCurrent: false //Important! See issue #1075
+    $( document ).ready(function() {
+        $('#cal_left_date').datepicker({
+            format: 'yyyy-mm-dd'
         });
-        $("#cal_left_date").on("dp.change", function (e) {
-            $('#cal_right_date').data("DateTimePicker").minDate(e.date);
-        });
-        $("#cal_right_date").on("dp.change", function (e) {
-            $('#cal_left_date').data("DateTimePicker").maxDate(e.date);
+        $('#cal_right_date').datepicker({
+            format: 'yyyy-mm-dd'
         });
     });
 </script>
