@@ -13,7 +13,18 @@
         <tr>
             <th class="row">{{ object.id }}</th>
             <td>{{ object.date | date('Y-m-d H:i:s') }}</td>
-            <td>{{ object.status }}</td>
+            <td>
+                {#TO-DO!!!На ветке с удаление поставить проверку!!!#}
+                {% if (object.doneEvent) %}
+                    <a href="#" class="btn btn-success btn-xs">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </a>
+                {% else %}
+                    <a href="#" class="btn btn-default btn-xs">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+            </td>
             <td>{{ object.info }}</td>
             <td>{{ object.createdAt | date('Y-m-d H:i:s') }}</td>
         </tr>

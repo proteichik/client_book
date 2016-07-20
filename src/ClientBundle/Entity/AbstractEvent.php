@@ -191,4 +191,12 @@ abstract class AbstractEvent implements EntityInterface
 
         return ($this->status == self::DONE_TYPE && $this->date > $now);
     }
+
+    /**
+     * @return bool
+     */
+    public function isDoneEvent()
+    {
+        return ($this->status === self::DONE_TYPE);
+    }
 }
