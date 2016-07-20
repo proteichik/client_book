@@ -8,7 +8,8 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                {{ include ('shared/event.list.html.twig', {'objects': objects}) }}
+                {{ include ('shared/event.list.html.twig', {'objects': objects,
+                    'activatePathName': 'client_meeting.status.active'}) }}
             </div>
         </div>
     </div>
@@ -23,5 +24,10 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/client/js/events_ajax.js') }}"></script>
 {% endblock %}
 

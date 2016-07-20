@@ -16,11 +16,13 @@
             <td>
                 {#TO-DO!!!На ветке с удаление поставить проверку!!!#}
                 {% if (object.doneEvent) %}
-                    <a href="#" class="btn btn-success btn-xs">
+                    <a href="#" class="btn btn-success btn-xs disabled">
                         <i class="fa fa-check" aria-hidden="true"></i>
                     </a>
                 {% else %}
-                    <a href="#" class="btn btn-default btn-xs">
+                    <a href="{{ path(activatePathName,
+                    {id_customer: app.request.attributes.get('id_customer'),
+                    id_event: object.id }) }}" class="btn btn-default btn-xs" name="status">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </a>
                 {% endif %}

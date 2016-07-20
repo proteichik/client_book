@@ -176,7 +176,7 @@ abstract class AbstractEvent implements EntityInterface
         $now = new \DateTime();
         $now->modify("+ 5 minutes");
 
-        return ($this->date < $now && $this->status === self::PLANNED_TYPE) ? false : true;
+        return ($this->date < $now && (int) $this->status === self::PLANNED_TYPE) ? false : true;
     }
 
     /**
@@ -189,7 +189,7 @@ abstract class AbstractEvent implements EntityInterface
     {
         $now = new \DateTime();
 
-        return ($this->status == self::DONE_TYPE && $this->date > $now);
+        return ((int) $this->status === self::DONE_TYPE && $this->date > $now);
     }
 
     /**

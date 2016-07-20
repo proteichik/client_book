@@ -5,6 +5,7 @@ namespace ClientBundle\Controller\Base;
 use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Entity\Customer;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class BaseEventController
@@ -64,5 +65,30 @@ class BaseEventController extends FilteredBaseController
         return $this->render($this->getTemplateName($this, __METHOD__), array(
             'form' => $form->createView(),
             'customer' => $customer));
+    }
+
+    public function activateStatusAction(Request $request, $id_customer, $id_event)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if (!$request->isXmlHttpRequest()) {
+            throw new \RuntimeException('Not Ajax request');
+        }
+
+        $event = $this->getService()->find($id_event);
+
+        if (!$event) {
+            throw $this->createNotFoundException('Event not found');
+        }
+
+        //TO-DO!!! Добавить проверку прав на установку статуса
+
+        $event->setStatus(AbstractEvent::DONE_TYPE);
+        $validator = $this->get('validator');
+        if (count($validator->validate($event)) === 0) {
+            $this->getService()->save($event);
+        }
+
+        return new Response(json_encode($event), 200);
     }
 }

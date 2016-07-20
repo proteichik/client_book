@@ -28,6 +28,13 @@ client_call.add:
     requirements:
         id_customer: \d+
 
+client_call.status.active:
+    path: /customer/{id_customer}/call/{id_event}/active
+    defaults: {_controller: 'client.controller.call:activateStatusAction'}
+    requirements:
+        id_customer: \d+
+        id_event: \d+
+
 client_meetings:
     path: /customer/{id_customer}/meetings
     defaults: {_controller: 'client.controller.meeting:listAction'}
@@ -39,3 +46,10 @@ client_meeting.add:
     defaults: {_controller: 'client.controller.meeting:createAction'}
     requirements:
         id_customer: \d+
+
+client_meeting.status.active:
+    path: /customer/{id_customer}/meeting/{id_event}/active
+    defaults: {_controller: 'client.controller.meeting:activateStatusAction'}
+    requirements:
+        id_customer: \d+
+        id_event: \d+
