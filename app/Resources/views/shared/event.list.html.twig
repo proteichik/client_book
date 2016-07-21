@@ -19,7 +19,7 @@
                     <a href="#" class="btn btn-success btn-xs disabled">
                         <i class="fa fa-check" aria-hidden="true"></i>
                     </a>
-                {% else %}
+                {% elseif(object.removedEvent == false) %}
                     <a href="{{ path(activatePathName,
                     {id_customer: app.request.attributes.get('id_customer'),
                     id_event: object.id }) }}" class="btn btn-default btn-xs" name="status">

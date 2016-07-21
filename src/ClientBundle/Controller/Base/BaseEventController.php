@@ -54,6 +54,7 @@ class BaseEventController extends FilteredBaseController
 
         $object = $this->getPrototype();
         $object->setCustomer($customer);
+        $object->setUser($customer->getUser());
         $object->setDate(new \DateTime());
 
         $form = $this->prepareForm($request, $object, array(

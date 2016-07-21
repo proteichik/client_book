@@ -25,16 +25,32 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var ClientBundle\Entity\Customer
+     * @var \ClientBundle\Entity\Customer
      *
      * @ORM\OneToMany(targetEntity="Customer", mappedBy="user")
      */
     protected $customers;
 
+    /**
+     * @var \ClientBundle\Entity\Call
+     *
+     * @ORM\OneToMany(targetEntity="Call", mappedBy="user")
+     */
+    protected $calls;
+
+    /**
+     * @var \ClientBundle\Entity\Meeting
+     *
+     * @ORM\OneToMany(targetEntity="Meeting", mappedBy="user")
+     */
+    protected $meetings;
+
     public function __construct()
     {
         parent::__construct();
         $this->customers = new ArrayCollection();
+        $this->calls = new ArrayCollection();
+        $this->meetings = new ArrayCollection();
     }
 
     /**
@@ -69,5 +85,73 @@ class User extends BaseUser
     public function getCustomers()
     {
         return $this->customers;
+    }
+
+    /**
+     * Add call
+     *
+     * @param \ClientBundle\Entity\Call $call
+     *
+     * @return User
+     */
+    public function addCall(\ClientBundle\Entity\Call $call)
+    {
+        $this->calls[] = $call;
+
+        return $this;
+    }
+
+    /**
+     * Remove call
+     *
+     * @param \ClientBundle\Entity\Call $call
+     */
+    public function removeCall(\ClientBundle\Entity\Call $call)
+    {
+        $this->calls->removeElement($call);
+    }
+
+    /**
+     * Get calls
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCalls()
+    {
+        return $this->calls;
+    }
+
+    /**
+     * Add meeting
+     *
+     * @param \ClientBundle\Entity\Meeting $meeting
+     *
+     * @return User
+     */
+    public function addMeeting(\ClientBundle\Entity\Meeting $meeting)
+    {
+        $this->meetings[] = $meeting;
+
+        return $this;
+    }
+
+    /**
+     * Remove meeting
+     *
+     * @param \ClientBundle\Entity\Meeting $meeting
+     */
+    public function removeMeeting(\ClientBundle\Entity\Meeting $meeting)
+    {
+        $this->meetings->removeElement($meeting);
+    }
+
+    /**
+     * Get meetings
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeetings()
+    {
+        return $this->meetings;
     }
 }

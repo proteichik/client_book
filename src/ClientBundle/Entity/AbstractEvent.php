@@ -15,6 +15,7 @@ abstract class AbstractEvent implements EntityInterface
 {
     const PLANNED_TYPE = 1;
     const DONE_TYPE = 0;
+    const REMOVED_TYPE = 2;
 
     /**
      * @var \DateTime
@@ -60,6 +61,37 @@ abstract class AbstractEvent implements EntityInterface
      * @var \ClientBundle\Entity\Customer
      */
     protected $customer;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $processed = false;
+
+    /**
+     * @var \ClientBundle\Entity\User
+     */
+    protected $user;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param $user
+     * @return $this
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
     /**
      * Set date
@@ -165,6 +197,26 @@ abstract class AbstractEvent implements EntityInterface
     }
 
     /**
+     * @return boolean
+     */
+    public function isProcessed()
+    {
+        return $this->processed;
+    }
+
+    /**
+     * @param $processed
+     * @return $this
+     * @return $this
+     */
+    public function setProcessed($processed)
+    {
+        $this->processed = $processed;
+
+        return $this;
+    }
+
+    /**
      * is valid status
      *
      * @Assert\IsFalse(message="Вы не можете запланировать cобытие в прошлом")
@@ -211,6 +263,11 @@ abstract class AbstractEvent implements EntityInterface
      */
     public function isDoneEvent()
     {
-        return ($this->status === self::DONE_TYPE);
+        return ((int) $this->status === self::DONE_TYPE);
+    }
+
+    public function isRemovedEvent()
+    {
+        return ((int) $this->status === self::REMOVED_TYPE);
     }
 }

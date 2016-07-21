@@ -28,7 +28,7 @@ class Call extends AbstractEvent
     
 
     /**
-     * @var ClientBundle\Entity\Customer
+     * @var \ClientBundle\Entity\Customer
      *
      * @ORM\ManyToOne(targetEntity="Customer", inversedBy="calls")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
@@ -37,6 +37,17 @@ class Call extends AbstractEvent
      * @Assert\Valid()
      */
     protected $customer;
+
+    /**
+     * @var \ClientBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="calls")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+     * @Assert\Type(type="ClientBundle\Entity\User")
+     * @Assert\Valid()
+     */
+    protected $user;
 
     /**
      * Get id
