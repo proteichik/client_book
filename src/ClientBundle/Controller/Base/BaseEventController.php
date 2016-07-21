@@ -56,7 +56,9 @@ class BaseEventController extends FilteredBaseController
         $object->setCustomer($customer);
         $object->setDate(new \DateTime());
 
-        $form = $this->prepareForm($request, $object);
+        $form = $this->prepareForm($request, $object, array(
+            'validation_groups' => array('Default', 'creation'),
+        ));
 
         if ($this->runSave($form)) {
             return $this->redirectToRoute('client_customer.edit', array('id' => $id_customer));
@@ -85,7 +87,7 @@ class BaseEventController extends FilteredBaseController
 
         $event->setStatus(AbstractEvent::DONE_TYPE);
         $validator = $this->get('validator');
-        if (count($validator->validate($event)) === 0) {
+        if (count($validator->validate($event, null, array('Default', 'activate'))) === 0) {
             $this->getService()->save($event);
         }
 

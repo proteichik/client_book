@@ -167,7 +167,7 @@ abstract class AbstractEvent implements EntityInterface
     /**
      * is valid status
      *
-     * @Assert\IsTrue(message="Вы не можете запланировать cобытие в прошлом")
+     * @Assert\IsFalse(message="Вы не можете запланировать cобытие в прошлом")
      *
      * @return bool
      */
@@ -176,19 +176,33 @@ abstract class AbstractEvent implements EntityInterface
         $now = new \DateTime();
         $now->modify("+ 5 minutes");
 
-        return ($this->date < $now && (int) $this->status === self::PLANNED_TYPE) ? false : true;
+        return ($this->date < $now && (int) $this->status === self::PLANNED_TYPE);
     }
 
     /**
      * Совершенное событие не может быть в будующем
      *
-     * @Assert\IsFalse(message="Неправильная дата!")
+     * @Assert\IsFalse(message="Неправильная дата!", groups={"creation"})
      * @return bool
      */
-    public function isNoFutureDoneEvent()
+    public function isNoFutureDoneEventCreation()
     {
         $now = new \DateTime();
 
+        return ((int) $this->status === self::DONE_TYPE && $this->date > $now);
+    }
+
+    /**
+     * При активации события дата должна быть сегодняшней
+     *
+     * @Assert\IsFalse(message="Неправильная дата!", groups={"activate"})
+     * @return bool
+     */
+    public function isNoFutureDoneEventActivate()
+    {
+        $now = new \DateTime();
+
+        $now->setTime(23, 59, 59);
         return ((int) $this->status === self::DONE_TYPE && $this->date > $now);
     }
 
