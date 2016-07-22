@@ -17,3 +17,9 @@ services:
         arguments: ["@doctrine.orm.entity_manager", "@annotation_reader"]
         tags:
             - {name: kernel.event_listener, event: kernel.controller}
+
+    client.doctrine.filter.status_configurator:
+        class: ClientBundle\Filter\SQLFilter\Configurator\StatusConfigurator
+        arguments: ["@doctrine.orm.entity_manager", "@annotation_reader"]
+        tags:
+            - {name: kernel.event_listener, event: kernel.request}

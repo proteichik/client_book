@@ -5,6 +5,7 @@ namespace ClientBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use ClientBundle\Annotation\CustomerSelect;
+use ClientBundle\Annotation\HasStatusFilter;
 
 /**
  * Class Call
@@ -14,6 +15,8 @@ use ClientBundle\Annotation\CustomerSelect;
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="calls")
  * @CustomerSelect(idField="customer_id")
+ *
+ * @HasStatusFilter()
  */
 class Call extends AbstractEvent
 {

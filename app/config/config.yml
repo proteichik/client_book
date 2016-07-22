@@ -78,6 +78,9 @@ doctrine:
                 class: ClientBundle\Filter\SQLFilter\ByIdOwnerFilter
                 enabled: true
 
+            status_filter:
+                class: ClientBundle\Filter\SQLFilter\StatusFilter
+                enabled: true
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
