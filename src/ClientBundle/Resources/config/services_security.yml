@@ -1,0 +1,6 @@
+services:
+    client.security.event_voter:
+        class: ClientBundle\Security\EventVoter
+        tags:
+            - {name: security.voter}
+        public: false
