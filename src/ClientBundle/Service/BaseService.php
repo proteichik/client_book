@@ -2,9 +2,9 @@
 
 namespace ClientBundle\Service;
 
+use ClientBundle\Model\EntityInterface;
 use ClientBundle\Repository\InternalRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Validator\Tests\Fixtures\EntityInterface;
 
 /**
  * Class BaseService
@@ -154,8 +154,21 @@ class BaseService implements ServiceInterface
         return $repository;
     }
 
-    public function delete(EntityInterface $object)
+    /**
+     * @param EntityInterface $object
+     * @param bool|true $isFlush
+     * @return EntityInterface
+     */
+    public function delete(EntityInterface $object, $isFlush = true)
     {
-        //todo
+        $object->setStatus(EntityInterface::REMOVED_TYPE);
+
+        $this->persist($object);
+
+        if ($isFlush) {
+            $this->flush();
+        }
+
+        return $object;
     }
 }
