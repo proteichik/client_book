@@ -4,6 +4,7 @@ namespace ClientBundle\Service;
 
 use ClientBundle\Repository\InternalRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Validator\Tests\Fixtures\EntityInterface;
 
 /**
  * Class BaseService
@@ -151,5 +152,10 @@ class BaseService implements ServiceInterface
         }
 
         return $repository;
+    }
+
+    public function delete(EntityInterface $object)
+    {
+        //todo
     }
 }

@@ -2,11 +2,12 @@
 
 namespace ClientBundle\Entity;
 
-use ClientBundle\Model\EntityInterface;
+use ClientBundle\Model\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use ClientBundle\Annotation\UserAware;
+use ClientBundle\Annotation\HasStatusFilter;
 
 /**
  * Class Customer
@@ -17,8 +18,9 @@ use ClientBundle\Annotation\UserAware;
  * @ORM\Table(name="customer", indexes={@ORM\Index(name="company_idx", columns={"company"})})
  *
  * @UserAware(idField="user_id")
+ * @HasStatusFilter()
  */
-class Customer implements EntityInterface
+class Customer extends BaseEntity
 {
     /**
      * @var int
@@ -98,6 +100,13 @@ class Customer implements EntityInterface
      *
      */
     protected $createdAt;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="smallint")
+     */
+    protected $status = 0;
 
     /**
      * Customer constructor.

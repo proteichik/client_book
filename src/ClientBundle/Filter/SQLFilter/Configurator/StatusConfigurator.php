@@ -2,11 +2,10 @@
 
 namespace ClientBundle\Filter\SQLFilter\Configurator;
 
-use ClientBundle\Entity\AbstractEvent;
+use ClientBundle\Model\EntityInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Annotations\Reader;
-use ClientBundle\Utils\UserUtils;
 
 /**
  * Class Configurator
@@ -42,7 +41,7 @@ class StatusConfigurator
     public function onKernelRequest()
     {
         $filter = $this->em->getFilters()->enable('status_filter');
-        $filter->setParameter('status', AbstractEvent::REMOVED_TYPE);
+        $filter->setParameter('status', EntityInterface::REMOVED_TYPE);
 
         $filter->setAnnotationReader($this->reader);
         $filter->setAnnotation('ClientBundle\\Annotation\\HasStatusFilter');

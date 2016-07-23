@@ -2,7 +2,7 @@
 
 namespace ClientBundle\Entity;
 
-use ClientBundle\Model\EntityInterface;
+use ClientBundle\Model\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use ClientBundle\Validator\Constraints as ClientAssert;
@@ -11,11 +11,10 @@ use ClientBundle\Validator\Constraints as ClientAssert;
  * Class AbstractEvent
  * @package ClientBundle\Entity
  */
-abstract class AbstractEvent implements EntityInterface
+abstract class AbstractEvent extends BaseEntity
 {
     const PLANNED_TYPE = 1;
     const DONE_TYPE = 0;
-    const REMOVED_TYPE = 2;
 
     /**
      * @var \DateTime
@@ -114,29 +113,6 @@ abstract class AbstractEvent implements EntityInterface
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set status
-     *
-     * @param $status
-     * @return $this
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return int
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**
@@ -264,10 +240,5 @@ abstract class AbstractEvent implements EntityInterface
     public function isDoneEvent()
     {
         return ((int) $this->status === self::DONE_TYPE);
-    }
-
-    public function isRemovedEvent()
-    {
-        return ((int) $this->status === self::REMOVED_TYPE);
     }
 }
