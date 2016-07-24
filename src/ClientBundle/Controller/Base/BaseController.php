@@ -22,4 +22,9 @@ abstract class BaseController extends AbstractController
             'objects' => $objects,
             ));
     }
+
+    public function deleteAction(Request $request)
+    {
+
+    }
 }
