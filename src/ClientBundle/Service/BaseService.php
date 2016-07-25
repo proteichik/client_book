@@ -143,6 +143,10 @@ class BaseService implements ServiceInterface
         $this->em->flush();
     }
 
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectRepository
+     * @throws \InvalidArgumentException
+     */
     protected function getRepository()
     {
         $repository = $this->em->getRepository($this->repositoryName);

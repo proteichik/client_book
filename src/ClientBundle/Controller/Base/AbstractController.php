@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractController extends Controller
 {
@@ -203,15 +204,10 @@ abstract class AbstractController extends Controller
         $this->denyAccessUnlessGranted('delete', $object);
 
         if ($request->isXmlHttpRequest()) {
-            $validator = $this->get('validator');
-            $errors = $validator->validate($object);
 
-            if (count($errors) === 0) {
-                $this->getService()->delete($object);
-                return new Response(json_encode($object), 200);
-            } else {
-                return new Response(json_encode($errors), 500);
-            }
+            $this->getService()->delete($object);
+            return new Response(json_encode($object), 200);
+
         } else {
             throw new \LogicException('Not ajax request');
         }
