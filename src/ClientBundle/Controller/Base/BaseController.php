@@ -1,7 +1,9 @@
 <?php
 namespace ClientBundle\Controller\Base;
 
+use ClientBundle\Model\EntityInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class BaseController extends AbstractController
 {
@@ -21,10 +23,5 @@ abstract class BaseController extends AbstractController
         return $this->render($this->getTemplateName($this, __METHOD__), array(
             'objects' => $objects,
             ));
-    }
-
-    public function deleteAction(Request $request)
-    {
-
     }
 }

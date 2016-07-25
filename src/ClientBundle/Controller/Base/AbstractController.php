@@ -193,4 +193,27 @@ abstract class AbstractController extends Controller
             $itemPerPage
         );
     }
+
+    public function deleteAction(Request $request, $id)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $object = $this->getService()->find($id);
+
+        $this->denyAccessUnlessGranted('delete', $object);
+
+        if ($request->isXmlHttpRequest()) {
+            $validator = $this->get('validator');
+            $errors = $validator->validate($object);
+
+            if (count($errors) === 0) {
+                $this->getService()->delete($object);
+                return new Response(json_encode($object), 200);
+            } else {
+                return new Response(json_encode($errors), 500);
+            }
+        } else {
+            throw new \LogicException('Not ajax request');
+        }
+    }
 }

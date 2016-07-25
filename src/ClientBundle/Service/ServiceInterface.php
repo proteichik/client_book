@@ -1,6 +1,7 @@
 <?php
 
 namespace ClientBundle\Service;
+use ClientBundle\Model\EntityInterface;
 
 /**
  * Interface ServiceInterface
@@ -47,4 +48,11 @@ interface ServiceInterface
      * @return void
      */
     public function flush();
+
+    /**
+     * @param EntityInterface $object
+     * @param bool $isFlush
+     * @return mixed
+     */
+    public function delete(EntityInterface $object, $isFlush = true);
 }

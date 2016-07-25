@@ -35,6 +35,13 @@ client_call.status.active:
         id_customer: \d+
         id_event: \d+
 
+client_call.delete:
+    path: /customer/{id_customer}/call/{id}/delete
+    defaults: {_controller: 'client.controller.call:deleteAction'}
+    requirements:
+        id_customer: \d+
+        id: \d+
+
 client_meetings:
     path: /customer/{id_customer}/meetings
     defaults: {_controller: 'client.controller.meeting:listAction'}
@@ -53,3 +60,10 @@ client_meeting.status.active:
     requirements:
         id_customer: \d+
         id_event: \d+
+
+client_meeting.delete:
+    path: /customer/{id_customer}/meeting/{id}/delete
+    defaults: {_controller: 'client.controller.meeting:deleteAction'}
+    requirements:
+        id_customer: \d+
+        id: \d+

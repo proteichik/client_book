@@ -9,7 +9,8 @@
             </div>
             <div class="x_content">
                 {{ include ('shared/event.list.html.twig', {'objects': objects,
-                    'activatePathName': 'client_meeting.status.active'}) }}
+                    'activatePathName': 'client_meeting.status.active',
+                    'deleteRoute': 'client_meeting.delete'}) }}
             </div>
         </div>
     </div>
