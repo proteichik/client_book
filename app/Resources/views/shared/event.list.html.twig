@@ -23,7 +23,7 @@
                 {% elseif(object.removed == false) %}
                     <a href="{{ path(activatePathName,
                     {id_customer: app.request.attributes.get('id_customer'),
-                    id_event: object.id }) }}" class="btn btn-default btn-xs" name="status">
+                    id_event: object.id }) }}" class="btn btn-default btn-xs" name="btn-status">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </a>
                 {% endif %}

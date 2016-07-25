@@ -4,7 +4,12 @@
     <div class="col-md-9 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Список звонков по клиенту</h2>
+                <h2>
+                    <a href="{{ path('client_customer.edit', {id: app.request.attributes.get('id_customer')}) }}">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </a>
+                    Список звонков по клиенту
+                </h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -25,10 +30,5 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('bundles/client/js/custom_ajax.js') }}"></script>
 {% endblock %}
 

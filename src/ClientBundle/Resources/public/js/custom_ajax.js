@@ -1,9 +1,21 @@
-$('[name="status"]').click(function (event) {
+$('[name="btn-status"]').click(function (event) {
     runAjax(event, this);
 });
 
 $('[name="btn-delete"]').click(function (event) {
-    runAjax(event, this);
+    var alias = $(this).data("alias");
+    if (!alias) {
+        var message = "Вы действительно хотите удалить данный элемент?"
+    }else {
+        var message = "Удалить " + alias + "?";
+    }
+
+    if (confirm(message)) {
+        runAjax(event, this);
+    } else {
+        event.preventDefault();
+        return false;
+    }
 });
 
 function runAjax(event, target) {

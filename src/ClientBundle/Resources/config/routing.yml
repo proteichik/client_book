@@ -16,6 +16,12 @@ client_customer.edit:
     requirements:
         id: \d+
 
+client_customer.delete:
+    path: /customer/{id}/delete
+    defaults: {_controller: 'client.controller.customer:deleteAction'}
+    requirements:
+        id: \d+
+
 client_calls:
     path: /customer/{id_customer}/calls
     defaults: {_controller: 'client.controller.call:listAction'}

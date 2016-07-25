@@ -28,7 +28,8 @@
                             <a href="{{ path('client_customer.edit', {id: object.id}) }}" type="button" class="btn btn-warning">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
-                            <a href="#" type="button" class="btn btn-danger">
+                            <a href="{{ path('client_customer.delete', {id: object.id}) }}" data-alias="{{ object.company }}"
+                               type="button" class="btn btn-danger" name="btn-delete">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                         </div>

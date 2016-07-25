@@ -2,13 +2,12 @@
 
 namespace ClientBundle\Security;
 
-use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Entity\User;
-use ClientBundle\Utils\UserUtils;
+use ClientBundle\Model\EntityInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class EventVoter extends Voter
+class BaseVoter extends Voter
 {
     protected $permissions = array(
         'delete' => 'canDelete',
@@ -20,7 +19,7 @@ class EventVoter extends Voter
             return false;
         }
 
-        if (!$subject instanceof AbstractEvent) {
+        if (!$subject instanceof EntityInterface) {
             return false;
         }
 
@@ -46,6 +45,10 @@ class EventVoter extends Voter
 
     protected function canDelete($subject, User $user)
     {
+        if (!method_exists($subject, 'getUser')) {
+            throw new \LogicException('Method getUser() does not exists.');
+        }
+
         return ($user === $subject->getUser() || $user->hasRole('ROLE_ADMIN'));
     }
 

@@ -1,6 +1,6 @@
 services:
-    client.security.event_voter:
-        class: ClientBundle\Security\EventVoter
+    client.security.base_voter:
+        class: ClientBundle\Security\BaseVoter
         tags:
             - {name: security.voter}
         public: false
