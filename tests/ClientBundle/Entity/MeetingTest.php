@@ -5,6 +5,7 @@ namespace Tests\ClientBundle\Entity;
 use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Entity\Meeting;
 use ClientBundle\Entity\Customer;
+use ClientBundle\Entity\User;
 
 class MeetingTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,10 +21,11 @@ class MeetingTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->meeting->getId());
         $this->assertNull($this->meeting->getCustomer());
         $this->assertNull($this->meeting->getDate());
-        $this->assertNull($this->meeting->getStatus());
+        $this->assertSame(Meeting::DONE_TYPE,$this->meeting->getStatus());
         $this->assertNull($this->meeting->getInfo());
         $this->assertNull($this->meeting->getCreatedAt());
         $this->assertNull($this->meeting->getAlias());
+        $this->assertNull($this->meeting->getUser());
     }
 
     public function testCustomer()
@@ -91,5 +93,12 @@ class MeetingTest extends \PHPUnit_Framework_TestCase
         $this->meeting->setAlias();
         $this->assertEquals('2-'.$this->meeting->getDate()->getTimestamp(), $this->meeting->getAlias());
 
+    }
+
+    public function testUser()
+    {
+        $user = new User();
+        $this->meeting->setUser($user);
+        $this->assertEquals($user, $this->meeting->getUser());
     }
 }

@@ -9,6 +9,7 @@ use ClientBundle\Entity\User;
 use ClientBundle\Entity\Call;
 use ClientBundle\Entity\Meeting;
 
+use ClientBundle\Model\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
 
@@ -35,6 +36,8 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->customer->getMeetings() instanceof ArrayCollection);
         $this->assertEquals(0, $this->customer->getMeetings()->count());
+        $this->assertSame(0, $this->customer->getStatus());
+        $this->assertFalse($this->customer->isRemoved());
     }
 
     public function testObjectWithData()
@@ -98,5 +101,9 @@ class CustomerTest extends \PHPUnit_Framework_TestCase
         $this->customer->addMeeting($meeting);
         $this->customer->removeMeeting($fake_meeting);
         $this->assertEquals(1, $this->customer->getMeetings()->count());
+
+        $this->customer->setStatus(EntityInterface::REMOVED_TYPE);
+        $this->assertSame(EntityInterface::REMOVED_TYPE, $this->customer->getStatus());
+        $this->assertTrue($this->customer->isRemoved());
     }
 }

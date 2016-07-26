@@ -4,6 +4,7 @@ namespace Tests\ClientBundle\Entity;
 
 use ClientBundle\Entity\Call;
 use ClientBundle\Entity\Customer;
+use ClientBundle\Entity\User;
 
 class CallTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,10 +20,13 @@ class CallTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->call->getId());
         $this->assertNull($this->call->getCustomer());
         $this->assertNull($this->call->getDate());
-        $this->assertNull($this->call->getStatus());
+        $this->assertSame(Call::DONE_TYPE, $this->call->getStatus());
         $this->assertNull($this->call->getInfo());
         $this->assertNull($this->call->getCreatedAt());
         $this->assertNull($this->call->getAlias());
+        $this->assertNull($this->call->getUser());
+
+        $this->assertTrue($this->call->isDoneEvent());
     }
 
     public function testFillObject()
@@ -39,8 +43,10 @@ class CallTest extends \PHPUnit_Framework_TestCase
         $this->call->setDate($date);
         $this->assertEquals($date, $this->call->getDate());
 
-        $this->call->setStatus(Call::DONE_TYPE);
-        $this->assertEquals(Call::DONE_TYPE, $this->call->getStatus());
+        $this->call->setStatus(Call::PLANNED_TYPE);
+        $this->assertEquals(Call::PLANNED_TYPE, $this->call->getStatus());
+        $this->assertFalse($this->call->isDoneEvent());
+
 
         $this->call->setInfo('test info');
         $this->assertEquals('test info', $this->call->getInfo());
@@ -50,6 +56,10 @@ class CallTest extends \PHPUnit_Framework_TestCase
 
         $this->call->setAlias();
         $this->assertEquals('2-'.$this->call->getDate()->getTimestamp(), $this->call->getAlias());
+
+        $user = new User();
+        $this->call->setUser($user);
+        $this->assertEquals($user, $this->call->getUser());
 
     }
 

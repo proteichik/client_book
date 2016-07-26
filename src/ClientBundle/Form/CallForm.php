@@ -2,11 +2,12 @@
 
 namespace ClientBundle\Form;
 
+use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Form\Type\EntityHiddenType;
 use ClientBundle\Form\Type\MyDateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,8 +26,11 @@ class CallForm extends AbstractType
     {
         $builder
             ->add('date', MyDateTimeType::class)
-            ->add('status', CheckboxType::class, array(
-                'required' => false,
+            ->add('status', ChoiceType::class, array(
+                'choices'  => array(
+                    'Выполненный' => AbstractEvent::DONE_TYPE,
+                    'Запланированный' => AbstractEvent::PLANNED_TYPE,
+                ),
             ))
             ->add('info', null, array(
                 'required' => false,

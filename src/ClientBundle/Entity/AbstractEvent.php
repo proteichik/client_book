@@ -73,6 +73,11 @@ abstract class AbstractEvent extends BaseEntity
      */
     protected $user;
 
+    public function __construct()
+    {
+        $this->status = self::DONE_TYPE;
+    }
+
     /**
      * @return mixed
      */
