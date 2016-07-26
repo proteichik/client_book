@@ -81,10 +81,20 @@ class CallValidationTest extends KernelTestCase
         $this->object->setStatus(AbstractEvent::DONE_TYPE);
         $this->assertFalse($this->isValid(array('creation')));
         $this->assertTrue($this->isValid(array('activate')));
+    }
 
-//        $errors = $this->getErrors();
-//        var_dump($errors);
-//        var_dump($this->object);
+    public function testIsNoFutureDoneEventActivate()
+    {
+        $this->getValidObject();
+        $this->assertTrue($this->isValid());
+
+        $date = new \DateTime();
+
+        //isNoFutureDoneEventCreation
+        $date->modify('+ 1 day');;
+        $this->object->setDate($date);
+        $this->object->setStatus(AbstractEvent::DONE_TYPE);
+        $this->assertFalse($this->isValid(array('activate')));
     }
 
     protected function getErrors($groups = array())
