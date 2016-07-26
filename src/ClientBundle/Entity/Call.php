@@ -36,6 +36,7 @@ class Call extends AbstractEvent
      * @ORM\ManyToOne(targetEntity="Customer", inversedBy="calls")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      *
+     * @Assert\NotBlank()
      * @Assert\Type(type="ClientBundle\Entity\Customer")
      * @Assert\Valid()
      */
@@ -47,6 +48,7 @@ class Call extends AbstractEvent
      * @ORM\ManyToOne(targetEntity="User", inversedBy="calls")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
+     * @Assert\NotBlank()
      * @Assert\Type(type="ClientBundle\Entity\User")
      * @Assert\Valid()
      */

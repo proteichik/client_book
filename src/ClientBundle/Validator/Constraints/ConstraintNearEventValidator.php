@@ -17,6 +17,10 @@ class ConstraintNearEventValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
+        if (null === $value) {
+            return;
+        }
+
         if (!$value instanceof \DateTime) {
             throw new UnexpectedTypeException($value, 'DateTime');
         }

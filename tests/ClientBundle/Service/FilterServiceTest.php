@@ -3,6 +3,7 @@
 namespace Tests\ClientBundle\Service;
 
 use ClientBundle\Service\FilterService;
+use Doctrine\ORM\Query;
 
 class FilterServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,13 +41,13 @@ class FilterServiceTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($repository));
         
         $queryBuilder = $this->getMockBuilder('Doctrine\ORM\QueryBuilder')->disableOriginalConstructor()->getMock();
-        $query = $this->getMockBuilder('Doctrine\ORM\Query')->disableOriginalConstructor()->getMock();
-        
+        //$query = $this->getMockBuilder('Doctrine\ORM\Query')->disableOriginalConstructor()->getMock();
+
         $repository->expects($this->once())
             ->method('getFilteredBuilder')
             ->will($this->returnValue($queryBuilder));
 
-        $form = $this->getMockBuilder('ClientBundle\Filter\FormFilter\EventFilter')
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -56,7 +57,7 @@ class FilterServiceTest extends \PHPUnit_Framework_TestCase
 
         $queryBuilder->expects($this->once())
             ->method('getQuery')
-            ->will($this->returnValue($query));
+            ->will($this->returnValue(true));
 
         try {
             $this->service->getFilteredList($form);

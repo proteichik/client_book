@@ -88,6 +88,7 @@ class Customer extends BaseEntity
      * @ORM\ManyToOne(targetEntity="User", inversedBy="customers")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
+     * @Assert\NotBlank()
      * @Assert\Type(type="ClientBundle\Entity\User")
      * @Assert\Valid()
      */
