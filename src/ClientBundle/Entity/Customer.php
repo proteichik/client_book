@@ -45,6 +45,7 @@ class Customer extends BaseEntity
      *
      * @ORM\Embedded(class="ClientBundle\Entity\Embeddable\Address")
      *
+     * @Assert\NotBlank()
      * @Assert\Type(type="ClientBundle\Entity\Embeddable\Address")
      * @Assert\Valid()
      */

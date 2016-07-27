@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\ClientBundle\Entity\EntityValidation;
+namespace Tests\ClientBundle\EntityValidation;
 
 use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Entity\Customer;
+use ClientBundle\Entity\Embeddable\Address;
+use ClientBundle\Entity\Embeddable\Contacts;
 use ClientBundle\Entity\User;
 
 abstract class EventEVTestCase extends BaseEVTestCase
 {
     public function testCallValidate()
     {
-        $user = new User();
-        $customer = new Customer();
-        $customer->setUser($user);
-        $customer->setCompany('test company');
+        $user = $this->getValidUser();
+        $customer = $this->getValidCustomer();
 
         //not Valid :( empty User, Customer, Date
         $this->assertFalse($this->isValid());
@@ -84,13 +84,37 @@ abstract class EventEVTestCase extends BaseEVTestCase
         $this->assertFalse($this->isValid(array('activate')));
     }
 
-    private function getValidObject()
+    protected function getValidObject()
     {
-        $user = new User();
-        $customer = new Customer();
-        $customer->setUser($user);
-        $customer->setCompany('test company');
+        $user = $this->getValidUser();
+        $customer = $this->getValidCustomer();
 
         $this->object->setDate(new \DateTime())->setCustomer($customer)->setUser($user);
     }
+
+    protected function getValidCustomer()
+    {
+        $address = new Address();
+        $address->setCity('test city');
+        $address->setStreet('test street');
+        $address->setUnp(123456789);
+
+        $user = $this->getValidUser();
+
+        $customer = new Customer();
+
+        $customer
+            ->setCompany('test company')
+            ->setAddress($address)
+            ->setUser($user);
+
+        return $customer;
+
+    }
+
+    protected function getValidUser()
+    {
+        return new User();
+    }
+
 }

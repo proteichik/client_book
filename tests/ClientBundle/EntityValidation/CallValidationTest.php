@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\ClientBundle\Entity\EntityValidation;
+namespace Tests\ClientBundle\EntityValidation;
 
 use ClientBundle\Entity\Call;
 
