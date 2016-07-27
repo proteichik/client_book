@@ -1,26 +1,13 @@
 <?php
 
-namespace Tests\ClientBundle\Entity;
+namespace Tests\ClientBundle\Entity\EntityValidation;
 
 use ClientBundle\Entity\AbstractEvent;
-use ClientBundle\Entity\Call;
 use ClientBundle\Entity\Customer;
 use ClientBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class CallValidationTest extends KernelTestCase
+abstract class EventEVTestCase extends BaseEVTestCase
 {
-    protected $object;
-    protected $validator;
-
-    public function setUp()
-    {
-        self::bootKernel();
-
-        $this->validator = self::$kernel->getContainer()->get('validator');
-        $this->object = new Call();
-    }
-
     public function testCallValidate()
     {
         $user = new User();
@@ -90,21 +77,11 @@ class CallValidationTest extends KernelTestCase
 
         $date = new \DateTime();
 
-        //isNoFutureDoneEventCreation
+        //isNoFutureDoneEventActivate
         $date->modify('+ 1 day');;
         $this->object->setDate($date);
         $this->object->setStatus(AbstractEvent::DONE_TYPE);
         $this->assertFalse($this->isValid(array('activate')));
-    }
-
-    protected function getErrors($groups = array())
-    {
-        return $this->validator->validate($this->object, null, $groups);
-    }
-
-    protected function isValid($groups = array())
-    {
-        return (count($this->getErrors($groups)) === 0);
     }
 
     private function getValidObject()
