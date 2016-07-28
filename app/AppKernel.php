@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new ClientBundle\ClientBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new ClientCommandBundle\ClientCommandBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

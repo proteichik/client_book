@@ -10,6 +10,7 @@ imports:
     - { resource: "@ClientBundle/Resources/config/services_validator.yml" }
     - { resource: "@ClientBundle/Resources/config/services_security.yml" }
     - { resource: "@ClientBundle/Resources/config/parameters.yml"}
+    - { resource: "@ClientCommandBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
