@@ -3,3 +3,10 @@ services:
         class: ClientBundle\Factory\EventCommandFactory
         arguments:
             - "@service_container"
+
+    client.logger.console_logger:
+        class: ClientBundle\Logger\ConsoleLogger
+        arguments: ["@logger"]
+        tags:
+            - { name: monolog.logger, channel: command }
+

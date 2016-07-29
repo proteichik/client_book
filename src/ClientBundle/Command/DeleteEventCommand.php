@@ -2,14 +2,16 @@
 
 namespace ClientBundle\Command;
 
+use ClientBundle\Command\Base\AbstractBaseCommand;
 use ClientBundle\Model\EntityInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use ClientBundle\Traits\TraitMessageCommand;
 
-class DeleteEventCommand extends ContainerAwareCommand
+class DeleteEventCommand extends AbstractBaseCommand
 {
     protected function configure()
     {
@@ -24,14 +26,15 @@ class DeleteEventCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $factory = $this->getContainer()->get('client.factory.event_command_factory');
-        $logger = $this->getContainer()->get('logger');
         $type = $input->getArgument('type');
+        $logger = $this->getContainer()->get('logger');
 
         try {
             $service = $factory->getService($type);
         } catch (\Exception $ex)
         {
-            $logger->error($ex->getMessage());
+            $output->writeln($this->getErrorMsg($ex->getMessage()));
+            return;
         }
 
         $searchParams = array(
@@ -40,23 +43,25 @@ class DeleteEventCommand extends ContainerAwareCommand
                 'processed' => false,
             ),
         );
-        
+
+        $output->writeln($this->getInfoMsg('START!'));
         $objects = $service->findBy($searchParams);
-        
-        $logger->warning(sprintf('Items for remove: %s', count($objects)));
+        $output->writeln($this->getInfoMsg(sprintf('Total objects: %s', count($objects))));
+
         
         foreach ($objects as $object) {
             $service->remove($object, false);
+            $output->writeln($this->getInfoMsg(
+                sprintf('Object (id: %s, date: %s) has been removed', $object->getId(), $object->getDate()->format('Y-m-d H:i:s'))
+            ));
         }
+        $logger->info('test');
 
         if (!$input->getOption('test')) {
             $service->flush();
+            $output->writeln($this->getInfoMsg('FLUSH!'));
         }
 
-        $output->writeln('Items are removed');
-        $logger->info('End');
-
+        $output->writeln($this->getInfoMsg('FINISH!'));
     }
-
-
 }

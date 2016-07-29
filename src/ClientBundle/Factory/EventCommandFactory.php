@@ -39,7 +39,7 @@ class EventCommandFactory
                 $service = $this->get('client.service.meeting');
                 break;
             default:
-                throw new \Exception(sprintf('Type %s not defined if factory', $type));
+                throw new \Exception (sprintf('Type %s not defined if factory', $type));
         }
 
         return $service;
