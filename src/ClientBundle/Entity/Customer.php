@@ -71,7 +71,7 @@ class Customer extends BaseEntity
     /**
      * @var ClientBundle\Entity\Call[]
      *
-     * @ORM\OneToMany(targetEntity="Call", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="Call", mappedBy="customer", cascade={"remove"})
      *
      */
     protected $calls;
@@ -79,7 +79,7 @@ class Customer extends BaseEntity
     /**
      * @var ClientBundle\Entity\Meeting[]
      *
-     * @ORM\OneToMany(targetEntity="Meeting", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="Meeting", mappedBy="customer", cascade={"remove"})
      */
     protected $meetings;
 

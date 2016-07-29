@@ -20,6 +20,7 @@ class MessageSubscriber implements EventSubscriberInterface
         return array(
             MessageEvent::INFO_MESSAGE => 'processInfo',
             MessageEvent::ERROR_MESSAGE => 'processError',
+            MessageEvent::WARNING_MESSAGE => 'processWarning',
         );
     }
 
@@ -31,5 +32,10 @@ class MessageSubscriber implements EventSubscriberInterface
     public function processError(MessageEvent $event)
     {
         $this->logger->error($event->getMessage(), $event->getContext());
+    }
+
+    public function processWarning(MessageEvent $event)
+    {
+        $this->logger->warning($event->getMessage(), $event->getContext());
     }
 }

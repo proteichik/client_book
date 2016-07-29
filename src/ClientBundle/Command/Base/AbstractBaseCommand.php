@@ -20,6 +20,12 @@ abstract class AbstractBaseCommand extends ContainerAwareCommand
         return '<error>[ERROR]: ' . $message . '</error>';
     }
 
+    protected function getWarningMsg($message)
+    {
+        $this->dispatch(MessageEvent::WARNING_MESSAGE, $message);
+        return '<comment>[INFO]: ' . $message . '</comment>';
+    }
+
     protected function dispatch($eventName, $message)
     {
         $dispatcher = $this->getDispatcher();

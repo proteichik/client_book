@@ -11,7 +11,9 @@ use Symfony\Component\EventDispatcher\Event;
 class MessageEvent extends Event
 {
     const INFO_MESSAGE = 'client.console_message_info';
+    const WARNING_MESSAGE = 'client.console_message_warning';
     const ERROR_MESSAGE = 'client.console_message_error';
+
 
     /**
      * @var string

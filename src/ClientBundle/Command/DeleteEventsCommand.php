@@ -11,12 +11,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use ClientBundle\Traits\TraitMessageCommand;
 
-class DeleteEventCommand extends AbstractBaseCommand
+class DeleteEventsCommand extends AbstractBaseCommand
 {
     protected function configure()
     {
         $this
-            ->setName('client:delete:event')
+            ->setName('client:delete:events')
             ->setDescription('Delete events')
             ->addArgument('type', InputArgument::REQUIRED, 'Event type')
             ->addOption('test', null, InputOption::VALUE_NONE)

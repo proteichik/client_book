@@ -24,4 +24,10 @@ class ConsoleLogger implements BaseInterface
         $this->logger->error($message, $context);
     }
 
+    public function warning($message, array $context = array())
+    {
+        $this->logger->warning($message, $context);
+    }
+
+
 }
