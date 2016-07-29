@@ -1,6 +1,6 @@
 <?php
 
-namespace ClientCommandBundle\Factory;
+namespace ClientBundle\Factory;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Class ClientCommandFactory
  * @package ClientCommandBundle\Factory
  */
-class ClientCommandFactory
+class EventCommandFactory
 {
     /**
      * @var ContainerInterface
@@ -37,9 +37,6 @@ class ClientCommandFactory
                 break;
             case 'meeting':
                 $service = $this->get('client.service.meeting');
-                break;
-            case 'customer':
-                $service = $this->get('client.service.customer');
                 break;
             default:
                 throw new \Exception(sprintf('Type %s not defined if factory', $type));

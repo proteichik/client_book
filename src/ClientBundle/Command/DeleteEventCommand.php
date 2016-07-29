@@ -1,6 +1,6 @@
 <?php
 
-namespace ClientCommandBundle\Command;
+namespace ClientBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
