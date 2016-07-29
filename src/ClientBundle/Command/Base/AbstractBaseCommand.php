@@ -2,34 +2,34 @@
 
 namespace ClientBundle\Command\Base;
 
+use ClientBundle\Event\Console\MessageEvent;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractBaseCommand extends ContainerAwareCommand
 {
     protected function getInfoMsg($message)
     {
-        $this->getLogger()->info($message);
+        $this->dispatch(MessageEvent::INFO_MESSAGE, $message);
         return '<info>[INFO]: ' . $message . '</info>';
-    }
-
-    protected function getQuestionMsg($message)
-    {
-        return '<question>[QUESTION]: ' . $message . '</question>';
-    }
-
-    protected function getCommentMsg($message)
-    {
-        return '<comment>[COMMENT]: ' . $message . '</comment>';
     }
 
     protected function getErrorMsg($message)
     {
-        $this->getLogger()->error($message);
+        $this->dispatch(MessageEvent::ERROR_MESSAGE, $message);
         return '<error>[ERROR]: ' . $message . '</error>';
     }
 
-    protected function getLogger()
+    protected function dispatch($eventName, $message)
     {
-        return $this->getContainer()->get('client.logger.console_logger');
+        $dispatcher = $this->getDispatcher();
+        $event = new MessageEvent($message);
+
+        $dispatcher->dispatch($eventName, $event);
+    }
+
+    protected function getDispatcher()
+    {
+        return $this->getContainer()->get('event_dispatcher');
     }
 }

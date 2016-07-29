@@ -10,3 +10,9 @@ services:
         tags:
             - { name: monolog.logger, channel: command }
 
+    client.event_subscriber.message:
+        class: ClientBundle\EventSubscriber\Console\MessageSubscriber
+        arguments: ["@client.logger.console_logger"]
+        tags:
+            - {name: kernel.event_subscriber}
+

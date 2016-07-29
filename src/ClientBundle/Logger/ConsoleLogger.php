@@ -2,10 +2,10 @@
 
 namespace ClientBundle\Logger;
 
-
+use ClientBundle\Logger\LoggerInterface as BaseInterface;
 use Psr\Log\LoggerInterface;
 
-class ConsoleLogger
+class ConsoleLogger implements BaseInterface
 {
     protected $logger;
 
