@@ -117,14 +117,14 @@ class BaseService implements ServiceInterface
         $this->flush();
     }
 
-    /**
-     * @param $object
-     * @return void
-     */
-    public function remove($object)
+
+    public function remove($object, $isFlush = true)
     {
         $this->em->remove($object);
-        $this->flush();
+
+        if ($isFlush) {
+            $this->flush();
+        }
     }
 
     /**

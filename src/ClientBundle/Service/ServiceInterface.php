@@ -34,9 +34,10 @@ interface ServiceInterface
 
     /**
      * @param $object
+     * @param bool $isFlush
      * @return mixed
      */
-    public function remove($object);
+    public function remove($object, $isFlush = true);
 
     /**
      * @param $object
