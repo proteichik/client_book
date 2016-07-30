@@ -24,6 +24,7 @@ class DeleteOlderEventsCommand extends AbstractBaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln($this->getInfoMsg('======== DELETE OLDER EVENTS START ========'));
         $interval = ($this->getContainer()->hasParameter('event_delete_interval')) ?
             $this->getContainer()->getParameter('event_delete_interval') : $input->getArgument('interval');
 
@@ -57,6 +58,7 @@ class DeleteOlderEventsCommand extends AbstractBaseCommand
             $output->writeln($this->getInfoMsg('FLUSH!'));
         }
 
+        $output->writeln($this->getInfoMsg('======== DELETE OLDER EVENTS FINISH ========'));
     }
 
     protected function getDate($interval)
