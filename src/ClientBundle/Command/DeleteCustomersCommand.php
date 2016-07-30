@@ -22,6 +22,8 @@ class DeleteCustomersCommand extends AbstractBaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln($this->getInfoMsg('======== DELETE CUSTOMERS - START ========'));
+
         /* @var ServiceInterface */
         $customerService = $this->getContainer()->get('client.service.customer');
 
@@ -37,7 +39,6 @@ class DeleteCustomersCommand extends AbstractBaseCommand
             ),
         );
 
-        $output->writeln($this->getInfoMsg('DELETE CUSTOMERS - START'));
         $customers = $customerService->findBy($searchOptions);
         $output->writeln($this->getInfoMsg(
             sprintf('Total customers: %s', count($customers))
@@ -66,7 +67,7 @@ class DeleteCustomersCommand extends AbstractBaseCommand
             $output->writeln($this->getInfoMsg('FLUSH!'));
         }
 
-        $output->writeln($this->getInfoMsg('DELETE CUSTOMERS - FINISH'));
+        $output->writeln($this->getInfoMsg('======== DELETE CUSTOMERS - FINISH ========'));
     }
 
 

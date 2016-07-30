@@ -175,4 +175,13 @@ class BaseService implements ServiceInterface
 
         return $object;
     }
+
+    /**
+     * @param $alias
+     * @return mixed
+     */
+    public function getQueryBuilder($alias)
+    {
+        return $this->getRepository()->createQueryBuilder($alias);
+    }
 }

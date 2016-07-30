@@ -56,4 +56,10 @@ interface ServiceInterface
      * @return mixed
      */
     public function delete(EntityInterface $object, $isFlush = true);
+
+    /**
+     * @param $alias
+     * @return mixed
+     */
+    public function getQueryBuilder($alias);
 }
