@@ -48,6 +48,10 @@ client_call.delete:
         id_customer: \d+
         id: \d+
 
+client_call.today:
+    path: /today/call
+    defaults: {_controller: 'client.controller.call:getTodayAction'}
+
 client_meetings:
     path: /customer/{id_customer}/meetings
     defaults: {_controller: 'client.controller.meeting:listAction'}
@@ -73,3 +77,7 @@ client_meeting.delete:
     requirements:
         id_customer: \d+
         id: \d+
+
+client_meeting.today:
+    path: /today/meeting
+    defaults: {_controller: 'client.controller.meeting:getTodayAction'}

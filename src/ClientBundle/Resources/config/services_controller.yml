@@ -7,9 +7,9 @@ services:
             - "%client.form.customer.class%"
             - "@client.entity.customer"
             - "@knp_paginator"
-            - "%client.filter.form.customer.class%"
         calls:
             - [setContainer, ['@service_container']]
+            - [addFilterFormClass, [{name: list, class: %client.filter.form.customer.class%}]]
 
     client.controller.call:
         class: ClientBundle\Controller\CallController
@@ -21,6 +21,7 @@ services:
             - "%client.filter.form.call.class%"
         calls:
             - [setContainer, ['@service_container']]
+            - [addFilterFormClass, [{name: list, class: %client.filter.form.call.class%}]]
 
     client.controller.meeting:
         class: ClientBundle\Controller\MeetingController
@@ -29,6 +30,7 @@ services:
             - "%client.form.meeting.class%"
             - "@client.entity.meeting"
             - "@knp_paginator"
-            - "%client.filter.form.meeting.class%"
         calls:
             - [setContainer, ['@service_container']]
+            - [addFilterFormClass, [{name: list, class: %client.filter.form.meeting.class%}]]
+

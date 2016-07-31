@@ -10,48 +10,53 @@ use Symfony\Component\HttpFoundation\Request;
 class FilteredBaseController extends AbstractController
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $filterFormClass;
+    protected $filterFormClasses = array();
 
     /**
-     * @param ServiceInterface $service
-     * @param $form
-     * @param EntityInterface $prototype
-     * @param PaginatorInterface $paginator
-     * @param $filterFormClass
-     */
-    public function __construct(ServiceInterface $service, $form, EntityInterface $prototype,
-                                PaginatorInterface $paginator, $filterFormClass)
-    {
-        parent::__construct($service, $form, $prototype, $paginator);
-
-        $this->setFilterFormClass($filterFormClass);
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getFilterFormClass()
-    {
-        return $this->filterFormClass;
-    }
-
-    /**
-     * @param $filterFormClass
+     * @param array $filterFormClass
      * @return $this
-     * @throws \InvalidArgumentException
      */
-    public function setFilterFormClass($filterFormClass)
+    public function addFilterFormClass(array $filterFormClass = array())
     {
-        if (!is_string($filterFormClass)) {
-            throw new \InvalidArgumentException('Form filter must be a string');
+        if (!isset($filterFormClass['name']) || !isset($filterFormClass['class'])) {
+            throw new \InvalidArgumentException('Filter format invalid');
         }
 
-        $this->filterFormClass = $filterFormClass;
+        $this->filterFormClasses[$filterFormClass['name']] = $filterFormClass['class'];
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFilterFormClasses()
+    {
+        return $this->filterFormClasses;
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function getFilterFormClass($name)
+    {
+        if (!$this->hasFilterFormClass($name)) {
+            throw new \InvalidArgumentException(sprintf('Filter %s not found', $name));
+        }
+
+        return $this->filterFormClasses[$name];
+    }
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function hasFilterFormClass($name)
+    {
+        return (isset($this->filterFormClasses[$name]));
     }
 
     /**
@@ -62,7 +67,7 @@ class FilteredBaseController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $filterForm = $this->createForm($this->filterFormClass);
+        $filterForm = $this->createForm($this->getFilterFormClass('list'));
 
         if ($request->query->has($filterForm->getName())) {
 
@@ -77,7 +82,6 @@ class FilteredBaseController extends AbstractController
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/
         );
-        
 
         return $this->render($this->getTemplateName($this, __METHOD__), array(
             'objects' => $objects,

@@ -94,4 +94,31 @@ class BaseEventController extends FilteredBaseController
 
         return new Response(json_encode($event), 200);
     }
+
+    public function getTodayAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $filterForm = $this->createForm($this->getFilterFormClass('list'));
+
+        $queryBuilder = $this->getService()->getRepository()->getTodayQB();
+
+        if ($request->query->has($filterForm->getName())) {
+
+            $filterForm->submit($request->query->get($filterForm->getName()));
+            $query = $this->getService()->getFilteredQuery($filterForm, $queryBuilder);
+
+        } else {
+            $query = $queryBuilder->getQuery();
+        }
+
+        $objects = $this->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/
+        );
+
+        return $this->render($this->getTemplateName($this, __METHOD__), array(
+            'objects' => $objects,
+            'filterForm' => $filterForm->createView()));
+    }
 }

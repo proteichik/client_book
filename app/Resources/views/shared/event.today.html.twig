@@ -1,0 +1,49 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th>{{ knp_pagination_sortable(objects, '#', 'q.id') }}</th>
+        <th>{{ knp_pagination_sortable(objects, 'Дата', 'q.date') }}</th>
+        <th>{{ knp_pagination_sortable(objects, 'Статус', 'q.status') }}</th>
+        <th>Информация</th>
+        <th>{{ knp_pagination_sortable(objects, 'Клиент', 'c.company') }}</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in objects %}
+        <tr>
+            <th class="row">{{ object.id }}</th>
+            <td>{{ object.date | date('Y-m-d H:i:s') }}</td>
+            <td>
+                {#TO-DO!!!На ветке с удаление поставить проверку!!!#}
+                {% if (object.doneEvent) %}
+                    <a href="#" class="btn btn-success btn-xs disabled">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </a>
+                {% elseif(object.removed == false) %}
+                    <a href="{{ path(activatePathName,
+                    {id_customer: object.customer.id,
+                        id_event: object.id }) }}" class="btn btn-default btn-xs" name="btn-status">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+            </td>
+            <td>{{ object.info }}</td>
+            <td>{{ object.customer.company }}</td>
+            <td>
+                <div class="btn-group btn-group-xs">
+                    <a href="{{ path(deleteRoute,
+                    {id_customer: object.customer.id,
+                        id: object.id }) }}" type="button" name="btn-delete" class="btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="navigation">
+    {{ knp_pagination_render(objects) }}
+</div>
+
