@@ -6,6 +6,9 @@
         <th>{{ knp_pagination_sortable(objects, 'Статус', 'q.status') }}</th>
         <th>Информация</th>
         <th>{{ knp_pagination_sortable(objects, 'Клиент', 'c.company') }}</th>
+        {% if is_granted('ROLE_ADMIN') %}
+            <th>{{ knp_pagination_sortable(objects, 'Сотрудник', 'u.username') }}</th>
+        {% endif %}
         <th>Действия</th>
     </tr>
     </thead>
@@ -30,6 +33,9 @@
             </td>
             <td>{{ object.info }}</td>
             <td>{{ object.customer.company }}</td>
+            {% if is_granted('ROLE_ADMIN') %}
+                <td>{{ object.user.username }}</td>
+            {% endif %}
             <td>
                 <div class="btn-group btn-group-xs">
                     <a href="{{ path(deleteRoute,

@@ -24,9 +24,10 @@ class EventRepository extends AbstractRepository
 
         //$qb =  $this->createQueryBuilder('q')->join('q.customer', 'c');
         $qb = $this->_em->createQueryBuilder()
-            ->select(array('q', 'c'))
+            ->select(array('q', 'c', 'u'))
             ->from($this->_entityName, 'q')
             ->join('q.customer', 'c')
+            ->join('q.user', 'u')
         ;
 
         $qb->where('q.status = :status')

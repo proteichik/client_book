@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    Список встреч на сегодня
+                </h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                {{ include ('shared/event.today.html.twig', {'objects': objects,
+                    'activatePathName': 'client_meeting.status.active',
+                    'deleteRoute': "client_meeting.delete"}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
