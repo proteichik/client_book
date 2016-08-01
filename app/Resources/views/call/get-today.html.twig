@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <div class="col-md-9 col-xs-12">
+    <div class="col-xs-12">
         <div class="x_panel">
             <div class="x_title">
                 <h2>
@@ -13,17 +13,6 @@
                 {{ include ('shared/event.today.html.twig', {'objects': objects,
                     'activatePathName': 'client_call.status.active',
                     'deleteRoute': "client_call.delete"}) }}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Поиск</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                {{ include ('shared/filters/event.filter.html.twig', {'filter': filterForm}) }}
             </div>
         </div>
     </div>

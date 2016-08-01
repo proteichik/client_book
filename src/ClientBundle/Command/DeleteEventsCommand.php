@@ -25,11 +25,10 @@ class DeleteEventsCommand extends AbstractBaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln($this->getInfoMsg('======== DELETE EVENTS START ========'));
-
         $factory = $this->getContainer()->get('client.factory.event_command_factory');
         $type = $input->getArgument('type');
         $logger = $this->getContainer()->get('logger');
+        $output->writeln($this->getInfoMsg(sprintf('======== DELETE EVENTS START [%s] ========', $type)));
 
         try {
             $service = $factory->getService($type);
@@ -63,6 +62,6 @@ class DeleteEventsCommand extends AbstractBaseCommand
             $output->writeln($this->getInfoMsg('FLUSH!'));
         }
 
-        $output->writeln($this->getInfoMsg('======== DELETE EVENTS FINISH ========'));
+        $output->writeln($this->getInfoMsg(sprintf('======== DELETE EVENTS FINISH [%s] ========', $type)));
     }
 }

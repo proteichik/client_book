@@ -2,17 +2,17 @@
 
 namespace ClientBundle\Filter\FormFilter;
 
-use ClientBundle\Filter\FormFilter\Type\AddressFilterType;
+use ClientBundle\Filter\FormFilter\Type\CustomerFilterType;
 use ClientBundle\Utils\UserUtils;
 use Doctrine\ORM\EntityRepository;
-use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 
-class CustomerFilter extends AbstractType
+class TodayFilter extends AbstractType
 {
     protected $tokenStorage;
 
@@ -23,27 +23,18 @@ class CustomerFilter extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('company', Filters\TextFilterType::class, array(
-            'condition_pattern' => FilterOperands::STRING_CONTAINS,
+        $builder->add('customer', Filters\EntityFilterType::class, array(
+            'class' => 'ClientBundle:Customer',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('c')->orderBy('c.company', 'DESC');
+            },
         ));
-        $builder->add('address', AddressFilterType::class);
-
-        $user = $this->getUser();
-        if ($user && $user->hasRole('ROLE_ADMIN')) {
-            $builder->add('user', Filters\EntityFilterType::class, array(
-                'class' => 'ClientBundle:User',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')->orderBy('u.username', 'DESC');
-                },
-            ));
-        }
     }
 
     public function getBlockPrefix()
     {
-        return 'user_filter';
+        return 'today_filter';
     }
-
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -57,4 +48,6 @@ class CustomerFilter extends AbstractType
     {
         return UserUtils::getUser($this->tokenStorage);
     }
+
+
 }

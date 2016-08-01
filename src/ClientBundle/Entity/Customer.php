@@ -336,4 +336,11 @@ class Customer extends BaseEntity
     {
         return $this->user;
     }
+
+    public function __toString()
+    {
+        return (string) $this->company;
+    }
+
+
 }

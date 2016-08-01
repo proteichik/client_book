@@ -99,7 +99,18 @@ class BaseEventController extends FilteredBaseController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $query = $this->getService()->getRepository()->getTodayQB()->getQuery();
+        $filterForm = $this->createForm($this->getFilterFormClass('today'));
+
+        $queryBuilder = $this->getService()->getRepository()->getTodayQB();
+
+        if ($request->query->has($filterForm->getName())) {
+
+            $filterForm->submit($request->query->get($filterForm->getName()));
+            $query = $this->getService()->getFilteredQuery($filterForm, $queryBuilder);
+
+        } else {
+            $query = $queryBuilder->getQuery();
+        }
 
         $objects = $this->paginate(
             $query, /* query NOT result */
@@ -108,6 +119,6 @@ class BaseEventController extends FilteredBaseController
 
         return $this->render($this->getTemplateName($this, __METHOD__), array(
             'objects' => $objects,
-            ));
+            'filterForm' => $filterForm->createView()));
     }
 }
