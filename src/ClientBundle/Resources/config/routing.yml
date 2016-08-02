@@ -81,3 +81,7 @@ client_meeting.delete:
 client_meeting.today:
     path: /today/meeting
     defaults: {_controller: 'client.controller.meeting:getTodayAction'}
+
+client_calendar.show:
+    path: /calendar
+    defaults: {_controller: 'ClientBundle:Calendar:show'}
