@@ -11,7 +11,7 @@ services:
             - { name: monolog.logger, channel: command }
 
     client.event_subscriber.message:
-        class: ClientBundle\EventSubscriber\Console\MessageSubscriber
+        class: ClientBundle\Listener\EventSubscriber\Console\MessageSubscriber
         arguments: ["@client.logger.console_logger"]
         tags:
             - {name: kernel.event_subscriber}

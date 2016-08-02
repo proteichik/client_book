@@ -1,6 +1,6 @@
 <?php
 
-namespace ClientBundle\EventSubscriber\Console;
+namespace ClientBundle\Listener\EventSubscriber\Console;
 
 use ClientBundle\Event\Console\MessageEvent;
 use ClientBundle\Logger\LoggerInterface;

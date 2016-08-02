@@ -1,0 +1,7 @@
+services:
+    client.calendar.call:
+        class: ClientBundle\Listener\EventListener\CalendarCallEventListener
+        arguments:
+            - "@client.service.call"
+        tags:
+            - {name: kernel.event_listener, event: calendar.load_events, method: loadEvents}
