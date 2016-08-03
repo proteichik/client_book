@@ -5,3 +5,10 @@ services:
             - "@client.service.call"
         tags:
             - {name: kernel.event_listener, event: calendar.load_events, method: loadEvents}
+
+    client.calendar.meeting:
+        class: ClientBundle\Listener\EventListener\CalendarMeetingEventListener
+        arguments:
+            - "@client.service.meeting"
+        tags:
+            - {name: kernel.event_listener, event: calendar.load_events, method: loadEvents}
