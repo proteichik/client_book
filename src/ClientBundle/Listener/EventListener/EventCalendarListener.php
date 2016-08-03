@@ -4,6 +4,7 @@ namespace ClientBundle\Listener\EventListener;
 
 use ADesigns\CalendarBundle\Entity\EventEntity;
 use ADesigns\CalendarBundle\Event\CalendarEvent;
+use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Service\ServiceInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,8 +28,7 @@ abstract class EventCalendarListener
     public function setDefaults(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'bgColorDone' => '#26B99A',
-            'bgColorPlan' => '#f0ad4e',
+            'bgColor' => '#26B99A',
             'fbColor' => '#FFFFFF',
         ));
 
@@ -48,8 +48,10 @@ abstract class EventCalendarListener
             ->select('q', 'c')
             ->join('q.customer', 'c')
             ->where('q.date BETWEEN :startDate AND :endDate')
+            ->andWhere('q.status = :status')
             ->setParameter('startDate', $startDate->format('Y-m-d H:i:s'))
             ->setParameter('endDate', $endDate->format('Y-m-d H:i:s'))
+            ->setParameter('status', AbstractEvent::PLANNED_TYPE)
             ->getQuery()->getResult();
     }
 
@@ -70,12 +72,8 @@ abstract class EventCalendarListener
             $eventEntity = new EventEntity($this->options['header'] .': '. $event->getCustomer()->getCompany() . PHP_EOL . $event->getInfo(),
                 $event->getDate(), $event->getDate());
 
-            //optional calendar event settings
-            if ($event->isDoneEvent()) {
-                $eventEntity->setBgColor($this->options['bgColorDone']); //set the background color of the event's label
-            } else {
-                $eventEntity->setBgColor($this->options['bgColorPlan']); //set the background color of the event's label
-            }
+
+            $eventEntity->setBgColor($this->options['bgColor']); //set the background color of the event's label
 
             $eventEntity->setFgColor($this->options['fbColor']); //set the foreground color of the event's label
             //$eventEntity->setUrl('http://www.google.com'); // url to send user to when event label is clicked
