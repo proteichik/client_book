@@ -3,6 +3,7 @@
 namespace Tests\ClientBundle\Service;
 
 use ClientBundle\Entity\Call;
+use ClientBundle\Model\EntityInterface;
 use ClientBundle\Service\BaseService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -154,13 +155,22 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testRemove()
+    public function testRemoveWithFlush()
     {
         $removeObject = new Call();
         $this->em->expects($this->once())->method('remove')->with($this->identicalTo($removeObject));
         $this->em->expects($this->once())->method('flush');
 
         $this->service->remove($removeObject);
+    }
+
+    public function testRemoveWithoutFlush()
+    {
+        $removeObject = new Call();
+        $this->em->expects($this->once())->method('remove')->with($this->identicalTo($removeObject));
+        $this->em->expects($this->never())->method('flush');
+
+        $this->service->remove($removeObject, false);
     }
 
     public function testPersist()
@@ -173,5 +183,27 @@ class BaseServiceTest extends \PHPUnit_Framework_TestCase
     {
         $this->em->expects($this->once())->method('flush');
         $this->service->flush();
+    }
+
+    public function testDeleteWithFlush()
+    {
+        $object = $this->getMockBuilder('ClientBundle\Entity\Call')->getMock();
+
+        $this->em->expects($this->once())->method('persist')->with($this->identicalTo($object));
+        $this->em->expects($this->once())->method('flush');
+        $object->expects($this->once())->method('setStatus')->with($this->identicalTo(EntityInterface::REMOVED_TYPE));
+
+        $this->service->delete($object);
+    }
+
+    public function testDeleteWithoutFlush()
+    {
+        $object = $this->getMockBuilder('ClientBundle\Entity\Call')->getMock();
+
+        $this->em->expects($this->once())->method('persist')->with($this->identicalTo($object));
+        $this->em->expects($this->never())->method('flush');
+        $object->expects($this->once())->method('setStatus')->with($this->identicalTo(EntityInterface::REMOVED_TYPE));
+
+        $this->service->delete($object, false);
     }
 }
