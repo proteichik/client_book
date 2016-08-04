@@ -1,0 +1,7 @@
+commands:
+    delete.call:
+        command: client:delete:events
+        type: call
+    delete.meeting:
+        command: client:delete:events
+        type: meeting
