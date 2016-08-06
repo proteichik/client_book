@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Statistic\MongoBundle\StatisticMongoBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -1,0 +1,4 @@
+services:
+#    statistic_mongo.example:
+#        class: Statistic\MongoBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
