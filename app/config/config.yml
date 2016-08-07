@@ -12,7 +12,10 @@ imports:
     - { resource: "@ClientBundle/Resources/config/services_command.yml" }
     - { resource: "@ClientBundle/Resources/config/services_calendar.yml" }
     - { resource: "@ClientBundle/Resources/config/parameters.yml"}
+
     - { resource: "@StatisticMongoBundle/Resources/config/services.yml" }
+    - { resource: "@StatisticMongoBundle/Resources/config/parameters.yml" }
+    - { resource: "@StatisticMongoBundle/Resources/config/config.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
