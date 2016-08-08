@@ -3,6 +3,7 @@
 namespace Statistic\MongoBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Statistic\BasicBundle\Model\User as BaseUser;
 
 /**
  * Class User
@@ -10,7 +11,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  *
  * @MongoDB\Document
  */
-class User
+class User extends BaseUser
 {
     /**
      * @MongoDB\Id
@@ -18,80 +19,37 @@ class User
     protected $id;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\ReferenceMany(targetDocument="Record", cascade="all")
      */
-    protected $name;
-
-    /**
-     * @MongoDB\ReferenceMany(targetDocument="Statistic", cascade="all")
-     */
-    protected $stats;
+    protected $records;
 
 
     public function __construct()
     {
-        $this->stats = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Get id
-     *
-     * @return id $id
-     */
-    public function getId()
-    {
-        return $this->id;
+        $this->records = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return $this
+     * @param Record $record
      */
-    public function setName($name)
+    public function addStat(\Statistic\MongoBundle\Document\Record $record)
     {
-        $this->name = $name;
-        return $this;
+        $this->records[] = $record;
     }
 
     /**
-     * Get name
-     *
-     * @return string $name
+     * @param Record $record
      */
-    public function getName()
+    public function removeStat(\Statistic\MongoBundle\Document\Record $record)
     {
-        return $this->name;
+        $this->records->removeElement($record);
     }
 
     /**
-     * Add stat
-     *
-     * @param Statistic\MongoBundle\Document\Statistic $stat
-     */
-    public function addStat(\Statistic\MongoBundle\Document\Statistic $stat)
-    {
-        $this->stats[] = $stat;
-    }
-
-    /**
-     * Remove stat
-     *
-     * @param Statistic\MongoBundle\Document\Statistic $stat
-     */
-    public function removeStat(\Statistic\MongoBundle\Document\Statistic $stat)
-    {
-        $this->stats->removeElement($stat);
-    }
-
-    /**
-     * Get stats
-     *
-     * @return \Doctrine\Common\Collections\Collection $stats
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getStats()
     {
-        return $this->stats;
+        return $this->records;
     }
 }

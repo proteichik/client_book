@@ -39,4 +39,22 @@ class EventRepository extends AbstractRepository
 
         return $qb;
     }
+
+    /**
+     * @return array
+     */
+    public function getUnProcessEvents()
+    {
+        $qb = $this->_em->createQueryBuilder()
+            ->select(array('q', 'u'))
+            ->from($this->_entityName, 'q')
+            ->join('q.user', 'u')
+            ->where('q.process = :process')
+            ->andWhere('q.status = :status')
+            ->setParameter('process', 0)
+            ->setParameter('status', AbstractEvent::DONE_TYPE)
+            ;
+
+        return $qb->getQuery()->getResult();
+    }
 }
