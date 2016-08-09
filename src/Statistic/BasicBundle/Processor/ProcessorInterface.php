@@ -4,5 +4,5 @@ namespace Statistic\BasicBundle\Processor;
 
 interface ProcessorInterface
 {
-    public function process($items);
+    public function process($item);
 }
