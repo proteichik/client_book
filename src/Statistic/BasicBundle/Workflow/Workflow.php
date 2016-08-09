@@ -72,13 +72,15 @@ class Workflow implements WorkflowInterface
         $items = $this->reader->getItems();
 
         foreach ($items as $item) {
-            $this->processor->process($item);
+            $stat = $this->processor->process($item);
+            $this->processor->save($stat, false);
 
             $this->reader->markProcess($item);
             $this->reader->saveItem($item, false);
         }
 
         $this->reader->flush();
+        $this->processor->flush();
     }
 
 }

@@ -2,15 +2,21 @@
 
 namespace Statistic\BasicBundle\Processor;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Statistic\BasicBundle\Traits\CacheTrait;
+use ClientBundle\Entity\Call;
+use ClientBundle\Entity\Meeting;
 
 class StatisticAddProcessor extends AbstractProcessor
 {
-
-    public function process($item)
+    protected function getActionsList()
     {
-        // TODO: Implement process() method.
+        return array(
+            Call::class => array(
+                'method' => 'incCalls'
+            ),
+            Meeting::class => array(
+                'method' => 'incMeetings'
+            ),
+        );
     }
-    
+
 }

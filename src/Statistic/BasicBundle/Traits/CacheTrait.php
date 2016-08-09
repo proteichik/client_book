@@ -36,7 +36,7 @@ trait CacheTrait
     protected function getFromCache($key)
     {
         if (!$this->inCache($key)) {
-            return false;
+            return null;
         }
 
         return $this->_cache[$key];
