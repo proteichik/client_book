@@ -5,13 +5,13 @@ namespace Statistic\DoctrineBundle\Entity;
 use Statistic\BasicBundle\Model\Record as BaseRecord;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use ClientBundle\Entity\User;
 
 /**
  * Class Record
  * @package Statistic\DoctrineBundle\Entity
  *
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="statistic")
  */
 class Record extends BaseRecord
@@ -58,7 +58,7 @@ class Record extends BaseRecord
     /**
      * @var BaseUser
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="stats")
+     * @ORM\ManyToOne(targetEntity="ClientBundle\Entity\User", inversedBy="stats")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
      * @Assert\NotBlank()

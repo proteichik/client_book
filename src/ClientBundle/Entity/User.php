@@ -5,7 +5,6 @@ namespace ClientBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Statistic\DoctrineBundle\Entity\Record;
 
 /**
  * Class User
@@ -49,7 +48,7 @@ class User extends BaseUser
     /**
      * @var \Statistic\DoctrineBundle\Entity\Record
      *
-     * @ORM\OneToMany(targetEntity="Record", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Statistic\DoctrineBundle\Entity\Record", mappedBy="user")
      */
     protected $stats;
 

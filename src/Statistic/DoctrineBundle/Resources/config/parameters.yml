@@ -1,0 +1,2 @@
+parameters:
+    statictic.doctrine.record.name: StatisticDoctrineBundle:Record

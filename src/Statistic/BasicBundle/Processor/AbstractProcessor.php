@@ -108,7 +108,9 @@ abstract class AbstractProcessor implements ProcessorInterface
 
         $action = $this->getAction($item);
 
-        call_user_func($statObject, $action['method']);
+        //$statObject->{$action['method']}();
+
+        call_user_func(array($statObject, $action['method']));
 
         return $statObject;
     }
@@ -122,7 +124,7 @@ abstract class AbstractProcessor implements ProcessorInterface
         $date = $this->_timeStrategy->convert($item->getDate());
         $user = $item->getUser();
 
-        $key = $date->format('Y-m-d') . '-' . $user->getId();
+        $key = $date->format('Y-m-d H:i:s') . '-' . $user->getId();
         if ($this->inCache($key)) {
             $object = $this->getFromCache($key);
         } else {
@@ -130,7 +132,8 @@ abstract class AbstractProcessor implements ProcessorInterface
         }
 
         if (!$object) {
-            $object = new Record();
+            $class = $this->getRepository()->getClassName();
+            $object = new $class();
             $object->setDate($date);
             $object->setUser($user);
         }

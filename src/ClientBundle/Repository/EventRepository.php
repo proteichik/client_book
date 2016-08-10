@@ -49,7 +49,7 @@ class EventRepository extends AbstractRepository
             ->select(array('q', 'u'))
             ->from($this->_entityName, 'q')
             ->join('q.user', 'u')
-            ->where('q.process = :process')
+            ->where('q.processed = :process')
             ->andWhere('q.status = :status')
             ->setParameter('process', 0)
             ->setParameter('status', AbstractEvent::DONE_TYPE)

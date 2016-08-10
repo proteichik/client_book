@@ -25,7 +25,7 @@ class Record
      * @var int
      */
     protected $countMeetings = 0;
-
+    
     /**
      * @var BaseUser
      */
@@ -142,5 +142,4 @@ class Record
     {
         $this->countMeetings++;
     }
-
 }

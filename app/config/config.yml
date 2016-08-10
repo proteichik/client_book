@@ -13,6 +13,9 @@ imports:
     - { resource: "@ClientBundle/Resources/config/services_calendar.yml" }
     - { resource: "@ClientBundle/Resources/config/parameters.yml"}
 
+    - { resource: "@StatisticDoctrineBundle/Resources/config/services.yml" }
+    - { resource: "@StatisticDoctrineBundle/Resources/config/parameters.yml" }
+
 #    - { resource: "@StatisticMongoBundle/Resources/config/services.yml" }
 #    - { resource: "@StatisticMongoBundle/Resources/config/parameters.yml" }
 #    - { resource: "@StatisticMongoBundle/Resources/config/config.yml" }

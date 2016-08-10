@@ -1,0 +1,27 @@
+services:
+    statistic.basic.time_strategy.daily_strategy:
+        class: Statistic\BasicBundle\TimeStrategy\DailyStrategy
+
+    statistic.doctrine.factory.add_factory:
+        class: Statistic\DoctrineBundle\Factory\StatisticAddFactory
+        calls:
+            - [setContainer, ['@service_container']]
+
+    statistic.doctrine.reader.doctrine_reader_add_call:
+        class: Statistic\BasicBundle\Reader\StatisticAddReader
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.call.name%"
+
+    statistic.doctrine.reader.doctrine_reader_add_meeting:
+        class: Statistic\BasicBundle\Reader\StatisticAddReader
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.meeting.name%"
+
+    statistic.doctrine.processor.doctrine_add_processor:
+        class: Statistic\BasicBundle\Processor\StatisticAddProcessor
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%statictic.doctrine.record.name%"
+            - "@statistic.basic.time_strategy.daily_strategy"
