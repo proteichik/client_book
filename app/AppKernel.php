@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             //new Statistic\MongoBundle\StatisticMongoBundle(),
             //new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+            new Statistic\BasicBundle\StatisticBasicBundle(),
+            new Statistic\DoctrineBundle\StatisticDoctrineBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

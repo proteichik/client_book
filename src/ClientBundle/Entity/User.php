@@ -5,6 +5,7 @@ namespace ClientBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Statistic\DoctrineBundle\Entity\Record;
 
 /**
  * Class User
@@ -45,12 +46,20 @@ class User extends BaseUser
      */
     protected $meetings;
 
+    /**
+     * @var \Statistic\DoctrineBundle\Entity\Record
+     *
+     * @ORM\OneToMany(targetEntity="Record", mappedBy="user")
+     */
+    protected $stats;
+
     public function __construct()
     {
         parent::__construct();
         $this->customers = new ArrayCollection();
         $this->calls = new ArrayCollection();
         $this->meetings = new ArrayCollection();
+        $this->stats = new ArrayCollection();
     }
 
     /**
@@ -153,5 +162,39 @@ class User extends BaseUser
     public function getMeetings()
     {
         return $this->meetings;
+    }
+
+    /**
+     * Add stat
+     *
+     * @param \ClientBundle\Entity\Record $stat
+     *
+     * @return User
+     */
+    public function addStat(\ClientBundle\Entity\Record $stat)
+    {
+        $this->stats[] = $stat;
+
+        return $this;
+    }
+
+    /**
+     * Remove stat
+     *
+     * @param \ClientBundle\Entity\Record $stat
+     */
+    public function removeStat(\ClientBundle\Entity\Record $stat)
+    {
+        $this->stats->removeElement($stat);
+    }
+
+    /**
+     * Get stats
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStats()
+    {
+        return $this->stats;
     }
 }
