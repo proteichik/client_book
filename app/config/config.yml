@@ -13,6 +13,8 @@ imports:
     - { resource: "@ClientBundle/Resources/config/services_calendar.yml" }
     - { resource: "@ClientBundle/Resources/config/parameters.yml"}
 
+    - { resource: "@StatisticBasicBundle/Resources/config/services.yml" }
+
     - { resource: "@StatisticDoctrineBundle/Resources/config/services.yml" }
     - { resource: "@StatisticDoctrineBundle/Resources/config/parameters.yml" }
 

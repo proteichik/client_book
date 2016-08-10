@@ -52,8 +52,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
         $factory = $this->getFactory();
         $reader = $factory->getReader($type);
         $processor = $factory->getProcessor();
+        $dispatcher = $this->getContainer()->get('event_dispatcher');
 
-        $workflow = new Workflow($reader, $processor);
+        $workflow = new Workflow($reader, $processor, $dispatcher);
         $workflow->process();
         $output->writeln('Finish');
     }

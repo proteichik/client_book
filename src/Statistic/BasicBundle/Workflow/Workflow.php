@@ -2,8 +2,12 @@
 
 namespace Statistic\BasicBundle\Workflow;
 
+use Statistic\BasicBundle\Event\PostProcessEvent;
+use Statistic\BasicBundle\Event\PreProcessEvent;
+use Statistic\BasicBundle\Event\ProcessEvent;
 use Statistic\BasicBundle\Processor\ProcessorInterface;
 use Statistic\BasicBundle\Reader\ReaderInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class Workflow implements WorkflowInterface
 {
@@ -18,14 +22,23 @@ class Workflow implements WorkflowInterface
     protected $processor;
 
     /**
+     * @var EventDispatcherInterface
+     */
+    protected $dispatcher;
+
+    /**
      * Workflow constructor.
+     *
      * @param ReaderInterface $reader
      * @param ProcessorInterface $processor
+     * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct(ReaderInterface $reader, ProcessorInterface $processor)
+    public function __construct(ReaderInterface $reader, ProcessorInterface $processor,
+                                EventDispatcherInterface $dispatcher)
     {
         $this->reader = $reader;
         $this->processor = $processor;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -70,6 +83,7 @@ class Workflow implements WorkflowInterface
     public function process()
     {
         $items = $this->reader->getItems();
+        $this->dispatcher->dispatch(PreProcessEvent::NAME, new PreProcessEvent($items));
 
         foreach ($items as $item) {
             $stat = $this->processor->process($item);
@@ -77,10 +91,14 @@ class Workflow implements WorkflowInterface
 
             $this->reader->markProcess($item);
             $this->reader->saveItem($item, false);
+
+            $this->dispatcher->dispatch(ProcessEvent::NAME, new ProcessEvent($item, $stat));
         }
 
         $this->reader->flush();
         $this->processor->flush();
+
+        $this->dispatcher->dispatch(PostProcessEvent::NAME, new PostProcessEvent());
     }
 
 }

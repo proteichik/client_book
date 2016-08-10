@@ -1,1 +1,6 @@
 services:
+    statistic.basic.subscriber.logging_subscriber:
+        class: Statistic\BasicBundle\Listener\EventSubscriber\LoggingSubscriber
+        arguments: ['@logger']
+        tags:
+            - { name: kernel.event_subscriber }
