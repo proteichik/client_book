@@ -57,4 +57,22 @@ class EventRepository extends AbstractRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @return array
+     */
+    public function getRemovedAndProcessedEvents()
+    {
+        $qb = $this->_em->createQueryBuilder()
+            ->select(array('q', 'u'))
+            ->from($this->_entityName, 'q')
+            ->join('q.user', 'u')
+            ->where('q.processed = :process')
+            ->andWhere('q.status = :status')
+            ->setParameter('process', 1)
+            ->setParameter('status', AbstractEvent::REMOVED_TYPE)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

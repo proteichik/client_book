@@ -166,11 +166,11 @@ class User extends BaseUser
     /**
      * Add stat
      *
-     * @param \ClientBundle\Entity\Record $stat
+     * @param \Statistic\DoctrineBundle\Entity\Record $stat
      *
      * @return User
      */
-    public function addStat(\ClientBundle\Entity\Record $stat)
+    public function addStat(\Statistic\DoctrineBundle\Entity\Record $stat)
     {
         $this->stats[] = $stat;
 
@@ -180,9 +180,9 @@ class User extends BaseUser
     /**
      * Remove stat
      *
-     * @param \ClientBundle\Entity\Record $stat
+     * @param \Statistic\DoctrineBundle\Entity\Record $stat
      */
-    public function removeStat(\ClientBundle\Entity\Record $stat)
+    public function removeStat(\Statistic\DoctrineBundle\Entity\Record $stat)
     {
         $this->stats->removeElement($stat);
     }

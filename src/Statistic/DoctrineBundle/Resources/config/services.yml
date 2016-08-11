@@ -1,27 +1,58 @@
 services:
+#Strategies:
     statistic.basic.time_strategy.daily_strategy:
         class: Statistic\BasicBundle\TimeStrategy\DailyStrategy
 
+#Factories:
     statistic.doctrine.factory.generate_factory:
         class: Statistic\DoctrineBundle\Factory\StatisticGenerateFactory
         calls:
             - [setContainer, ['@service_container']]
 
+    statistic.doctrine.factory.clear_factory:
+        class: Statistic\DoctrineBundle\Factory\StatisticClearFactory
+        calls:
+            - [setContainer, ['@service_container']]
+
+#Readers:
+    #Call:
     statistic.doctrine.reader.doctrine_reader_generate_call:
         class: Statistic\BasicBundle\Reader\StatisticGenerateReader
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%client.repository.call.name%"
 
+    statistic.doctrine.reader.doctrine_reader_clear_call:
+        class: Statistic\BasicBundle\Reader\StatisticClearReader
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.call.name%"
+
+    #Meeting:
     statistic.doctrine.reader.doctrine_reader_generate_meeting:
         class: Statistic\BasicBundle\Reader\StatisticGenerateReader
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%client.repository.meeting.name%"
 
+    statistic.doctrine.reader.doctrine_reader_clear_meeting:
+        class: Statistic\BasicBundle\Reader\StatisticClearReader
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.meeting.name%"
+
+#Processors
     statistic.doctrine.processor.doctrine_generate_processor:
         class: Statistic\BasicBundle\Processor\StatisticGenerateProcessor
         arguments:
             - "@doctrine.orm.entity_manager"
             - "%statictic.doctrine.record.name%"
             - "@statistic.basic.time_strategy.daily_strategy"
+
+    statistic.doctrine.processor.doctrine_clear_processor:
+        class: Statistic\BasicBundle\Processor\StatisticClearProcessor
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%statictic.doctrine.record.name%"
+            - "@statistic.basic.time_strategy.daily_strategy"
+

@@ -4,18 +4,22 @@ namespace Statistic\BasicBundle\Reader;
 
 use ClientBundle\Entity\AbstractEvent;
 
-class StatisticGenerateReader extends AbstractReader
+class StatisticClearReader extends AbstractReader
 {
     /**
      * @return array
      */
     public function getItems()
     {
-        return $this->getRepository()->getUnProcessEvents();
+        return $this->getRepository()->getRemovedAndProcessedEvents();
     }
 
+    /**
+     * @param AbstractEvent $item
+     */
     public function markProcess(AbstractEvent $item)
     {
-        $item->setProcessed(1);
+        $item->setProcessed(0);
     }
+
 }
