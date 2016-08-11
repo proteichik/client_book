@@ -6,7 +6,7 @@ use ClientBundle\Entity\AbstractEvent;
 use ClientBundle\Repository\EventRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class StatisticAddReader implements ReaderInterface
+class StatisticGenerateReader implements ReaderInterface
 {
     /**
      * @var ObjectManager

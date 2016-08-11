@@ -6,7 +6,7 @@ use Statistic\BasicBundle\Event\PostProcessEvent;
 use Statistic\BasicBundle\Event\PreProcessEvent;
 use Statistic\BasicBundle\Event\ProcessEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Psr\Log\LoggerInterface;
+use ClientBundle\Logger\LoggerInterface as LoggerInterface;
 
 class LoggingSubscriber implements EventSubscriberInterface
 {
@@ -36,7 +36,7 @@ class LoggingSubscriber implements EventSubscriberInterface
 
     public function onPreProcess(PreProcessEvent $event)
     {
-        $this->logger->warning(sprintf('Items to process: %s', count($event->getItems())));
+        $this->logger->info(sprintf('Items to process: %s', count($event->getItems())));
     }
 
     public function onProcess(ProcessEvent $event)
@@ -44,7 +44,7 @@ class LoggingSubscriber implements EventSubscriberInterface
         $item = $event->getItem();
 //        $record = $event->getRecord();
 
-        $this->logger->warning(sprintf('Event: %s [id] - %s[date] - %s[user]',
+        $this->logger->info(sprintf('Event: %s [id] - %s[date] - %s[user]',
             $item->getId(),
             $item->getDate()->format('Y-m-d H:i:s'),
             $item->getUser()->getUsername()

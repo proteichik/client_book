@@ -1,6 +1,12 @@
 services:
     statistic.basic.subscriber.logging_subscriber:
         class: Statistic\BasicBundle\Listener\EventSubscriber\LoggingSubscriber
-        arguments: ['@logger']
+        arguments: ['@statistic.logger.console_logger']
         tags:
             - { name: kernel.event_subscriber }
+
+    statistic.logger.console_logger:
+        class: ClientBundle\Logger\ConsoleLogger
+        arguments: ["@logger"]
+        tags:
+            - { name: monolog.logger, channel: statistic}

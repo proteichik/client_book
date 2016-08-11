@@ -46,8 +46,10 @@ abstract class AbstractCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Start');
         $type = $input->getArgument('type');
+
+        $logger = $this->getContainer()->get('statistic.logger.console_logger');
+        $logger->info(sprintf('Start command [%s] with type [%s]', $this->options['name'], $type));
 
         $factory = $this->getFactory();
         $reader = $factory->getReader($type);
@@ -56,6 +58,7 @@ abstract class AbstractCommand extends ContainerAwareCommand
 
         $workflow = new Workflow($reader, $processor, $dispatcher);
         $workflow->process();
-        $output->writeln('Finish');
+        $logger->info(sprintf('Finish command [%s] with type [%s]', $this->options['name'], $type));
+        $logger->info('***');
     }
 }

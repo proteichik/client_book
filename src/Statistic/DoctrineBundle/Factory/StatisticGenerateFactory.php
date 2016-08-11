@@ -4,7 +4,7 @@ namespace Statistic\DoctrineBundle\Factory;
 
 use Statistic\BasicBundle\Factory\AbstractCommandFactory;
 
-class StatisticAddFactory extends AbstractCommandFactory
+class StatisticGenerateFactory extends AbstractCommandFactory
 {
     /**
      * @param string $type
@@ -16,10 +16,10 @@ class StatisticAddFactory extends AbstractCommandFactory
         switch ($type)
         {
             case 'call':
-                $reader = $this->get('statistic.doctrine.reader.doctrine_reader_add_call');
+                $reader = $this->get('statistic.doctrine.reader.doctrine_reader_generate_call');
                 break;
             case 'meeting':
-                $reader = $this->get('statistic.doctrine.reader.doctrine_reader_add_meeting');
+                $reader = $this->get('statistic.doctrine.reader.doctrine_reader_generate_meeting');
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Not found reader for type %s', $type));
@@ -33,7 +33,7 @@ class StatisticAddFactory extends AbstractCommandFactory
      */
     public function getProcessor()
     {
-        return $this->get('statistic.doctrine.processor.doctrine_add_processor');
+        return $this->get('statistic.doctrine.processor.doctrine_generate_processor');
     }
 
 }

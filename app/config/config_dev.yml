@@ -20,11 +20,17 @@ monolog:
             channels: [!event, !command]
         console:
             type:   console
+            verbosity_levels:
+                VERBOSITY_DEBUG: DEBUG
             channels: [!event, !doctrine, !command]
         my_console:
             type: stream
             path: "%kernel.logs_dir%/console.log"
             channels: [command]
+        statistic:
+            type: stream
+            path: "%kernel.logs_dir%/statistic.log"
+            channels: [statistic]
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
         #firephp:
