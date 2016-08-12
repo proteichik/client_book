@@ -22,7 +22,7 @@ class DeleteCustomersCommand extends AbstractBaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln($this->getInfoMsg('======== DELETE CUSTOMERS - START ========'));
+        $this->dispatchInfoMsg('Start command [client:delete:customers]');
 
         /* @var ServiceInterface */
         $customerService = $this->getContainer()->get('client.service.customer');
@@ -40,34 +40,31 @@ class DeleteCustomersCommand extends AbstractBaseCommand
         );
 
         $customers = $customerService->findBy($searchOptions);
-        $output->writeln($this->getInfoMsg(
-            sprintf('Total customers: %s', count($customers))
-        ));
+        $this->dispatchInfoMsg(sprintf('Total customers: %s', count($customers)));
 
         foreach ($customers as $customer)
         {
-            $output->writeln($this->getInfoMsg(
-                sprintf('Customers: %s', $customer->getCompany())
-            ));
-            $output->writeln($this->getInfoMsg('Search unprocessed events...'));
+            $this->dispatchInfoMsg(sprintf('Customers: %s', $customer->getCompany()));
+            $this->dispatchInfoMsg('Search unprocessed events...');
 
             if ($this->isUnprocessedEvents($callService, $customer)
                 || $this->isUnprocessedEvents($meetingService, $customer))
             {
-                $output->writeln($this->getWarningMsg('Found! Skip!'));
+                $this->dispatchWarningMsg('Found! Skip!');
                 continue;
             }
 
             $customerService->remove($customer, false);
-            $output->writeln($this->getInfoMsg('Not found! Remove!'));
+            $this->dispatchInfoMsg('Not found! Remove!');
         }
 
         if (!$input->getOption('test')) {
             $customerService->flush();
-            $output->writeln($this->getInfoMsg('FLUSH!'));
+            $this->dispatchInfoMsg('FLUSH!');
         }
-
-        $output->writeln($this->getInfoMsg('======== DELETE CUSTOMERS - FINISH ========'));
+        
+        $this->dispatchInfoMsg('Finish command [client:delete:customers]');
+        $this->dispatchInfoMsg('***');
     }
 
 

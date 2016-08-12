@@ -17,12 +17,12 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-            channels: [!event, !command]
+            channels: [!event]
         console:
             type:   console
             verbosity_levels:
                 VERBOSITY_DEBUG: DEBUG
-            channels: [!event, !doctrine, !command]
+            channels: [!event, !doctrine]
         my_console:
             type: stream
             path: "%kernel.logs_dir%/console.log"

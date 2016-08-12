@@ -28,13 +28,13 @@ class DeleteEventsCommand extends AbstractBaseCommand
         $factory = $this->getContainer()->get('client.factory.event_command_factory');
         $type = $input->getArgument('type');
         $logger = $this->getContainer()->get('logger');
-        $output->writeln($this->getInfoMsg(sprintf('======== DELETE EVENTS START [%s] ========', $type)));
+        $this->dispatchInfoMsg(sprintf('Start command [client:delete:events] with type [%s]', $type));
 
         try {
             $service = $factory->getService($type);
         } catch (\Exception $ex)
         {
-            $output->writeln($this->getErrorMsg($ex->getMessage()));
+            $this->dispatchErrorMsg($ex->getMessage());
             return;
         }
 
@@ -46,22 +46,21 @@ class DeleteEventsCommand extends AbstractBaseCommand
         );
 
         $objects = $service->findBy($searchParams);
-        $output->writeln($this->getInfoMsg(sprintf('Total objects: %s', count($objects))));
+        $this->dispatchInfoMsg(sprintf('Total objects: %s', count($objects)));
 
         
         foreach ($objects as $object) {
             $service->remove($object, false);
-            $output->writeln($this->getInfoMsg(
-                sprintf('Object (id: %s, date: %s) has been removed', $object->getId(), $object->getDate()->format('Y-m-d H:i:s'))
-            ));
+            $this->dispatchInfoMsg(sprintf('Object (id: %s, date: %s) has been removed', $object->getId(), $object->getDate()->format('Y-m-d H:i:s')));
+
         }
-        $logger->info('test');
 
         if (!$input->getOption('test')) {
             $service->flush();
-            $output->writeln($this->getInfoMsg('FLUSH!'));
+            $this->dispatchInfoMsg('FLUSH!');
         }
 
-        $output->writeln($this->getInfoMsg(sprintf('======== DELETE EVENTS FINISH [%s] ========', $type)));
+        $this->dispatchInfoMsg(sprintf('Finish command [client:delete:events] with type [%s]', $type));
+        $this->dispatchInfoMsg('***');
     }
 }

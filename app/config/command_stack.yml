@@ -1,7 +1,19 @@
 commands:
+    statistic.clear.call:
+        command: statistic:doctrine:clear
+        type: call
+    statistic.clear.meeting:
+        command: statistic:doctrine:clear
+        type: meeting
     delete.call:
         command: client:delete:events
         type: call
     delete.meeting:
         command: client:delete:events
+        type: meeting
+    statistic.generate.call:
+        command: statistic:doctrine:generate
+        type: call
+    statistic.generate.meeting:
+        command: statistic:doctrine:generate
         type: meeting

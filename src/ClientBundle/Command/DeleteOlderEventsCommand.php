@@ -24,12 +24,13 @@ class DeleteOlderEventsCommand extends AbstractBaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln($this->getInfoMsg('======== DELETE OLDER EVENTS START ========'));
+        $this->dispatchInfoMsg(sprintf('Start command [client:delete:older] with type [%s]', $input->getArgument('type')));
+
         $interval = ($this->getContainer()->hasParameter('event_delete_interval')) ?
             $this->getContainer()->getParameter('event_delete_interval') : $input->getArgument('interval');
 
         if (!$interval) {
-            $output->writeln($this->getErrorMsg('Have not parameter interval or event_delete_interval!'));
+            $this->dispatchErrorMsg('Have not parameter interval or event_delete_interval!');
             return;
         }
 
@@ -38,27 +39,28 @@ class DeleteOlderEventsCommand extends AbstractBaseCommand
         try {
             $service = $factory->getService($input->getArgument('type'));
         } catch(\Exception $ex) {
-            $output->writeln($this->getErrorMsg($ex->getMessage()));
+            $this->dispatchErrorMsg($ex->getMessage());
             return;
         }
 
         $date = $this->getDate($interval);
-        $output->writeln($this->getInfoMsg(sprintf('Date: %s', $date->format('Y-m-d H:i:s'))));
+        $this->dispatchInfoMsg(sprintf('Date: %s', $date->format('Y-m-d H:i:s')));
 
         $objects = $this->getObjects($service, $date);
-        $output->writeln($this->getInfoMsg(sprintf('Total objects: %s', count($objects))));
+        $this->dispatchInfoMsg(sprintf('Total objects: %s', count($objects)));
 
         foreach ($objects as $object) {
             $service->remove($object, false);
-            $output->writeln($this->getInfoMsg(sprintf('Remove: (id: %s, date: %s)', $object->getId(), $object->getDate()->format('Y-m-d H:i:s'))));
+            $this->dispatchInfoMsg(sprintf('Remove: (id: %s, date: %s)', $object->getId(), $object->getDate()->format('Y-m-d H:i:s')));
         }
 
         if (!$input->getOption('test')) {
             $service->flush();
-            $output->writeln($this->getInfoMsg('FLUSH!'));
+            $this->dispatchInfoMsg('FLUSH');
         }
 
-        $output->writeln($this->getInfoMsg('======== DELETE OLDER EVENTS FINISH ========'));
+        $this->dispatchInfoMsg(sprintf('Finish command [client:delete:older] with type [%s]', $input->getArgument('type')));
+        $this->dispatchInfoMsg('***');
     }
 
     protected function getDate($interval)
