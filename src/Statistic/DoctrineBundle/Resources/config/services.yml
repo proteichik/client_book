@@ -56,3 +56,19 @@ services:
             - "%statictic.doctrine.record.name%"
             - "@statistic.basic.time_strategy.daily_strategy"
 
+#Services:
+    statistic.doctrine.service.record:
+        class: Statistic\BasicBundle\Service\RecordService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "%statictic.doctrine.record.name%"
+
+#Commands:
+    statistic.doctrine.command.remove_empty_record:
+        class: Statistic\BasicBundle\Command\RemoveEmptyRecordCommand
+        arguments:
+            - "@statistic.doctrine.service.record"
+            - "@statistic.logger.console_logger"
+        tags:
+            - {name: console.command}
+
