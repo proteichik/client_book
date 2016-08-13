@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             //new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Statistic\BasicBundle\StatisticBasicBundle(),
             new Statistic\DoctrineBundle\StatisticDoctrineBundle(),
+            new Ob\HighchartsBundle\ObHighchartsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
