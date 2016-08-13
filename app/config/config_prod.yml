@@ -19,3 +19,11 @@ monolog:
             level: debug
         console:
             type:  console
+        my_console:
+            type: stream
+            path: "%kernel.logs_dir%/console.log"
+            channels: [command]
+        statistic:
+            type: stream
+            path: "%kernel.logs_dir%/statistic.log"
+            channels: [statistic]
