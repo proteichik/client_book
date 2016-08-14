@@ -61,42 +61,43 @@
                         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                             <div class="menu_section">
                                 <h3>General</h3>
-                                <ul class="nav side-menu">
-                                    <li>
-                                        <a><i class="fa fa-home"></i> Клиенты <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li>
-                                                <a href="{{ path('client_customers') }}">Мои клиенты</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ path('client_customer.add') }}">Добавить клиента</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a><i class="fa fa-edit"></i> Сегодня <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li>
-                                                <a href="{{ path('client_call.today') }}">Мои звонки</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ path('client_meeting.today') }}">Мои встречи</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('client_calendar.show') }}"><i class="fa fa-desktop"></i> Календарь</a>
-                                    </li>
-                                    <li><a><i class="fa fa-table"></i> Админка <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li>
-                                                <a href="#">Управление пользователями</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Статистика</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                {#<ul class="nav side-menu">#}
+                                    {#<li>#}
+                                        {#<a><i class="fa fa-home"></i> Клиенты <span class="fa fa-chevron-down"></span></a>#}
+                                        {#<ul class="nav child_menu">#}
+                                            {#<li>#}
+                                                {#<a href="{{ path('client_customers') }}">Мои клиенты</a>#}
+                                            {#</li>#}
+                                            {#<li>#}
+                                                {#<a href="{{ path('client_customer.add') }}">Добавить клиента</a>#}
+                                            {#</li>#}
+                                        {#</ul>#}
+                                    {#</li>#}
+                                    {#<li><a><i class="fa fa-edit"></i> Сегодня <span class="fa fa-chevron-down"></span></a>#}
+                                        {#<ul class="nav child_menu">#}
+                                            {#<li>#}
+                                                {#<a href="{{ path('client_call.today') }}">Мои звонки</a>#}
+                                            {#</li>#}
+                                            {#<li>#}
+                                                {#<a href="{{ path('client_meeting.today') }}">Мои встречи</a>#}
+                                            {#</li>#}
+                                        {#</ul>#}
+                                    {#</li>#}
+                                    {#<li>#}
+                                        {#<a href="{{ path('client_calendar.show') }}"><i class="fa fa-desktop"></i> Календарь</a>#}
+                                    {#</li>#}
+                                    {#<li><a><i class="fa fa-table"></i> Админка <span class="fa fa-chevron-down"></span></a>#}
+                                        {#<ul class="nav child_menu">#}
+                                            {#<li>#}
+                                                {#<a href="#">Управление пользователями</a>#}
+                                            {#</li>#}
+                                            {#<li>#}
+                                                {#<a href="#">Статистика</a>#}
+                                            {#</li>#}
+                                        {#</ul>#}
+                                    {#</li>#}
+                                {#</ul>#}
+                                {{ knp_menu_render('ClientBundle:MenuBuilder:mainMenu', {'currentClass': 'active', 'template': 'ClientBundle:Menu:knp_menu.html.twig'}) }}
                             </div>
 
                         </div>

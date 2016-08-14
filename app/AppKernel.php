@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Statistic\BasicBundle\StatisticBasicBundle(),
             new Statistic\DoctrineBundle\StatisticDoctrineBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
