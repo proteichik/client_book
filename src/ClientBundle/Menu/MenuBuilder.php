@@ -33,6 +33,14 @@ class MenuBuilder implements ContainerAwareInterface
         $menu->addChild('Календарь', array('route' => 'client_calendar.show'))
             ->setAttribute('icon', 'fa fa-desktop');
 
+        $menu->addChild('Статистика', array('uri' => '#'))
+            ->setAttribute('icon', 'fa fa-bar-chart')
+        ;
+
+        $menu->addChild('Администрирование', array('uri' => '#'))
+            ->setAttribute('icon', 'fa fa-lock')
+        ;
+
         return $menu;
 
     }
