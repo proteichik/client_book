@@ -2,10 +2,11 @@
 
 namespace Statistic\BasicBundle\Service;
 
+use ClientBundle\Model\EntityInterface;
 use ClientBundle\Service\ServiceInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class RecordService
+class RecordService implements ServiceInterface
 {
     /**
      * @var ObjectManager
@@ -168,4 +169,16 @@ class RecordService
     {
         return $this->_em->getRepository($this->_entityName);
     }
+
+    public function delete(EntityInterface $object, $isFlush = true)
+    {
+        return $this->remove($object, $isFlush);
+    }
+
+    public function getQueryBuilder($alias)
+    {
+        return $this->getRepository()->createQueryBuilder($alias);
+    }
+
+
 }
