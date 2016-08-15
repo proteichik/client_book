@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use ClientBundle\Traits\FilterFormTrait;
 
-class CharsController extends Controller
+class ChartsController extends Controller
 {
     use FilterFormTrait;
 
@@ -15,11 +15,6 @@ class CharsController extends Controller
      * @var ServiceInterface
      */
     protected $service;
-
-    /**
-     * @var array
-     */
-    protected $filterFormClasses = array();
 
     /**
      * CharsController constructor.
@@ -34,6 +29,11 @@ class CharsController extends Controller
 
     public function eventAction(Request $request)
     {
-        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $qb = $this->service->getQueryBuilder('q');
+
+
+        return $this->render('/charts/event.html.twig');
     }
 }

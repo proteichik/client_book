@@ -9,7 +9,7 @@ services:
             - "@knp_paginator"
         calls:
             - [setContainer, ['@service_container']]
-            - [addFilterFormClass, [{name: list, class: %client.filter.form.customer.class%}]]
+            - [addFilterFormClass, [{name: list, class: "%client.filter.form.customer.class%"}]]
 
     client.controller.call:
         class: ClientBundle\Controller\CallController
@@ -21,7 +21,7 @@ services:
             - "%client.filter.form.call.class%"
         calls:
             - [setContainer, ['@service_container']]
-            - [addFilterFormClass, [{name: list, class: %client.filter.form.call.class%}]]
+            - [addFilterFormClass, [{name: list, class: "%client.filter.form.call.class%"}]]
 
     client.controller.meeting:
         class: ClientBundle\Controller\MeetingController
@@ -32,5 +32,11 @@ services:
             - "@knp_paginator"
         calls:
             - [setContainer, ['@service_container']]
-            - [addFilterFormClass, [{name: list, class: %client.filter.form.meeting.class%}]]
+            - [addFilterFormClass, [{name: list, class: "%client.filter.form.meeting.class%"}]]
 
+    client.controller.charts_controller:
+        class: ClientBundle\Controller\ChartsController
+        arguments: ['@statistic.doctrine.service.record']
+        calls:
+            - [setContainer, ['@service_container']]
+#    		- [addFilterFormClass, ['@?']]

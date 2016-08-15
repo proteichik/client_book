@@ -1,7 +1,7 @@
 parameters:
     max.recent: 5 #количество ивентов выводимое в блоке Последние совершенные звонки/встречи
     count.days: 3 #количество дней, после которой заявка считаеться просроченной
-    item_per_page: 5 #для пагинации
+    item_per_page: 15 #для пагинации
     event_delete_interval: P4D #количество дней после которого удаляется просроченное событие
 #Repositories
     client.repository.customer.name: ClientBundle:Customer
