@@ -40,10 +40,14 @@ class ChartsController extends Controller
         ;
 
         $result = $qb->getQuery()->getResult();
-        var_dump($result);
 
+        $data = array();
+        foreach ($result as $item) {
+            $data[] = array($item['username'], (int) $item['countCalls']);
+        }
+        $ob = $this->getPieChart('test', $data);
 
-        return $this->render('/charts/event.html.twig');
+        return $this->render('/charts/event.html.twig', array('chart' => $ob));
     }
 
     protected function getPieChart($name, array $data = array(), array $options = array())
@@ -51,8 +55,15 @@ class ChartsController extends Controller
         $ob = new Highchart();
         $ob->chart->renderTo('piechart');
         $ob->title->text('Browser market shares at a specific website in 2010');
-        $ob->plotOptions->pie($options);
+        $ob->plotOptions->pie(array(
+            'allowPointSelect'  => true,
+            'cursor'    => 'pointer',
+            'dataLabels'    => array('enabled' => false),
+            'showInLegend'  => true
+        ));
         $ob->series(array(array('type' => 'pie','name' => $name, 'data' => $data)));
+
+        return $ob;
     }
 
     protected function getColumnChart()
