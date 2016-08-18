@@ -11,7 +11,7 @@ trait ExchangeArrayTrait
     /**
      * @param array $data
      */
-    public function exchangeArray($data = array())
+    public function exchangeArray(array $data = array())
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
