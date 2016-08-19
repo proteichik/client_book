@@ -11,6 +11,9 @@ class MenuBuilder implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    protected $config;
+    protected $configFactory;
+
     public function mainMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root');
