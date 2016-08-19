@@ -1,0 +1,11 @@
+services:
+    client.factory.parser_factory:
+        class: ClientBundle\Factory\ParserFactory
+
+    client.menu_builder:
+        class: ClientBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory" ,"@client.factory.parser_factory", "%menu.config_name%"]
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: knp_menu.menu_builder, method: mainMenu, alias: main }

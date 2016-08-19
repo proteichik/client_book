@@ -1,0 +1,58 @@
+main_menu:
+    customers:
+        label: "Клиенты"
+        attributes:
+            icon: "fa fa-home"
+            dropdown: true
+        children:
+            my_customers:
+                label: "Мои клиенты"
+                route: client_customers
+            add_customer:
+                label: "Добавить клиента"
+                route: client_customer.add
+    today:
+        label: "Cегодня"
+        attributes:
+            icon: "fa fa-edit"
+            dropdown: true
+        children:
+            today_calls:
+                label: "Мои звонки"
+                route: client_call.today
+            today_meetings:
+                label: "Мои встречи"
+                route: client_meeting.today
+    calendar:
+        label: "Календарь"
+        route: client_calendar.show
+        attributes:
+            icon: "fa fa-desktop"
+    charts:
+        label: "Статистика"
+        attributes:
+            icon: "fa fa-bar-chart"
+            dropdown: true
+        children:
+            chars_calls:
+                label: "Статистика по звонкам"
+                attributes:
+                    dropdown: true
+                children:
+                    chars_calls_group:
+                        label: "Грипповая"
+                    chars_calls_ind:
+                        label: "Индивидуальная"
+            chars_meetings:
+                label: "Статистика по встречам"
+                attributes:
+                    dropdown: true
+                children:
+                    chars_meetings_group:
+                        label: "Грипповая"
+                    chars_meetings_ind:
+                        label: "Индивидуальная"
+    admin:
+        label: "Администрирование"
+        attributes:
+            icon: "fa fa-lock"

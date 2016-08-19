@@ -11,6 +11,7 @@ imports:
     - { resource: "@ClientBundle/Resources/config/services_security.yml" }
     - { resource: "@ClientBundle/Resources/config/services_command.yml" }
     - { resource: "@ClientBundle/Resources/config/services_calendar.yml" }
+    - { resource: "@ClientBundle/Resources/config/services_menu.yml" }
     - { resource: "@ClientBundle/Resources/config/parameters.yml"}
 
     - { resource: "@StatisticBasicBundle/Resources/config/services.yml" }

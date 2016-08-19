@@ -3,6 +3,7 @@ parameters:
     count.days: 3 #количество дней, после которой заявка считаеться просроченной
     item_per_page: 15 #для пагинации
     event_delete_interval: P4D #количество дней после которого удаляется просроченное событие
+    menu.config_name: menu.yml
 #Repositories
     client.repository.customer.name: ClientBundle:Customer
     client.repository.call.name: ClientBundle:Call
