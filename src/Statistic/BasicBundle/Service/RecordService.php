@@ -165,7 +165,7 @@ class RecordService implements ServiceInterface
     /**
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
-    protected function getRepository()
+    public function getRepository()
     {
         return $this->_em->getRepository($this->_entityName);
     }

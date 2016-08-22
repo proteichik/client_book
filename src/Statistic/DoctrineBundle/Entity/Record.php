@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Record
  * @package Statistic\DoctrineBundle\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Statistic\DoctrineBundle\Repository\RecordRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="statistic")
  */

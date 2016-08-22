@@ -40,7 +40,8 @@ main_menu:
                     dropdown: true
                 children:
                     chars_calls_group:
-                        label: "Грипповая"
+                        label: "Групповая"
+                        route: client_charts.call_pie
                     chars_calls_ind:
                         label: "Индивидуальная"
             chars_meetings:
@@ -49,7 +50,7 @@ main_menu:
                     dropdown: true
                 children:
                     chars_meetings_group:
-                        label: "Грипповая"
+                        label: "Групповая"
                     chars_meetings_ind:
                         label: "Индивидуальная"
     admin:

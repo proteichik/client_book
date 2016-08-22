@@ -16,3 +16,4 @@ parameters:
     client.filter.form.customer.class: ClientBundle\Filter\FormFilter\CustomerFilter
     client.filter.form.call.class: ClientBundle\Filter\FormFilter\EventFilter
     client.filter.form.meeting.class: ClientBundle\Filter\FormFilter\EventFilter
+    client.filter.form.charts.class: ClientBundle\Filter\FormFilter\ChartsFilter

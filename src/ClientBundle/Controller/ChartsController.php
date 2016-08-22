@@ -27,6 +27,35 @@ class ChartsController extends Controller
         $this->service = $service;
         $this->filterFormClasses = $filterFormClasses;
     }
+    
+    
+    public function callPieAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $filterForm = $this->createForm($this->getFilterFormClass('pie'));
+
+        $qb = $this->service->getRepository()->getSumAllEvents();
+
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->submit($request->query->get($filterForm->getName()));
+            
+            // build the query from the given form object
+            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $qb);
+
+        }
+
+        $result = $qb->getQuery()->getResult();
+
+        $data = array();
+        foreach ($result as $item) {
+            $data[] = array($item['username'], (int) $item['sumCalls']);
+        }
+        $ob = $this->getPieChart('test', $data);
+
+        return $this->render('/charts/call_pie.html.twig', array('chart' => $ob, 'filterForm' => $filterForm->createView(),));
+        
+    }
 
     public function eventAction(Request $request)
     {

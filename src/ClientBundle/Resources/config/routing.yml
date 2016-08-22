@@ -86,6 +86,6 @@ client_calendar.show:
     path: /calendar
     defaults: {_controller: 'ClientBundle:Calendar:show'}
 
-client_charts.event:
-    path: /charts/events
-    defaults: {_controller: 'client.controller.charts_controller:eventAction'}
+client_charts.call_pie:
+    path: /charts/calls/pie
+    defaults: {_controller: 'client.controller.charts_controller:callPieAction'}

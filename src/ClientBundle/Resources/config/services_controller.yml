@@ -39,4 +39,5 @@ services:
         arguments: ['@statistic.doctrine.service.record']
         calls:
             - [setContainer, ['@service_container']]
+            - [addFilterFormClass, [{name: pie, class: "%client.filter.form.charts.class%"}]]
 #    		- [addFilterFormClass, ['@?']]

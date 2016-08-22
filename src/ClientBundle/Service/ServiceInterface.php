@@ -2,6 +2,7 @@
 
 namespace ClientBundle\Service;
 use ClientBundle\Model\EntityInterface;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Interface ServiceInterface
@@ -62,4 +63,9 @@ interface ServiceInterface
      * @return mixed
      */
     public function getQueryBuilder($alias);
+
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectRepository
+     */
+    public function getRepository();
 }
