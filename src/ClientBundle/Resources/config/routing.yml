@@ -88,4 +88,8 @@ client_calendar.show:
 
 client_charts.call_pie:
     path: /charts/calls/pie
-    defaults: {_controller: 'client.controller.charts_controller:callPieAction'}
+    defaults: {_controller: 'client.controller.charts_controller:pieAction', type: 'call'}
+
+client_charts.meeting_pie:
+    path: /charts/meetings/pie
+    defaults: {_controller: 'client.controller.charts_controller:pieAction', type: 'meeting'}

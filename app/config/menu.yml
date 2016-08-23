@@ -51,6 +51,7 @@ main_menu:
                 children:
                     chars_meetings_group:
                         label: "Групповая"
+                        route: client_charts.meeting_pie
                     chars_meetings_ind:
                         label: "Индивидуальная"
     admin:
