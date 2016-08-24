@@ -13,7 +13,7 @@ class ChartsController extends BaseChartController
 
         $filterForm = $this->createForm($this->getFilterFormClass('pie'));
 
-        $qb = $this->service->getRepository()->getSumAllEvents();
+        $qb = $this->service->getAggregateInfoByEvent($type);
 
         if ($request->query->has($filterForm->getName())) {
             $filterForm->submit($request->query->get($filterForm->getName()));
@@ -25,10 +25,15 @@ class ChartsController extends BaseChartController
 
         $result = $qb->getQuery()->getResult();
 
-        $data = $this->preparePieData($type, $result);
+        $data = array();
+        foreach ($result as $item) {
+            $data[] = array($item['username'], (int) $item['sumCount']);
+        }
+
         $ob = $this->getPieChart($data, $this->getPieOptions($type));
 
-        return $this->render('/charts/pie.html.twig', array('chart' => $ob, 'filterForm' => $filterForm->createView(),));
+        return $this->render('/charts/pie.html.twig',
+            array('chart' => $ob, 'filterForm' => $filterForm->createView(), 'data' => $result));
         
     }
 
