@@ -14,7 +14,6 @@ class PieChartsFactory extends AbstractChartsFactory
     {
         $resolver->setRequired(array(
             'plotOptions',
-            'test',
         ));
     }
 
@@ -26,6 +25,7 @@ class PieChartsFactory extends AbstractChartsFactory
         $resolver->setDefined(array(
             'renderTo',
             'name',
+            'text',
         ));
 
     }
