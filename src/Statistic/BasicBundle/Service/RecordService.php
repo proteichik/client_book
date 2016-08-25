@@ -5,6 +5,7 @@ namespace Statistic\BasicBundle\Service;
 use ClientBundle\Model\EntityInterface;
 use ClientBundle\Service\ServiceInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Statistic\BasicBundle\Repository\RecordRepositoryInterface;
 
 class RecordService implements ServiceInterface
 {
@@ -163,11 +164,20 @@ class RecordService implements ServiceInterface
     }
 
     /**
-     * @return \Doctrine\Common\Persistence\ObjectRepository
+     * @return \Statistic\BasicBundle\Repository\RecordRepositoryInterface;
      */
     public function getRepository()
     {
-        return $this->_em->getRepository($this->_entityName);
+        $repository = $this->_em->getRepository($this->_entityName);
+
+        if (!$repository instanceof RecordRepositoryInterface) {
+            throw new \InvalidArgumentException(sprintf(
+                'Repository must be instance of %s',
+                RecordRepositoryInterface::class
+            ));
+        }
+
+        return $repository;
     }
 
     public function delete(EntityInterface $object, $isFlush = true)
@@ -180,5 +190,22 @@ class RecordService implements ServiceInterface
         return $this->getRepository()->createQueryBuilder($alias);
     }
 
+    public function getAggregateInfoByEvent($type)
+    {
+        switch ($type)
+        {
+            case 'call':
+                return $this->getRepository()->getAggregateInfoCalls();
+                break;
+            case 'meeting':
+                return $this->getRepository()->getAggregateInfoMeetings();
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf(
+                    'Not found aggregate function for type %s',
+                    $type
+                ));
+        }
+    }
 
 }

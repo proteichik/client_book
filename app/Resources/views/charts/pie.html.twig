@@ -26,4 +26,27 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Пользователь</th>
+                    <th>Количество</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.username }}</td>
+                        <td>{{ item.sumCount }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
 {% endblock %}

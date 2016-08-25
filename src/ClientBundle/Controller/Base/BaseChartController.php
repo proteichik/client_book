@@ -27,29 +27,6 @@ abstract class BaseChartController extends Controller
         $this->filterFormClasses = $filterFormClasses;
     }
 
-    protected function preparePieData($type, $data)
-    {
-        $result = array();
-
-        switch ($type)
-        {
-            case 'call':
-                foreach ($data as $item) {
-                    $result[] = array($item['username'], (int) $item['sumCalls']);
-                }
-                break;
-            case 'meeting':
-                foreach ($data as $item) {
-                    $result[] = array($item['username'], (int) $item['sumMeetings']);
-                }
-                break;
-            default:
-                $result = $data;
-        }
-
-        return $result;
-    }
-
     protected function getPieOptions($type)
     {
         switch ($type)
