@@ -36,8 +36,4 @@ services:
 
     client.controller.charts_controller:
         class: ClientBundle\Controller\ChartsController
-        arguments: ['@statistic.doctrine.service.record']
-        calls:
-            - [setContainer, ['@service_container']]
-            - [addFilterFormClass, [{name: pie, class: "%client.filter.form.charts.class%"}]]
-#    		- [addFilterFormClass, ['@?']]
+        arguments: ['@statistic.doctrine.service.record', '@service_container', '%client.filter.form.charts.class%']

@@ -93,3 +93,9 @@ client_charts.call_pie:
 client_charts.meeting_pie:
     path: /charts/meetings/pie
     defaults: {_controller: 'client.controller.charts_controller:pieAction', type: 'meeting'}
+
+client_charts.call_column:
+    path: /charts/calls/{user_id}
+    defaults: {_controller: 'client.controller.charts_controller:columnAction', type: 'call'}
+    requirements:
+        user_id: \d+

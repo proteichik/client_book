@@ -32,6 +32,7 @@ class RecordRepository extends EntityRepository implements RecordRepositoryInter
         $qb = $this->createQueryBuilder('q');
 
         $qb->select('SUM(q.countCalls) as sumCount')
+            ->addSelect('u.id as userId')
             ->addSelect('u.username')
             ->join('q.user', 'u')
             ->groupBy('q.user')
@@ -48,6 +49,7 @@ class RecordRepository extends EntityRepository implements RecordRepositoryInter
         $qb = $this->createQueryBuilder('q');
 
         $qb->select('SUM(q.countMeetings) as sumCount')
+            ->addSelect('u.id as userId')
             ->addSelect('u.username')
             ->join('q.user', 'u')
             ->groupBy('q.user')

@@ -56,13 +56,22 @@ abstract class AbstractChartsFactory implements ChartsFactoryInterface
     }
 
     /**
+     * @param $name
+     * @return bool
+     */
+    public function hasOption($name)
+    {
+        return (isset($this->options[$name]));
+    }
+
+    /**
      * @param string $name
      * @param mixed $default
      * @return mixed
      */
     public function getOption($name, $default = null)
     {
-        return (isset($this->options[$name])) ? $this->options[$name] : $default;
+        return ($this->hasOption($name)) ? $this->options[$name] : $default;
     }
 
 

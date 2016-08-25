@@ -36,24 +36,10 @@ main_menu:
         children:
             chars_calls:
                 label: "Статистика по звонкам"
-                attributes:
-                    dropdown: true
-                children:
-                    chars_calls_group:
-                        label: "Групповая"
-                        route: client_charts.call_pie
-                    chars_calls_ind:
-                        label: "Индивидуальная"
+                route: client_charts.call_pie
             chars_meetings:
                 label: "Статистика по встречам"
-                attributes:
-                    dropdown: true
-                children:
-                    chars_meetings_group:
-                        label: "Групповая"
-                        route: client_charts.meeting_pie
-                    chars_meetings_ind:
-                        label: "Индивидуальная"
+                route: client_charts.meeting_pie
     admin:
         label: "Администрирование"
         attributes:

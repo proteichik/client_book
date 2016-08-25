@@ -38,7 +38,7 @@
                 <tbody>
                 {% for item in data %}
                     <tr>
-                        <td>{{ item.username }}</td>
+                        <td><a href="{{ path('client_charts.call_column', {user_id: item.userId}) }}">{{ item.username }}</a></td>
                         <td>{{ item.sumCount }}</td>
                     </tr>
                 {% endfor %}
