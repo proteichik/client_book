@@ -25,7 +25,6 @@ class PieChartsFactory extends AbstractChartsFactory
         $resolver->setDefined(array(
             'renderTo',
             'name',
-            'text',
         ));
 
     }
