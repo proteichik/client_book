@@ -14,6 +14,7 @@ class PieChartsFactory extends AbstractChartsFactory
     {
         $resolver->setRequired(array(
             'plotOptions',
+            'test',
         ));
     }
 
