@@ -9,6 +9,9 @@ use Statistic\BasicBundle\Repository\RecordRepositoryInterface;
 
 class RecordService implements ServiceInterface
 {
+    const TYPE_CALL = 'call';
+    const TYPE_MEETING = 'meeting';
+
     /**
      * @var ObjectManager
      */
@@ -194,11 +197,29 @@ class RecordService implements ServiceInterface
     {
         switch ($type)
         {
-            case 'call':
+            case self::TYPE_CALL:
                 return $this->getRepository()->getAggregateInfoCalls();
                 break;
-            case 'meeting':
+            case self::TYPE_MEETING:
                 return $this->getRepository()->getAggregateInfoMeetings();
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf(
+                    'Not found aggregate function for type %s',
+                    $type
+                ));
+        }
+    }
+    
+    public function getInfoByTypeForColumnChart($type)
+    {
+        switch ($type)
+        {
+            case self::TYPE_CALL:
+                return $this->getRepository()->getCallsInfoForColumn();
+                break;
+            case self::TYPE_MEETING:
+                return $this->getRepository()->getMeetingsInfoForColumn();
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf(

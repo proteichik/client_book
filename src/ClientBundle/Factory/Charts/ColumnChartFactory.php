@@ -55,14 +55,14 @@ class ColumnChartFactory extends AbstractChartsFactory
         $ob->chart->type('column');
         $ob->title->text($this->getOption('text'));
         $ob->xAxis->categories($this->getOption('categories', array()));
-        $ob->yAxis($this->getOption('yData', array()));
+        //$ob->yAxis($this->getOption('yData', array()));
         $ob->legend->enabled($this->getOption('legend', false));
 
         if ($this->hasOption('formatter')) {
             $ob->tooltip->formatter($this->getOption('formatter'));
         }
 
-        $ob->series($data);
+        $ob->series(array($data));
 
         return $ob;
     }

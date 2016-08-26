@@ -32,17 +32,31 @@ class ChartsController extends BaseChartController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $qb = $this->service->getQueryBuilder('q')->select(array('q', 'u'))->join('q.user', 'u');
-
-        $this->handleFilter($request, $qb);
+        $qb = $this->handleFilter($request, $this->service->getInfoByTypeForColumnChart($type));
 
         $qb->andWhere('u.id = :uid')->setParameter('uid', $user_id);
 
         $result = $qb->getQuery()->getResult();
 
-        var_dump($result); die;
+        $data = array(
+            'name'  => 'Rainfall',
+            'type'  => 'column',
+            'color' => '#4572A7',
+            'data' => array(),
+        );
+        $categories = array();
+        foreach ($result as $item) {
+            $data['data'][] = $item['countEvents'];
+            $categories[] = $item['date']->format('Y-m-d');
+        }
 
-        return new Response(print_r($result));
+        $options = $this->getColumnOptions($type);
+        $options['categories'] = $categories;
+
+        $ob = $this->getChartFactory('column')->getChart($data, $options);
+
+        return $this->render('/charts/column.html.twig',
+            array('chart' => $ob, 'filterForm' => $this->filterForm->createView()));
     }
 
 

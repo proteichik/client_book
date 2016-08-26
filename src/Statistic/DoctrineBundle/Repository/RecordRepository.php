@@ -57,4 +57,40 @@ class RecordRepository extends EntityRepository implements RecordRepositoryInter
 
         return $qb;
     }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getCallsInfoForColumn()
+    {
+        $qb = $this->createQueryBuilder('q');
+
+        $qb->select('q.countCalls as countEvents')
+            ->addSelect('q.date')
+            ->addSelect('u.id as userId')
+            ->addSelect('u.username')
+            ->join('q.user', 'u')
+            ->orderBy('q.date', 'ASC')
+        ;
+
+        return $qb;
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getMeetingsInfoForColumn()
+    {
+        $qb = $this->createQueryBuilder('q');
+
+        $qb->select('q.countMeetings as countEvents')
+            ->addSelect('q.date')
+            ->addSelect('u.id as userId')
+            ->addSelect('u.username')
+            ->join('q.user', 'u')
+            ->orderBy('q.date', 'ASC')
+        ;
+
+        return $qb;
+    }
 }

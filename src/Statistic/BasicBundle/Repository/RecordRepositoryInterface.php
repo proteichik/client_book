@@ -13,4 +13,14 @@ interface RecordRepositoryInterface
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getAggregateInfoMeetings();
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getCallsInfoForColumn();
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getMeetingsInfoForColumn();
 }

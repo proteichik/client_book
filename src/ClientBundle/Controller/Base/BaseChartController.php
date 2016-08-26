@@ -7,6 +7,7 @@ use ClientBundle\Factory\Charts\ColumnChartFactory;
 use ClientBundle\Factory\Charts\PieChartsFactory;
 use ClientBundle\Service\ServiceInterface;
 use Doctrine\ORM\QueryBuilder;
+use Statistic\BasicBundle\Service\RecordService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,18 +41,39 @@ abstract class BaseChartController extends Controller
     {
         switch ($type)
         {
-            case 'call':
+            case RecordService::TYPE_CALL:
                 return array(
                     'renderTo' => 'piechart',
                     'text' => 'Общее количество звонков',
                     'name' => 'звонков',
                 );
                 break;
-            case 'meeting':
+            case RecordService::TYPE_MEETING:
                 return array(
                     'renderTo' => 'piechart',
                     'text' => 'Общее количество встреч',
                     'name' => 'встреч',
+                );
+                break;
+            default:
+                return array();
+        }
+    }
+
+    protected function getColumnOptions($type)
+    {
+        switch ($type)
+        {
+            case RecordService::TYPE_CALL:
+                return array(
+                    'renderTo' => 'columnchart',
+                    'text' => 'Звонки',
+                );
+                break;
+            case RecordService::TYPE_MEETING:
+                return array(
+                    'renderTo' => 'columnchart',
+                    'text' => 'Встречи',
                 );
                 break;
             default:
