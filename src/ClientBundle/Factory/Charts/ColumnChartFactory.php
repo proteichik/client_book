@@ -15,6 +15,7 @@ class ColumnChartFactory extends AbstractChartsFactory
         $resolver->setRequired(array(
             'renderTo',
             'text',
+            'name',
         ));
     }
 
@@ -27,6 +28,7 @@ class ColumnChartFactory extends AbstractChartsFactory
             'categories' => array(),
             'yData' => array(),
             'legend' => false,
+            'color' => '#4572A7'
         ));
     }
 
@@ -62,7 +64,7 @@ class ColumnChartFactory extends AbstractChartsFactory
             $ob->tooltip->formatter($this->getOption('formatter'));
         }
 
-        $ob->series(array($data));
+        $ob->series(array(array('type' => 'column', 'color' => $this->getOption('color'), 'name' => $this->getOption('name'), 'data' => $data)));
 
         return $ob;
     }

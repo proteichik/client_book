@@ -38,15 +38,10 @@ class ChartsController extends BaseChartController
 
         $result = $qb->getQuery()->getResult();
 
-        $data = array(
-            'name'  => 'Rainfall',
-            'type'  => 'column',
-            'color' => '#4572A7',
-            'data' => array(),
-        );
+        $data = array();
         $categories = array();
         foreach ($result as $item) {
-            $data['data'][] = $item['countEvents'];
+            $data[] = $item['countEvents'];
             $categories[] = $item['date']->format('Y-m-d');
         }
 

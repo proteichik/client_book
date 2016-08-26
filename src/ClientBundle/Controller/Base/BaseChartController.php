@@ -68,12 +68,14 @@ abstract class BaseChartController extends Controller
                 return array(
                     'renderTo' => 'columnchart',
                     'text' => 'Звонки',
+                    'name' => 'звонков',
                 );
                 break;
             case RecordService::TYPE_MEETING:
                 return array(
                     'renderTo' => 'columnchart',
                     'text' => 'Встречи',
+                    'name' => 'встреч',
                 );
                 break;
             default:
