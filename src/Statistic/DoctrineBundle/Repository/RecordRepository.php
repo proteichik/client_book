@@ -36,6 +36,7 @@ class RecordRepository extends EntityRepository implements RecordRepositoryInter
             ->addSelect('u.username')
             ->join('q.user', 'u')
             ->groupBy('q.user')
+            ->having('sumCount > 0')
         ;
 
         return $qb;
@@ -53,6 +54,7 @@ class RecordRepository extends EntityRepository implements RecordRepositoryInter
             ->addSelect('u.username')
             ->join('q.user', 'u')
             ->groupBy('q.user')
+            ->having('sumCount > 0')
         ;
 
         return $qb;
