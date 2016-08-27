@@ -119,7 +119,7 @@ abstract class BaseChartController extends Controller
 
             // build the query from the given form object
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($this->filterForm, $qb);
-
+            
         }
 
         return $qb;

@@ -99,3 +99,9 @@ client_charts.call_column:
     defaults: {_controller: 'client.controller.charts_controller:columnAction', type: 'call'}
     requirements:
         user_id: \d+
+
+client_charts.meeting_column:
+    path: /charts/meetings/{user_id}
+    defaults: {_controller: 'client.controller.charts_controller:columnAction', type: 'meeting'}
+    requirements:
+        user_id: \d+

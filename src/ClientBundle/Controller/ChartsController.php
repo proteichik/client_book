@@ -24,7 +24,7 @@ class ChartsController extends BaseChartController
         $ob = $this->getChartFactory('pie')->getChart($data, $this->getPieOptions($type));
 
         return $this->render('/charts/pie.html.twig',
-            array('chart' => $ob, 'filterForm' => $this->filterForm->createView(), 'data' => $result));
+            array('chart' => $ob, 'filterForm' => $this->filterForm->createView(), 'data' => $result, 'type' => $type));
         
     }
 
@@ -41,8 +41,10 @@ class ChartsController extends BaseChartController
         $data = array();
         $categories = array();
         foreach ($result as $item) {
-            $data[] = $item['countEvents'];
-            $categories[] = $item['date']->format('Y-m-d');
+            if ((int) $item['countEvents'] > 0) {
+                $data[] = $item['countEvents'];
+                $categories[] = $item['date']->format('Y-m-d');
+            }
         }
 
         $options = $this->getColumnOptions($type);

@@ -38,7 +38,11 @@
                 <tbody>
                 {% for item in data %}
                     <tr>
-                        <td><a href="{{ path('client_charts.call_column', {user_id: item.userId}) }}">{{ item.username }}</a></td>
+                        {% if type == 'call' %}
+                            <td><a href="{{ path('client_charts.call_column', {user_id: item.userId}) }}">{{ item.username }}</a></td>
+                         {% elseif type == 'meeting' %}
+                             <td><a href="{{ path('client_charts.meeting_column', {user_id: item.userId}) }}">{{ item.username }}</a></td>
+                         {% endif %}
                         <td>{{ item.sumCount }}</td>
                     </tr>
                 {% endfor %}

@@ -15,10 +15,12 @@ class ChartsFilter extends AbstractType
             'left_date_options' => array(
                 'widget' => 'single_text',
                 'html5' => false,
+                //'data' => new \DateTime('first day of this month'),
             ),
             'right_date_options' => array(
                 'widget' => 'single_text',
                 'html5' => false,
+                //'data' => new \DateTime('last day of this month'),
             ),
         ));
     }
