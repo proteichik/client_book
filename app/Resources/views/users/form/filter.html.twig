@@ -1,0 +1,33 @@
+{{ form_start(filter, {'method': 'GET'}) }}
+<div class="form-group form-group-sm">
+    <label>Логин:</label>
+    {{ form_widget(filter.username) }}
+</div>
+<div class="form-group form-group-sm">
+    <label>Email:</label>
+    {{ form_widget(filter.email) }}
+</div>
+<div class="form-group form-group-sm">
+    <label>Статус:</label>
+    {{ form_widget(filter.locked) }}
+</div>
+<div class="form-group form-group-sm">
+    <label>Последний визит:</label>
+    {{ form_widget(filter.lastLogin) }}
+</div>
+<p>
+    <input type="submit" class="btn btn-primary btn-sm btn-block" value="Фильтр" />
+</p>
+
+{{ form_end(filter) }}
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('#cal_left_date').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $('#cal_right_date').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    });
+</script>

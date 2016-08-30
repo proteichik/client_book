@@ -41,7 +41,7 @@ class CustomerFilter extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'user_filter';
+        return 'customer_filter';
     }
 
 

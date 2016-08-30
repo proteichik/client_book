@@ -72,6 +72,8 @@ class UsersController extends Controller
 
         $filterForm = $this->createForm($this->filterClass);
         if ($request->query->has($filterForm->getName())) {
+
+            $filterForm->submit($request->query->get($filterForm->getName()));
             $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $qb);
         }
 
@@ -81,7 +83,7 @@ class UsersController extends Controller
         );
         
 
-        return $this->render('users/list.html.twig', array('objects' => $items, 'filter' => $filterForm->createView()));
+        return $this->render('users/list.html.twig', array('objects' => $items, 'filterForm' => $filterForm->createView()));
     }
 
     /**
