@@ -8,6 +8,7 @@ parameters:
     client.repository.customer.name: ClientBundle:Customer
     client.repository.call.name: ClientBundle:Call
     client.repository.meeting.name: ClientBundle:Meeting
+    client.repository.user.name: ClientBundle:User
 #Forms
     client.form.customer.class: ClientBundle\Form\CustomerForm
     client.form.call.class: ClientBundle\Form\CallForm
@@ -17,3 +18,4 @@ parameters:
     client.filter.form.call.class: ClientBundle\Filter\FormFilter\EventFilter
     client.filter.form.meeting.class: ClientBundle\Filter\FormFilter\EventFilter
     client.filter.form.charts.class: ClientBundle\Filter\FormFilter\ChartsFilter
+    client.filter.form.users.class: ClientBundle\Filter\FormFilter\UsersFilter

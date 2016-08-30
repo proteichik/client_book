@@ -44,3 +44,8 @@ main_menu:
         label: "Администрирование"
         attributes:
             icon: "fa fa-lock"
+            dropdown: true
+        children:
+            admin_users:
+                label: "Пользователи"
+                route: client_admin.users

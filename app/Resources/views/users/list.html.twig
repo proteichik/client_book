@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="col-md-9 col-xs-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Логин</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in objects %}
+                <tr>
+                    <th class="row">{{ object.id }}</th>
+                    <td>{{ object.username }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+
+        </div>
+    </div>
+    <div class="col-md-3 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Поиск</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+

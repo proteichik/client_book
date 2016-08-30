@@ -20,4 +20,10 @@ services:
             - "%client.repository.meeting.name%"
             - "@lexik_form_filter.query_builder_updater"
 
+    client.service.users:
+        class: ClientBundle\Service\UsersService
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%client.repository.user.name%"
+
 

@@ -105,3 +105,7 @@ client_charts.meeting_column:
     defaults: {_controller: 'client.controller.charts_controller:columnAction', type: 'meeting'}
     requirements:
         user_id: \d+
+
+client_admin.users:
+    path: /admin/users
+    defaults: {_controller: 'client.controller.users:listAction'}

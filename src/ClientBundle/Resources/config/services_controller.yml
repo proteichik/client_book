@@ -37,3 +37,9 @@ services:
     client.controller.charts_controller:
         class: ClientBundle\Controller\ChartsController
         arguments: ['@statistic.doctrine.service.record', '@service_container', '%client.filter.form.charts.class%']
+
+    client.controller.users:
+        class: ClientBundle\Controller\UsersController
+        arguments: ['@client.service.users', '%client.filter.form.users.class%', '@knp_paginator']
+        calls:
+            - [setContainer, ['@service_container']]
