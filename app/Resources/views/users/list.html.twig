@@ -51,16 +51,20 @@
         </div>
     </div>
     <div class="col-md-3 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Фильтр</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                {{ include ('users/form/filter.html.twig', {'filter': filterForm}) }}
+        <div class="col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Фильтр</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    {{ include ('users/form/filter.html.twig', {'filter': filterForm}) }}
+                </div>
             </div>
         </div>
-
+        <div class="col-xs-12">
+            <a href="{{ path('client_admin.user.create') }}" class="btn btn-success btn-block">Добавить</a>
+        </div>
     </div>
 {% endblock %}
 

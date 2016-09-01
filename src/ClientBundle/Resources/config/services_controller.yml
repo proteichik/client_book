@@ -43,3 +43,11 @@ services:
         arguments: ['@client.service.users', '%client.filter.form.users.class%', '@knp_paginator']
         calls:
             - [setContainer, ['@service_container']]
+
+    client.controller.user:
+        class: ClientBundle\Controller\UserController
+        arguments:
+            - "@fos_user.user_manager"
+            - "%client.form.user.class%"
+        calls:
+            - [setContainer, ['@service_container']]

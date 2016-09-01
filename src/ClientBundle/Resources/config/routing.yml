@@ -109,3 +109,7 @@ client_charts.meeting_column:
 client_admin.users:
     path: /admin/users
     defaults: {_controller: 'client.controller.users:listAction'}
+
+client_admin.user.create:
+    path: /admin/user/create
+    defaults: {_controller: 'client.controller.user:createAction'}
