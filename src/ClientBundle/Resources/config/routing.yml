@@ -113,3 +113,7 @@ client_admin.users:
 client_admin.user.create:
     path: /admin/user/create
     defaults: {_controller: 'client.controller.user:createAction'}
+
+client_admin.user.update:
+    path: /admin/user/update/{username}
+    defaults: {_controller: 'client.controller.user:updateAction'}

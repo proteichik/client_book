@@ -1,0 +1,51 @@
+<form action="{{ action }}" class="form-horizontal form-label-left" method="POST">
+    {{ form_errors(form) }}
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">
+            Имя пользователя:
+        </label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+            {{ form_errors(form.username) }}
+            {{ form_widget(form.username) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+            Email:
+        </label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="plainPassword">
+            {% if (action == path('client_admin.user.create')) %}
+                Пароль
+            {% else %}
+                Новый пароль:
+            {% endif %}
+        </label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+            {{ form_errors(form.plainPassword) }}
+            {{ form_widget(form.plainPassword) }}
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="roles">
+            Группы:
+        </label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+            {{ form_errors(form.roles) }}
+            {{ form_widget(form.roles) }}
+        </div>
+    </div>
+
+    {{ form_row(form.submit, { 'label': 'Cохранить ', 'attr': {'class': 'btn btn-success pull-right'} }) }}
+
+    {{ form_widget(form._token) }}
+</form>
