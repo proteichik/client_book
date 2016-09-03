@@ -4,3 +4,9 @@ services:
         tags:
             - {name: security.voter}
         public: false
+
+    client.security.user.delete_voter:
+        class: ClientBundle\Security\UserDeleteVoter
+        tags:
+            - {name: security.voter}
+        public: false

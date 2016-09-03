@@ -27,4 +27,5 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/book/charts/, role: ROLE_ADMIN}
+        - { path: ^/book/admin/, role: ROLE_SUPER_ADMIN}
         - { path: ^/book/, role: ROLE_USER }

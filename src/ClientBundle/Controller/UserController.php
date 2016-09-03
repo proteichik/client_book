@@ -78,12 +78,12 @@ class UserController extends Controller
      * Обновление инф. юзера
      *
      * @param Request $request
-     * @param $username
+     * @param int $user_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction(Request $request, $username)
+    public function updateAction(Request $request, $user_id)
     {
-        $user = $this->userManager->findUserByUsername($username);
+        $user = $this->userManager->findUserBy(array('id' => $user_id));
 
         if (!$user) {
             throw new \RuntimeException('User not found');
@@ -98,14 +98,24 @@ class UserController extends Controller
         if ($form->isValid() && $form->isSubmitted()) {
             $this->userManager->updateUser($user);
 
+            $this->addFlash('notice', 'Информация сохранена');
+
             return $this->redirectToRoute('client_admin.user.update',
-                array('username' => $username));
+                array('user_id' => $user_id));
+        } else if (!$form->isValid() && $form->isSubmitted()) {
+            $this->addFlash('error', 'Ошибка, введены некоректные данные');
         }
 
         return $this->render('users/update.html.twig',
             array('form' => $form->createView(),
                 'object' => $user
                 ));
+    }
+
+
+    public function deleteAction(Request $request, $user_id)
+    {
+        //TODO remove logic for user
     }
 
 }
