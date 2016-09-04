@@ -53,7 +53,7 @@ class UserConfigurator
             return null;
         }
 
-        if (!$user->hasRole('ROLE_ADMIN')) {
+        if (!$user->hasRole('ROLE_ADMIN') && !$user->hasRole('ROLE_SUPER_ADMIN')) {
             $filter = $this->em->getFilters()->enable('user_filter');
             $filter->setParameter('id', $user->getId());
             $filter->setAnnotationReader($this->reader);

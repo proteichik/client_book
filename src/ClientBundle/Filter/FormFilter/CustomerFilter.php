@@ -14,29 +14,20 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class CustomerFilter extends AbstractType
 {
-    protected $tokenStorage;
-
-    public function __construct(TokenStorageInterface $tokenStorage)
-    {
-        $this->tokenStorage = $tokenStorage;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('company', Filters\TextFilterType::class, array(
             'condition_pattern' => FilterOperands::STRING_CONTAINS,
         ));
         $builder->add('address', AddressFilterType::class);
-
-        $user = $this->getUser();
-        if ($user && $user->hasRole('ROLE_ADMIN')) {
-            $builder->add('user', Filters\EntityFilterType::class, array(
-                'class' => 'ClientBundle:User',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')->orderBy('u.username', 'DESC');
-                },
-            ));
-        }
+        
+        $builder->add('user', Filters\EntityFilterType::class, array(
+            'class' => 'ClientBundle:User',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('u')->orderBy('u.username', 'DESC');
+            },
+        ));
+        
     }
 
     public function getBlockPrefix()
@@ -52,9 +43,5 @@ class CustomerFilter extends AbstractType
             'validation_groups' => array('filtering'), // avoid NotBlank() constraint-related message
         ));
     }
-
-    protected function getUser()
-    {
-        return UserUtils::getUser($this->tokenStorage);
-    }
+    
 }

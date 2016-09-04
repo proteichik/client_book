@@ -1,10 +1,4 @@
 services:
-    client.filter.form.customer:
-        class: ClientBundle\Filter\FormFilter\CustomerFilter
-        arguments: ['@security.token_storage']
-        tags:
-            - {name: form.type, alias: customer_filter}
-
 #Doctrine filter configurator
     client.doctrine.filter.user_configurator:
         class: ClientBundle\Filter\SQLFilter\Configurator\UserConfigurator
