@@ -27,6 +27,6 @@ function runAjax(event, target) {
     }).done(function () {
         location.reload(true);
     }).fail(function (data) {
-        console.log(data);
+        console.log(data.responseJSON.message);
     });
 }

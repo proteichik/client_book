@@ -1,0 +1,5 @@
+services:
+    client.listener.exception:
+        class: ClientBundle\Listener\EventListener\ExceptionListener
+        tags:
+            - {name: kernel.event_listener, event: kernel.exception}

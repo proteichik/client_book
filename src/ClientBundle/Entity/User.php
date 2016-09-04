@@ -34,21 +34,21 @@ class User extends BaseUser
     /**
      * @var \ClientBundle\Entity\Call
      *
-     * @ORM\OneToMany(targetEntity="Call", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Call", mappedBy="user", cascade={"remove"})
      */
     protected $calls;
 
     /**
      * @var \ClientBundle\Entity\Meeting
      *
-     * @ORM\OneToMany(targetEntity="Meeting", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Meeting", mappedBy="user", cascade={"remove"})
      */
     protected $meetings;
 
     /**
      * @var \Statistic\DoctrineBundle\Entity\Record
      *
-     * @ORM\OneToMany(targetEntity="Statistic\DoctrineBundle\Entity\Record", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Statistic\DoctrineBundle\Entity\Record", mappedBy="user", cascade={"remove"})
      */
     protected $stats;
 

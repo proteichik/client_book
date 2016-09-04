@@ -83,11 +83,7 @@ class UserController extends Controller
      */
     public function updateAction(Request $request, $user_id)
     {
-        $user = $this->userManager->findUserBy(array('id' => $user_id));
-
-        if (!$user) {
-            throw new \RuntimeException('User not found');
-        }
+        $user = $this->findUserOrThrowException(array('id' => $user_id));
 
         $form = $this->createForm($this->formClass, $user, array(
             'validation_groups' => array('update'),
@@ -112,10 +108,44 @@ class UserController extends Controller
                 ));
     }
 
-
+    /**
+     * @param Request $request
+     * @param $user_id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteAction(Request $request, $user_id)
     {
-        //TODO remove logic for user
+        $user = $this->findUserOrThrowException(array('id' => $user_id));
+
+        $this->denyAccessUnlessGranted('canDelete', $user, 'You can\'t delete yourself');
+        
+        //Если у пользователя есть клиенты - удалять нельзя
+        if (count($user->getCustomers()) > 0) {
+            throw new \RuntimeException('You can\'t delete user because he have customers');
+        }
+        
+        $this->userManager->deleteUser($user);
+        
+        if ($request->isXmlHttpRequest()) {
+            return $this->json($user);
+        } else {
+            return $this->redirectToRoute('client_admin.users');
+        }
+    }
+
+    /**
+     * @param array $criteria
+     * @return \FOS\UserBundle\Model\UserInterface
+     */
+    protected function findUserOrThrowException(array $criteria = array())
+    {
+        $user = $this->userManager->findUserBy($criteria);
+
+        if (!$user) {
+            throw new \RuntimeException('User not found');
+        }
+
+        return $user;
     }
 
 }

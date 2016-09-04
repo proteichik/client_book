@@ -118,4 +118,10 @@ client_admin.user.update:
     path: /admin/user/update/{user_id}
     defaults: {_controller: 'client.controller.user:updateAction'}
     requirements:
-        id: \d+
+        user_id: \d+
+
+client_admin.user.delete:
+    path: /admin/user/{user_id}/delete
+    defaults: {_controller: 'client.controller.user:deleteAction'}
+    requirements:
+        user_id: \d+
