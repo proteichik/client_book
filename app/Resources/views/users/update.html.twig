@@ -17,11 +17,27 @@
         {% endfor %}
     {% endif %}
 
-        <div class="row">
-        <div class="col-xs-12 col-md-9">
+    <div class="row">
+        <div class="col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Сведения о пользователе</h2>
+                    <div class="pull-right">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a href="{{ path('client_admin.user.toogle_lock',
+                            {'id': object.id}) }}" class="btn btn-dark">
+                                {% if (object.accountNonLocked) %}
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                {% else %}
+                                    <i class="fa fa-unlock" aria-hidden="true"></i>
+                                {% endif %}
+                            </a>
+                            <a href="{{ path('client_admin.user.delete',
+                            {'user_id': object.id}) }}" class="btn btn-danger">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">

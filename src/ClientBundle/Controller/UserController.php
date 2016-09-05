@@ -134,6 +134,22 @@ class UserController extends Controller
     }
 
     /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function toggleLockAction($id)
+    {
+        $user = $this->findUserOrThrowException(array('id' => $id));
+
+        $isLocked = !$user->isAccountNonLocked();
+        $user->setLocked(!$isLocked);
+
+        $this->userManager->updateUser($user);
+
+        return $this->redirectToRoute('client_admin.user.update', array('user_id' => $id));
+    }
+
+    /**
      * @param array $criteria
      * @return \FOS\UserBundle\Model\UserInterface
      */

@@ -30,6 +30,9 @@ class UserForm extends AbstractType
                     )),
                     ),
                 'required' => false,
+                'attr' => array(
+                    'autocomplete' => 'off',
+                ),
                 )
             )
             ->add('roles', Type\ChoiceType::class, array(

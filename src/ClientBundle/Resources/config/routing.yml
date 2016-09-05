@@ -125,3 +125,9 @@ client_admin.user.delete:
     defaults: {_controller: 'client.controller.user:deleteAction'}
     requirements:
         user_id: \d+
+
+client_admin.user.toogle_lock:
+    path: /admin/user/{id}/toggle-lock
+    defaults: {_controller: 'client.controller.user:toggleLockAction'}
+    requirements:
+        id: \d+
