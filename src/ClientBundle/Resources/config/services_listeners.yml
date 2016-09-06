@@ -3,3 +3,10 @@ services:
         class: ClientBundle\Listener\EventListener\ExceptionListener
         tags:
             - {name: kernel.event_listener, event: kernel.exception}
+
+    client.listener.registration_subscriber:
+        class: ClientBundle\Listener\EventSubscriber\RegistrationSubscriber
+        arguments:
+            - "@router"
+        tags:
+            - {name: kernel.event_subscriber}
