@@ -6,7 +6,7 @@ services:
         public: false
 
     client.security.user.delete_voter:
-        class: ClientBundle\Security\UserDeleteVoter
+        class: ClientBundle\Security\UserManipulatorVoter
         tags:
             - {name: security.voter}
         public: false

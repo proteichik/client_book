@@ -140,7 +140,11 @@ class UserController extends Controller
     public function toggleLockAction($id)
     {
         $user = $this->findUserOrThrowException(array('id' => $id));
-
+        
+        if ($user->isAccountNonLocked()) {
+            $this->denyAccessUnlessGranted('canLock', $user, 'You can\'t lock yourself');
+        }
+        
         $isLocked = !$user->isAccountNonLocked();
         $user->setLocked(!$isLocked);
 

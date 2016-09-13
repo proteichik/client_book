@@ -6,10 +6,11 @@ use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class UserDeleteVoter extends Voter
+class UserManipulatorVoter extends Voter
 {
     protected $actions = array(
         'canDelete',
+        'canLock',
     );
 
     protected function supports($attribute, $subject)
