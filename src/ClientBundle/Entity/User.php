@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Class User
  * @package ClientBundle\Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ClientBundle\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
