@@ -47,7 +47,7 @@ services:
     client.controller.user:
         class: ClientBundle\Controller\UserController
         arguments:
-            - "@fos_user.user_manager"
+            - "@client.service.user_manager"
             - "%client.form.user.class%"
         calls:
             - [setContainer, ['@service_container']]

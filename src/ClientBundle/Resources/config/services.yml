@@ -26,4 +26,8 @@ services:
             - "@doctrine.orm.entity_manager"
             - "%client.repository.user.name%"
 
+    client.service.user_manager:
+        class: ClientBundle\Service\UserManager
+        parent: fos_user.user_manager
+
 

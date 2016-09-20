@@ -2,7 +2,7 @@
 
 namespace ClientBundle\Controller;
 
-use FOS\UserBundle\Model\UserManagerInterface;
+use ClientBundle\Model\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -151,6 +151,11 @@ class UserController extends Controller
         $this->userManager->updateUser($user);
 
         return $this->redirectToRoute('client_admin.user.update', array('user_id' => $id));
+    }
+    
+    public function showProfileAction(Request $request)
+    {
+        
     }
 
     /**
