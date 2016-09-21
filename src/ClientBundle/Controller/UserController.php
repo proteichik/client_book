@@ -153,9 +153,14 @@ class UserController extends Controller
         return $this->redirectToRoute('client_admin.user.update', array('user_id' => $id));
     }
     
-    public function showProfileAction(Request $request)
+    public function showProfileAction(Request $request, $username)
     {
-        
+        $user = $this->findUserOrThrowException(array('username' => $username));
+
+        return $this->render('users/profile.html.twig',
+            array('user' => $user,
+                'countCustomers' => $this->userManager->getCountCustomersByUser($user),
+            ));
     }
 
     /**

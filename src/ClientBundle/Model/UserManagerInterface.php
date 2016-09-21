@@ -1,35 +1,18 @@
 <?php
-
 namespace ClientBundle\Model;
 
+use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface as BaseInterface;
 
+/**
+ * Class UserManager
+ * @package ClientBundle\Service
+ */
 interface UserManagerInterface extends BaseInterface
 {
     /**
-     * @param $id
-     * @param bool $isResult
-     * @return array|\Doctrine\ORM\QueryBuilder 
+     * @param UserInterface $user
+     * @return int
      */
-    public function getUserWithCustomersById($id, $isResult = true);
-
-    /**
-     * @param $username
-     * @param bool $isResult
-     * @return array|\Doctrine\ORM\QueryBuilder
-     */
-    public function getUserWithCustomersByUsername($username, $isResult = true);
-
-    /**
-     * @param $emailCanonical
-     * @param bool $isResult
-     * @return array|\Doctrine\ORM\QueryBuilder
-     */
-    public function getUserWithCustomersByEmail($emailCanonical, $isResult = true);
-
-    /**
-     * @param bool $isResult
-     * @return array|\Doctrine\ORM\QueryBuilder
-     */
-    public function getUsersWithCustomers($isResult = true);
+    public function getCountCustomersByUser(UserInterface $user);
 }

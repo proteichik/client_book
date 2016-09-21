@@ -131,3 +131,9 @@ client_admin.user.toogle_lock:
     defaults: {_controller: 'client.controller.user:toggleLockAction'}
     requirements:
         id: \d+
+
+client.user.profile:
+    path: /user/{username}
+    defaults: {_controller: 'client.controller.user:showProfileAction'}
+    requirements:
+        username: "[a-zA-Z-_+]+"

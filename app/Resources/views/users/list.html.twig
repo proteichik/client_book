@@ -33,6 +33,10 @@
                     <td>{{ object.lastLogin | date('Y-m-d H:i:s') }}</td>
                     <td>
                         <div class="btn-group btn-group-sm">
+                            <a href="{{ path('client.user.profile',
+                            {'username': object.username}) }}" type="button" class="btn btn-default">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
                             <a href="{{ path('client_admin.user.update',
                             {'user_id': object.id}) }}" type="button" class="btn btn-warning">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
