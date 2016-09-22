@@ -40,7 +40,7 @@
                             <th>Группы: </th>
                             <td>
                                 {% for role in user.roles %}
-                                    <p>{{ role }}</p>
+                                    <p>{{ role | roles }}</p>
                                 {% endfor %}
                             </td>
                         </tr>

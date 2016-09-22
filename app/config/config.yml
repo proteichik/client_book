@@ -14,6 +14,7 @@ imports:
     - { resource: "@ClientBundle/Resources/config/services_menu.yml" }
     - { resource: "@ClientBundle/Resources/config/parameters.yml"}
     - { resource: "@ClientBundle/Resources/config/services_listeners.yml"}
+    - { resource: "@ClientBundle/Resources/config/services_twig.yml"}
 
     - { resource: "@StatisticBasicBundle/Resources/config/services.yml" }
 
@@ -134,3 +135,5 @@ knp_menu:
     templating: false
     # the renderer to use, list is also available by default
     default_renderer: twig
+
+

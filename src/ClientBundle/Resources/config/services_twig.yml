@@ -1,0 +1,6 @@
+services:
+    client.roles_extension:
+        class: ClientBundle\Twig\RolesExtension
+        public: false
+        tags:
+            - { name: twig.extension }
