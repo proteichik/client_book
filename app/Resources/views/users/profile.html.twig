@@ -1,5 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <p>Count customers: {{ countCustomers }}</p>
+    <div class="col-md-7 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Сведения о пользователе</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table">
+                    <thead>
+                        <th width="40%"></th>
+                        <th width="60%"></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Имя пользователя:</th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ user.emailCanonical }}</td>
+                        </tr>
+                        <tr>
+                            <th>Статус аккаунта: </th>
+                            <td>
+                                {% if (user.accountNonLocked) %}
+                                    <button class="btn btn-success btn-xs disabled">
+                                        <i class="fa fa-unlock" aria-hidden="true"></i>
+                                    </button>
+                                {% else %}
+                                    <button class="btn btn-danger btn-xs disabled">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Группы: </th>
+                            <td>
+                                {% for role in user.roles %}
+                                    <p>{{ role }}</p>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Дополнительная информация</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table class="table">
+                    <thead>
+                    <th width="40%"></th>
+                    <th width="60%"></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Кол-во клиентов:</th>
+                            <td>{{ countCustomers }}</td>
+                        </tr>
+                        <tr>
+                            <th>Был в сети:</th>
+                            <td>{{ user.lastLogin | date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

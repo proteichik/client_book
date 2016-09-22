@@ -10,3 +10,9 @@ services:
         tags:
             - {name: security.voter}
         public: false
+
+    client.security.user.profile:
+        class: ClientBundle\Security\UserProfileVoter
+        tags:
+            - {name: security.voter}
+        public: false

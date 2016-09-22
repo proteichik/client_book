@@ -157,6 +157,8 @@ class UserController extends Controller
     {
         $user = $this->findUserOrThrowException(array('username' => $username));
 
+        $this->denyAccessUnlessGranted('showProfile', $user);
+
         return $this->render('users/profile.html.twig',
             array('user' => $user,
                 'countCustomers' => $this->userManager->getCountCustomersByUser($user),
